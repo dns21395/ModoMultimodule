@@ -1,6 +1,5 @@
 package uk.nightlines.modomultimodule
 
-import androidx.compose.runtime.Composable
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -12,12 +11,4 @@ class SampleStack(
 ) : StackScreen(stackNavModel) {
 
     constructor(rootScreen: Screen) : this(StackNavModel(rootScreen))
-
-    @Composable
-    override fun Content() {
-        TopScreenContent {
-
-        }
-    }
 }
-
