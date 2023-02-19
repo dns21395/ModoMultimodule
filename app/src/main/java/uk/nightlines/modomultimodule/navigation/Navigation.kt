@@ -1,4 +1,7 @@
 package uk.nightlines.modomultimodule.navigation
 
-interface Navigation
+import kotlinx.coroutines.flow.MutableSharedFlow
 
+class Navigation {
+    val commandsFlow = MutableSharedFlow<NavigationCommand>()
+}
