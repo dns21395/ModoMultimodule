@@ -4,4 +4,6 @@ interface NavigationCommand
 
 object NavigationForwardCommand : NavigationCommand
 
-object NavigationForwardRootCommand : NavigationCommand
+object OpenWeatherScreenCommand : NavigationCommand
+
+object NavigationOpenStack2 : NavigationCommand

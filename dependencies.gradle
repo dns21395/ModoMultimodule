@@ -2,7 +2,7 @@
 
 def versions = [:]
 
-versions.compose = '1.3.2'
+versions.compose = '1.3.3'
 versions.compose_activity = '1.6.1'
 // https://developer.android.com/jetpack/androidx/releases/compose-material
 versions.compose_material = '1.3.1'
@@ -42,6 +42,7 @@ compose.activity = "androidx.activity:activity-compose:$versions.compose_activit
 compose.material = "androidx.compose.material:material:$versions.compose_material"
 compose.material3 = "androidx.compose.material3:material3:$versions.compose_material3"
 compose.navigation = "androidx.navigation:navigation-compose:$versions.compose_navigation"
+compose.runtime = "androidx.compose.runtime:runtime:$versions.compose"
 compose.ui = "androidx.compose.ui:ui:$versions.compose"
 compose.ui_tooling =  "androidx.compose.ui:ui-tooling:$versions.compose"
 compose.ui_tooling_preview = "androidx.compose.ui:ui-tooling-preview:$versions.compose"
@@ -66,7 +67,7 @@ modo.modo = "com.github.terrakok:modo-compose:$versions.modo"
 deps.modo = modo
 
 def room = [:]
-room.room = "androidx.room:room-runtime:$versions.room"
+    room.room = "androidx.room:room-runtime:$versions.room"
 room.compiler = "androidx.room:room-compiler:$versions.room"
 deps.room = room
 

@@ -53,6 +53,7 @@ dependencies {
 
     implementation(
             deps.dagger.dagger,
+            deps.compose.runtime,
     )
 
     kapt(
