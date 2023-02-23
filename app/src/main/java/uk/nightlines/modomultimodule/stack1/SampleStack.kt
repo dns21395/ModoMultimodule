@@ -12,11 +12,9 @@ import uk.nightlines.modomultimodule.navigation.NavigationCommand
 import uk.nightlines.modomultimodule.navigation.NavigationForwardCommand
 import androidx.compose.runtime.getValue
 import com.github.terrakok.modo.stack.replace
-import uk.nightlines.modomultimodule.di.NavigationProvider
-import uk.nightlines.modomultimodule.navigation.Navigation
 import uk.nightlines.modomultimodule.navigation.OpenWeatherScreenCommand
-import uk.nightlines.modomultimodule.stack2.SampleScreen3
-import uk.nightlines.modomultimodule.stack2.SampleStack2
+import uk.nightlines.modomultimodule.module.weather.SampleScreen3
+import uk.nightlines.modomultimodule.module.weather.SampleStack2
 
 @Parcelize
 class SampleStack(

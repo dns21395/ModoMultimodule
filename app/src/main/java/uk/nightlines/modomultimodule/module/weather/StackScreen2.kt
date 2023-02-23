@@ -1,4 +1,4 @@
-package uk.nightlines.modomultimodule.stack2
+package uk.nightlines.modomultimodule.module.weather
 
 import android.util.Log
 import androidx.compose.material3.Button

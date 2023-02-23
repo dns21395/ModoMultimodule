@@ -1,4 +1,4 @@
-package uk.nightlines.modomultimodule.stack2
+package uk.nightlines.modomultimodule.module.weather
 
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.Screen

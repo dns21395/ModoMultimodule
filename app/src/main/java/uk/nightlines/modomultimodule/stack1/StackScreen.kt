@@ -15,7 +15,7 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.modomultimodule.di.LocalNavigationProvider
 import uk.nightlines.modomultimodule.navigation.OpenWeatherScreenCommand
 import uk.nightlines.modomultimodule.navigation.NavigationOpenStack2
-import uk.nightlines.modomultimodule.stack2.SampleScreen3
+import uk.nightlines.modomultimodule.module.weather.SampleScreen3
 
 @Parcelize
 class SampleScreen(
