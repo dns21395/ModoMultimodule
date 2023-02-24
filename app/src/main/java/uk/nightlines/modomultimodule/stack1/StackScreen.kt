@@ -15,7 +15,7 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.modomultimodule.di.LocalNavigationProvider
 import uk.nightlines.modomultimodule.navigation.OpenWeatherScreenCommand
 import uk.nightlines.modomultimodule.navigation.NavigationOpenStack2
-import uk.nightlines.modomultimodule.module.weather.SampleScreen3
+//import uk.nightlines.feature.weather.ui.SampleScreen3
 
 @Parcelize
 class SampleScreen(
@@ -41,7 +41,7 @@ class SampleScreen2(
 
 @Composable
 fun SampleContent() {
-    val parent = LocalContainerScreen.current
+//    val parent = LocalContainerScreen.current
     val navigation = LocalNavigationProvider.current
 
     val coroutineScope = rememberCoroutineScope()
@@ -57,7 +57,7 @@ fun SampleContent() {
             Text("navigation command")
         }
         Button(onClick = {
-            (parent as StackScreen).replace(SampleScreen3())
+//            (parent as StackScreen).replace(uk.nightlines.feature.weather.ui.SampleScreen3())
         }) {
             Text("modo way")
         }

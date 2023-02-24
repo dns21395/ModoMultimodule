@@ -14,7 +14,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion '1.4.2'
+        kotlinCompilerVersion '1.5.30'
     }
 }
 
@@ -26,6 +27,7 @@ dependencies {
             deps.compose.material3,
             deps.compose.ui_tooling_preview,
             deps.dagger.dagger,
+            deps.modo.modo,
     )
 
     kapt(

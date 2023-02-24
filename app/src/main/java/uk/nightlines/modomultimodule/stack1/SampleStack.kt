@@ -10,11 +10,7 @@ import uk.nightlines.modomultimodule.di.DaggerAppComponent
 import uk.nightlines.modomultimodule.di.LocalNavigationProvider
 import uk.nightlines.modomultimodule.navigation.NavigationCommand
 import uk.nightlines.modomultimodule.navigation.NavigationForwardCommand
-import androidx.compose.runtime.getValue
-import com.github.terrakok.modo.stack.replace
 import uk.nightlines.modomultimodule.navigation.OpenWeatherScreenCommand
-import uk.nightlines.modomultimodule.module.weather.SampleScreen3
-import uk.nightlines.modomultimodule.module.weather.SampleStack2
 
 @Parcelize
 class SampleStack(
@@ -44,7 +40,7 @@ class SampleStack(
         LaunchedEffect(key1 = commands) {
             when (commands) {
                 is OpenWeatherScreenCommand -> {
-                    replace(SampleStack2(SampleScreen3()))
+//                    replace(uk.nightlines.feature.weather.ui.SampleStack2(uk.nightlines.feature.weather.ui.SampleScreen3()))
                 }
             }
         }
