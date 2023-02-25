@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.main.ui
+package uk.nightlines.feature.weather.main_impl.ui
 
 //import androidx.compose.runtime.*
 //import com.github.terrakok.modo.Screen
