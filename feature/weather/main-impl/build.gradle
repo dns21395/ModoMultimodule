@@ -7,21 +7,24 @@ apply from: "$rootDir/common.gradle"
 
 android {
 
-    namespace 'uk.nightlines.feature.weather.main'
+    namespace 'uk.nightlines.feature.weather.main_impl'
 
     buildFeatures {
         compose true
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.2'
-        kotlinCompilerVersion '1.5.30'
+        kotlinCompilerExtensionVersion rootProject.ext.kotlin_version
+        kotlinCompilerVersion rootProject.ext.kotlin_version
     }
 }
 
 dependencies {
 
     implementation(
+            project(':feature:weather:day-api'),
+            project(':feature:weather:day-impl'),
+
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,
