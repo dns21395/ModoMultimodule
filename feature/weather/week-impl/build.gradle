@@ -22,6 +22,8 @@ android {
 dependencies {
 
     implementation(
+            project(':feature:weather:week-api'),
+
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,
