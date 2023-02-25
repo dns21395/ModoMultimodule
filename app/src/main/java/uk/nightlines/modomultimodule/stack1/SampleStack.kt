@@ -1,4 +1,4 @@
-package uk.nightlines.modomultimodule.stack1
+//package uk.nightlines.modomultimodule.stack1
 
 import android.util.Log
 import androidx.compose.runtime.*
@@ -8,19 +8,19 @@ import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 import uk.nightlines.modomultimodule.di.LocalNavigationProvider
-
-@Parcelize
-class SampleStack(
-    private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
-
-    constructor(rootScreen: Screen) : this(StackNavModel(rootScreen))
-
-    @Composable
-    override fun Content() {
-
-        val navigationProvider = DaggerAppComponent.builder().build()
-
+//
+//@Parcelize
+//class SampleStack(
+//    private val stackNavModel: StackNavModel,
+//) : StackScreen(stackNavModel) {
+//
+//    constructor(rootScreen: Screen) : this(StackNavModel(rootScreen))
+//
+//    @Composable
+//    override fun Content() {
+//
+//        val navigationProvider = DaggerAppComponent.builder().build()
+//
 //        var commands by remember {
 //            mutableStateOf<uk.nightlines.core.navigation.NavigationCommand>(uk.nightlines.core.navigation.NavigationForwardCommand)
 //        }
@@ -37,18 +37,18 @@ class SampleStack(
 //        LaunchedEffect(key1 = commands) {
 //            when (commands) {
 //                is uk.nightlines.core.navigation.OpenWeatherScreenCommand -> {
-////                    replace(uk.nightlines.feature.weather.ui.SampleStack2(uk.nightlines.feature.weather.ui.SampleScreen3()))
+//                    replace(uk.nightlines.feature.weather.ui.SampleStack2(uk.nightlines.feature.weather.ui.SampleScreen3()))
 //                }
 //            }
 //        }
 
 //        Log.d("GTA5", "screen changed : ${commands}")
-
-        CompositionLocalProvider(
-            LocalNavigationProvider provides navigationProvider
-        ) {
-            TopScreenContent()
-        }
-    }
-}
+//
+//        CompositionLocalProvider(
+//            LocalNavigationProvider provides navigationProvider
+//        ) {
+//            TopScreenContent()
+//        }
+//    }
+//}
 

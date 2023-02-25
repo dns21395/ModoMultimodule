@@ -1,6 +1,5 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
-import android.util.Log
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -26,22 +25,21 @@ class WeatherStack(
     override fun Content() {
         val component = DaggerWeatherMainComponent.builder().build()
 
-        val currentScreen = remember {
+        var currentCommand by remember {
             mutableStateOf<NavigationCommand>(OpenDayScreenCommand)
         }
 
-        LaunchedEffect(key1 = "screen") {
-            when (currentScreen.value) {
+        LaunchedEffect(key1 = currentCommand) {
+            when (currentCommand) {
                 OpenDayScreenCommand -> replace(DayScreen())
                 OpenWeekScreenCommand -> replace(WeekScreen())
             }
         }
 
-        Log.d("GTA5", "created")
 
         LaunchedEffect(key1 = "navigation_listener") {
             component.getNavigation().commandsFlow.collect { command ->
-                currentScreen.value = command
+                currentCommand = command
             }
         }
 
