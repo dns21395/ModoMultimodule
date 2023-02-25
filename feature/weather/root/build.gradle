@@ -7,7 +7,7 @@ apply from: "$rootDir/common.gradle"
 
 android {
 
-    namespace 'uk.nightlines.feature.weather'
+    namespace 'uk.nightlines.feature.weather.root'
 
     buildFeatures {
         compose true
