@@ -7,7 +7,7 @@ apply from: "$rootDir/common.gradle"
 
 android {
 
-    namespace 'uk.nightlines.feature.weather.main_impl'
+    namespace 'uk.nightlines.feature.weather.week_impl'
 
     buildFeatures {
         compose true
@@ -22,10 +22,6 @@ android {
 dependencies {
 
     implementation(
-            project(':feature:weather:day-api'),
-            project(':feature:weather:day-impl'),
-            project(':feature:weather:week-impl'),
-
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,
