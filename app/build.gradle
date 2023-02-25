@@ -54,6 +54,8 @@ dependencies {
     implementation(
             project(':core:di'),
             project(':core:navigation'),
+            project(':feature:weather:main-api'),
+            project(':feature:weather:main-impl'),
 
             deps.dagger.dagger,
             deps.compose.runtime,

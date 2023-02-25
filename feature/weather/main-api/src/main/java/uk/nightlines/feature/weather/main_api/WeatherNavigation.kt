@@ -8,6 +8,6 @@ interface WeatherNavigation {
     fun getNavigation(): Navigation
 }
 
-val WeatherNavigationProvider = compositionLocalOf<WeatherNavigation> {
+val LocalWeatherNavigationProvider = compositionLocalOf<Navigation> {
     error("WeatherNavigation not found")
 }

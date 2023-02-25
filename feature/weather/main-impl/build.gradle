@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 apply from: "$rootDir/common.gradle"
 
@@ -14,14 +15,17 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion rootProject.ext.kotlin_version
-        kotlinCompilerVersion rootProject.ext.kotlin_version
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
     }
 }
 
 dependencies {
 
     implementation(
+            project(':core:di'),
+            project(':core:navigation'),
+            project(':feature:weather:main-api'),
             project(':feature:weather:day-api'),
             project(':feature:weather:day-impl'),
             project(':feature:weather:week-api'),

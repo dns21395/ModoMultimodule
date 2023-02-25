@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 apply from: "$rootDir/common.gradle"
 
@@ -14,8 +15,8 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion rootProject.ext.kotlin_version
-        kotlinCompilerVersion rootProject.ext.kotlin_version
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
     }
 }
 
