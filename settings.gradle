@@ -16,3 +16,4 @@ rootProject.name = "ModoMultimodule"
 include ':app'
 include ':feature:weather'
 include ':core:di'
+include ':core:navigation'

@@ -1,7 +1,7 @@
 package uk.nightlines.modomultimodule.di
 
 import androidx.compose.runtime.compositionLocalOf
-import uk.nightlines.modomultimodule.navigation.Navigation
+import uk.nightlines.core.navigation.Navigation
 
 interface NavigationProvider {
 

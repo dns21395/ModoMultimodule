@@ -52,6 +52,9 @@ android {
 dependencies {
 
     implementation(
+            project(':core:di'),
+            project(':core:navigation'),
+
             deps.dagger.dagger,
             deps.compose.runtime,
     )

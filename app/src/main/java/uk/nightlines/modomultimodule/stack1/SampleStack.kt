@@ -8,9 +8,6 @@ import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 import uk.nightlines.modomultimodule.di.LocalNavigationProvider
-import uk.nightlines.modomultimodule.navigation.NavigationCommand
-import uk.nightlines.modomultimodule.navigation.NavigationForwardCommand
-import uk.nightlines.modomultimodule.navigation.OpenWeatherScreenCommand
 
 @Parcelize
 class SampleStack(
@@ -24,28 +21,28 @@ class SampleStack(
 
         val navigationProvider = DaggerAppComponent.builder().build()
 
-        var commands by remember {
-            mutableStateOf<NavigationCommand>(NavigationForwardCommand)
-        }
+//        var commands by remember {
+//            mutableStateOf<uk.nightlines.core.navigation.NavigationCommand>(uk.nightlines.core.navigation.NavigationForwardCommand)
+//        }
 
 //        val commands = navigationProvider.getNavigation().commandsFlow.collectAsState(initial = NavigationForwardCommand)
 
-        LaunchedEffect(key1 = "yes1") {
-            navigationProvider.getNavigation().commandsFlow.collect {
-                Log.d("GTA5", "launched effect : $it")
-                commands = it
-            }
-        }
+//        LaunchedEffect(key1 = "yes1") {
+//            navigationProvider.getNavigation().commandsFlow.collect {
+//                Log.d("GTA5", "launched effect : $it")
+//                commands = it
+//            }
+//        }
+//
+//        LaunchedEffect(key1 = commands) {
+//            when (commands) {
+//                is uk.nightlines.core.navigation.OpenWeatherScreenCommand -> {
+////                    replace(uk.nightlines.feature.weather.ui.SampleStack2(uk.nightlines.feature.weather.ui.SampleScreen3()))
+//                }
+//            }
+//        }
 
-        LaunchedEffect(key1 = commands) {
-            when (commands) {
-                is OpenWeatherScreenCommand -> {
-//                    replace(uk.nightlines.feature.weather.ui.SampleStack2(uk.nightlines.feature.weather.ui.SampleScreen3()))
-                }
-            }
-        }
-
-        Log.d("GTA5", "screen changed : ${commands}")
+//        Log.d("GTA5", "screen changed : ${commands}")
 
         CompositionLocalProvider(
             LocalNavigationProvider provides navigationProvider
