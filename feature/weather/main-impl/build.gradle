@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+
+    namespace 'uk.nightlines.feature.weather.main_impl'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            project(':core:di'),
+            project(':core:navigation'),
+            project(':feature:weather:main-api'),
+            project(':feature:weather:day-api'),
+            project(':feature:weather:day-impl'),
+            project(':feature:weather:week-api'),
+            project(':feature:weather:week-impl'),
+
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.material3,
+            deps.compose.ui_tooling_preview,
+            deps.dagger.dagger,
+            deps.modo.modo,
+    )
+
+    kapt(
+            deps.dagger.compiler
+    )
+
+    debugImplementation(
+            deps.compose.ui_tooling
+    )
+}
