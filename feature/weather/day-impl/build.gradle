@@ -23,6 +23,9 @@ android {
 dependencies {
 
     implementation(
+            project(':core:navigation'),
+            project(':feature:weather:main-api'),
+
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,

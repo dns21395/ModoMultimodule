@@ -1,5 +1,6 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
+import android.util.Log
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -9,7 +10,9 @@ import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.weather.day_impl.DayScreen
 import uk.nightlines.feature.weather.main_api.LocalWeatherNavigationProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
+import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
+import uk.nightlines.feature.weather.week_impl.WeekScreen
 
 @Parcelize
 class WeatherStack(
@@ -30,8 +33,11 @@ class WeatherStack(
         LaunchedEffect(key1 = "screen") {
             when (currentScreen.value) {
                 OpenDayScreenCommand -> replace(DayScreen())
+                OpenWeekScreenCommand -> replace(WeekScreen())
             }
         }
+
+        Log.d("GTA5", "created")
 
         LaunchedEffect(key1 = "navigation_listener") {
             component.getNavigation().commandsFlow.collect { command ->
