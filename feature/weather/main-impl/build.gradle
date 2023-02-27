@@ -23,6 +23,8 @@ android {
 dependencies {
 
     implementation(
+            project(':feature:weather:main-api'),
+
             project(':core:di'),
             project(':core:navigation'),
             project(':feature:weather:main-api'),

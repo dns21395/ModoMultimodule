@@ -1,0 +1,49 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+
+    namespace 'uk.nightlines.feature.settings.main_impl'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            project(':core:di'),
+            project(':core:navigation'),
+            project(':feature:settings:main-api'),
+            project(':feature:settings:one-api'),
+            project(':feature:settings:one-impl'),
+            project(':feature:settings:two-api'),
+            project(':feature:settings:two-impl'),
+
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.material3,
+            deps.compose.ui_tooling_preview,
+            deps.dagger.dagger,
+            deps.modo.modo,
+    )
+
+    kapt(
+            deps.dagger.compiler
+    )
+
+    debugImplementation(
+            deps.compose.ui_tooling
+    )
+}

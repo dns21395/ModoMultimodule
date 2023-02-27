@@ -12,6 +12,9 @@ android {
 dependencies {
 
     implementation(
+            project(':core:navigation'),
+
+            deps.compose.navigation,
             deps.dagger.dagger,
     )
 

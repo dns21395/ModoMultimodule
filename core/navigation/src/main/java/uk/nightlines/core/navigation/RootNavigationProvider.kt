@@ -4,7 +4,6 @@ import androidx.compose.runtime.compositionLocalOf
 
 interface RootNavigationProvider {
 
-    fun getNavigation(): Navigation
 }
 
 val LocalNavigationProvider = compositionLocalOf<RootNavigationProvider> {

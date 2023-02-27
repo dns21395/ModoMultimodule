@@ -7,14 +7,14 @@ import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.weather.day_impl.DayScreen
-import uk.nightlines.feature.weather.main_api.LocalWeatherNavigationProvider
+import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
 import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 import uk.nightlines.feature.weather.week_impl.WeekScreen
 
 @Parcelize
-class WeatherStack(
+internal class WeatherStack(
     private val stackNavModel: StackNavModel,
 ) : StackScreen(stackNavModel) {
 
@@ -26,7 +26,7 @@ class WeatherStack(
         val component = DaggerWeatherMainComponent.builder().build()
 
         var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenDayScreenCommand)
+            mutableStateOf<NavigationCommand>(OpenWeekScreenCommand)
         }
 
         LaunchedEffect(key1 = currentCommand) {
@@ -36,15 +36,14 @@ class WeatherStack(
             }
         }
 
-
-        LaunchedEffect(key1 = "navigation_listener") {
-            component.getNavigation().commandsFlow.collect { command ->
+        LaunchedEffect(currentCommand) {
+            component.getWeatherNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }
         }
 
         CompositionLocalProvider(
-            LocalWeatherNavigationProvider provides component.getNavigation()
+            LocalDependenciesProvider provides component
         ) {
             TopScreenContent()
         }

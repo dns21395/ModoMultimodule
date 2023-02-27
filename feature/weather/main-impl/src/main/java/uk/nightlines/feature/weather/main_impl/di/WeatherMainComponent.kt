@@ -2,10 +2,10 @@ package uk.nightlines.feature.weather.main_impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.feature.weather.main_api.WeatherNavigation
+import uk.nightlines.feature.weather.main_api.WeatherDependencies
 
 @Component(
     modules = [WeatherMainModule::class]
 )
 @PerFeature
-internal interface WeatherMainComponent : WeatherNavigation
+internal interface WeatherMainComponent : WeatherDependencies
