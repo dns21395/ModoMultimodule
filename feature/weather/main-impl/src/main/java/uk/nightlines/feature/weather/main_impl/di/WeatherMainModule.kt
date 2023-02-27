@@ -1,6 +1,5 @@
 package uk.nightlines.feature.weather.main_impl.di
 
-import dagger.Component
 import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature

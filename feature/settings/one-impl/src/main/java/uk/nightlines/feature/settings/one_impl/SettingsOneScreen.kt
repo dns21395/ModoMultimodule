@@ -1,13 +1,27 @@
 package uk.nightlines.feature.settings.one_impl
 
-import com.github.terrakok.modo.stack.StackNavModel
-import com.github.terrakok.modo.stack.StackScreen
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import com.github.terrakok.modo.Screen
+import com.github.terrakok.modo.ScreenKey
+import com.github.terrakok.modo.generateScreenKey
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class SettingsStack(
-    private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
+internal class SettingsOneScreen(
+    override val screenKey: ScreenKey = generateScreenKey()
+) : Screen {
 
-    constructor() : this(StackNavModel(emptyList()))
+    @Composable
+    override fun Content() {
+        SettingsOneContent()
+    }
+}
+
+@Composable
+internal fun SettingsOneContent() {
+    Column {
+        Text("Settings One")
+    }
 }
