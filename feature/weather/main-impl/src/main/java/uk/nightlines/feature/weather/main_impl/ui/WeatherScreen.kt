@@ -26,7 +26,7 @@ class WeatherStack(
         val component = DaggerWeatherMainComponent.builder().build()
 
         var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenDayScreenCommand)
+            mutableStateOf<NavigationCommand>(OpenWeekScreenCommand)
         }
 
         LaunchedEffect(key1 = currentCommand) {
@@ -36,8 +36,7 @@ class WeatherStack(
             }
         }
 
-
-        LaunchedEffect(key1 = "navigation_listener") {
+        LaunchedEffect(currentCommand) {
             component.getNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }
