@@ -14,5 +14,6 @@ dependencies {
     implementation(
             deps.compose.navigation,
             deps.coroutines.coroutines,
+            deps.modo.modo,
     )
 }

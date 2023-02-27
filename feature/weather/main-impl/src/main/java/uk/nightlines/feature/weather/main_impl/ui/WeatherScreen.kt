@@ -14,7 +14,7 @@ import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 import uk.nightlines.feature.weather.week_impl.WeekScreen
 
 @Parcelize
-class WeatherStack(
+internal class WeatherStack(
     private val stackNavModel: StackNavModel,
 ) : StackScreen(stackNavModel) {
 

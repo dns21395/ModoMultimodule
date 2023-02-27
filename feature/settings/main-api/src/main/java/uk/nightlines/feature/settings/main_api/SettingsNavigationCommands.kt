@@ -2,6 +2,6 @@ package uk.nightlines.feature.settings.main_api
 
 import uk.nightlines.core.navigation.NavigationCommand
 
-object OpenFirstSettingsScreenCommand : NavigationCommand
+object OpenWeatherCommand : NavigationCommand
 
-object OpenSecondSettingsScreenCommand : NavigationCommand
+object OpenSettingsCommand : NavigationCommand
