@@ -36,7 +36,7 @@ class AppStackScreen(
         }
 
 
-        LaunchedEffect(key1 = "navigation_listener") {
+        LaunchedEffect(key1 = currentCommand) {
             coreProvider.getCoreNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }

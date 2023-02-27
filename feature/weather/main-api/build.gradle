@@ -23,7 +23,8 @@ dependencies {
 
     implementation(
             project(':core:navigation'),
-
+            project(':feature:weather:day-api'),
+            project(':feature:weather:week-api'),
 
             deps.compose.ui,
             deps.compose.material,

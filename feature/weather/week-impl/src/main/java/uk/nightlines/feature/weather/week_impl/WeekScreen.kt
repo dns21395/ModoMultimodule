@@ -11,9 +11,11 @@ import com.github.terrakok.modo.generateScreenKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.feature.weather.main_api.LocalWeatherNavigationProvider
+import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.OpenSettingsCommand
+import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
-import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
+import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
 
 @Parcelize
 class WeekScreen(
@@ -28,15 +30,29 @@ class WeekScreen(
 
 @Composable
 fun WeekContent() {
-    val navigation = LocalWeatherNavigationProvider.current
+    val coreProvider = LocalCoreProvider.current
+    val settingsDependencies = LocalDependenciesProvider.current
     val coroutineScope = rememberCoroutineScope()
+
+    val component = DaggerWeekComponent.factory().create(
+        coreProvider, settingsDependencies
+    )
 
     Column {
         Text("WeekScreen")
         Button(onClick = {
-            coroutineScope.launch(Dispatchers.Main) { navigation.navigate(OpenDayScreenCommand) }
+            coroutineScope.launch(Dispatchers.Main) {
+                component.getWeatherNavigation().navigate(OpenDayScreenCommand)
+            }
         }) {
             Text("Open Day Screen")
+        }
+        Button(onClick = {
+            coroutineScope.launch(Dispatchers.Main) {
+                component.getCoreNavigation().navigate(OpenSettingsCommand)
+            }
+        }) {
+            Text("Open Settings Screen")
         }
     }
 }

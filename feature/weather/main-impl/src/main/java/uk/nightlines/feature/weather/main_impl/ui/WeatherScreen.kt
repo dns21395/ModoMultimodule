@@ -7,7 +7,7 @@ import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.weather.day_impl.DayScreen
-import uk.nightlines.feature.weather.main_api.LocalWeatherNavigationProvider
+import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
 import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
@@ -37,13 +37,13 @@ internal class WeatherStack(
         }
 
         LaunchedEffect(currentCommand) {
-            component.getNavigation().commandsFlow.collect { command ->
+            component.getWeatherNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }
         }
 
         CompositionLocalProvider(
-            LocalWeatherNavigationProvider provides component.getNavigation()
+            LocalDependenciesProvider provides component
         ) {
             TopScreenContent()
         }

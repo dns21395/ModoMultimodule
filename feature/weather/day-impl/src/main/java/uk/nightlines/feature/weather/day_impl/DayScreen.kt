@@ -11,7 +11,7 @@ import com.github.terrakok.modo.generateScreenKey
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.feature.weather.main_api.LocalWeatherNavigationProvider
+import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
 
 @Parcelize
@@ -27,13 +27,15 @@ class DayScreen(
 
 @Composable
 fun DayContent() {
-    val navigation = LocalWeatherNavigationProvider.current
+    val weatherDependencies = LocalDependenciesProvider.current
     val coroutineScope = rememberCoroutineScope()
 
     Column {
         Text("DayScreen")
         Button(onClick = {
-            coroutineScope.launch(Dispatchers.Main) { navigation.navigate(OpenWeekScreenCommand) }
+            coroutineScope.launch(Dispatchers.Main) {
+                weatherDependencies.getWeatherNavigation().navigate(OpenWeekScreenCommand)
+            }
         }) {
             Text("Open Week Screen")
         }
