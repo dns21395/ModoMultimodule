@@ -1,4 +1,4 @@
-package uk.nightlines.modomultimodule
+package uk.nightlines.modomultimodule.ui
 
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
