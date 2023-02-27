@@ -11,6 +11,7 @@ import com.github.terrakok.modo.generateScreenKey
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.OpenWeatherCommand
 import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
 import uk.nightlines.feature.settings.main_api.OpenSettingsTwoScreenCommand
 import uk.nightlines.feature.settings.one_impl.di.DaggerSettingsOneComponent
@@ -39,11 +40,18 @@ internal fun SettingsOneContent() {
         Button(
             onClick = {
                 val navigation = component.getNavigation()
-//
                 coroutineScope.launch { navigation.navigate(OpenSettingsTwoScreenCommand) }
             }
         ) {
             Text("Open Settings Two Screen")
+        }
+        Button(
+            onClick = {
+                val coreNavigation = component.getCoreNavigation()
+                coroutineScope.launch { coreNavigation.navigate(OpenWeatherCommand) }
+            }
+        ) {
+            Text("Open Weather")
         }
     }
 }
