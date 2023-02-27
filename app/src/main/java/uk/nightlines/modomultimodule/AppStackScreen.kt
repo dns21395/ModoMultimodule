@@ -7,10 +7,8 @@ import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.feature.settings.main_api.OpenSettingsCommand
-import uk.nightlines.feature.settings.main_api.OpenWeatherCommand
-import uk.nightlines.feature.settings.main_impl.OpenSettingsOneScreenCommand
-import uk.nightlines.feature.settings.main_impl.OpenSettingsTwoScreenCommand
+import uk.nightlines.core.navigation.OpenSettingsCommand
+import uk.nightlines.core.navigation.OpenWeatherCommand
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 
 @Parcelize
@@ -27,7 +25,7 @@ class AppStackScreen(
         val rootScreens = coreProvider.rootScreens()
 
         var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenWeatherCommand)
+            mutableStateOf<NavigationCommand>(OpenSettingsCommand)
         }
 
         LaunchedEffect(key1 = currentCommand) {
@@ -39,7 +37,7 @@ class AppStackScreen(
 
 
         LaunchedEffect(key1 = "navigation_listener") {
-            coreProvider.getNavigation().commandsFlow.collect { command ->
+            coreProvider.getCoreNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }
         }

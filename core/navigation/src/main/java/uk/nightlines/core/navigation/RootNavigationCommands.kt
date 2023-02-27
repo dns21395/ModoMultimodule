@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.main_api
+package uk.nightlines.core.navigation
 
 import uk.nightlines.core.navigation.NavigationCommand
 

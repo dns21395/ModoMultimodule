@@ -7,6 +7,8 @@ import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
+import uk.nightlines.feature.settings.main_api.OpenSettingsOneScreenCommand
+import uk.nightlines.feature.settings.main_api.OpenSettingsTwoScreenCommand
 import uk.nightlines.feature.settings.main_api.SettingsDependencies
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 

@@ -4,6 +4,8 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
 import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.navigation.RootNavigationQualifier
+import uk.nightlines.feature.settings.main_api.SettingsNavigationQualifier
 import uk.nightlines.feature.settings.one_api.SettingsOneApi
 import uk.nightlines.feature.settings.one_impl.SettingsOneImpl
 import uk.nightlines.feature.settings.two_api.SettingsTwoApi
@@ -22,5 +24,6 @@ class SettingsModule {
 
     @PerFeature
     @Provides
+    @SettingsNavigationQualifier
     fun provideNavigation() = Navigation()
 }

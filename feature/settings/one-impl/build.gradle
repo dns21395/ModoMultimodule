@@ -27,6 +27,7 @@ dependencies {
             project(':core:di'),
             project(':feature:settings:main-api'),
             project(':feature:settings:one-api'),
+            project(':feature:settings:two-api'),
 
             deps.compose.ui,
             deps.compose.material,

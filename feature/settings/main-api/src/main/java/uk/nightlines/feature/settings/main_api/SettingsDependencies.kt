@@ -7,6 +7,7 @@ import uk.nightlines.feature.settings.two_api.SettingsTwoApi
 
 interface SettingsDependencies {
 
+    @SettingsNavigationQualifier
     fun getNavigation(): Navigation
 
     fun getOneApi(): SettingsOneApi
