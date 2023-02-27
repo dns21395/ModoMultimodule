@@ -23,6 +23,8 @@ android {
 dependencies {
 
     implementation(
+            project(':core:navigation'),
+            project(':core:di'),
             project(':feature:settings:main-api'),
             project(':feature:settings:one-api'),
 
