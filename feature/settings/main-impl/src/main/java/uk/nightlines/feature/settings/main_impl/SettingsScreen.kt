@@ -36,7 +36,7 @@ class SettingsStack(
         }
 
 
-        LaunchedEffect(key1 = "navigation_listener") {
+        LaunchedEffect(currentCommand) {
             settingsDependencies.getNavigation().commandsFlow.collect { command ->
                 currentCommand = command
             }

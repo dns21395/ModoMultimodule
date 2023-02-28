@@ -31,11 +31,11 @@ class WeekScreen(
 @Composable
 fun WeekContent() {
     val coreProvider = LocalCoreProvider.current
-    val settingsDependencies = LocalDependenciesProvider.current
+    val weatherDependencies = LocalDependenciesProvider.current
     val coroutineScope = rememberCoroutineScope()
 
     val component = DaggerWeekComponent.factory().create(
-        coreProvider, settingsDependencies
+        coreProvider, weatherDependencies
     )
 
     Column {
