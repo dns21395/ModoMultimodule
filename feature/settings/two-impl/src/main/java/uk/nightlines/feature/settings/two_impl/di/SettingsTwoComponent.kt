@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.one_impl.di
+package uk.nightlines.feature.settings.two_impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
@@ -12,13 +12,13 @@ import uk.nightlines.feature.settings.main_api.SettingsDependencies
         SettingsDependencies::class
     ]
 )
-internal interface SettingsOneComponent : CoreProvider, SettingsDependencies {
+internal interface SettingsTwoComponent : CoreProvider, SettingsDependencies {
 
     @Component.Factory
     interface Builder {
         fun create(
             coreProvider: CoreProvider,
             settingsDependencies: SettingsDependencies
-        ): SettingsOneComponent
+        ): SettingsTwoComponent
     }
 }
