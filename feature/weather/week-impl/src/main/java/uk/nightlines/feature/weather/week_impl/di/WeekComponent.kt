@@ -4,6 +4,7 @@ import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.feature.weather.main_api.WeatherDependencies
+import uk.nightlines.feature.weather.week_impl.ui.WeekViewModel
 
 @FeatureScope
 @Component(
@@ -12,7 +13,7 @@ import uk.nightlines.feature.weather.main_api.WeatherDependencies
         WeatherDependencies::class
     ]
 )
-interface WeekComponent : CoreProvider, WeatherDependencies {
+internal interface WeekComponent : CoreProvider, WeatherDependencies {
 
     @Component.Factory
     interface Builder {
@@ -21,4 +22,6 @@ interface WeekComponent : CoreProvider, WeatherDependencies {
             weatherDependencies: WeatherDependencies
         ): WeekComponent
     }
+
+    fun viewModel(): WeekViewModel
 }

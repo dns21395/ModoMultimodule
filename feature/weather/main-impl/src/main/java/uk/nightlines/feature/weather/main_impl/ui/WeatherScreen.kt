@@ -11,7 +11,7 @@ import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
 import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
-import uk.nightlines.feature.weather.week_impl.WeekScreen
+import uk.nightlines.feature.weather.week_impl.ui.WeekScreen
 
 @Parcelize
 internal class WeatherStack(
