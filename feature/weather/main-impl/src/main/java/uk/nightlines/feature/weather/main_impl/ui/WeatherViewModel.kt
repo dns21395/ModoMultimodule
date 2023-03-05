@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.SharedFlow
 import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.feature.weather.main_api.WeatherNavigationQualifier
+import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(

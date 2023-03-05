@@ -15,8 +15,7 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.day_impl.di.DaggerDayComponent
-import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
-import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
+import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 
 @Parcelize
 class DayScreen(

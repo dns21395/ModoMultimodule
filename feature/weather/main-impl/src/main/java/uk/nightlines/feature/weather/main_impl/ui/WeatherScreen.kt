@@ -6,10 +6,12 @@ import com.github.terrakok.modo.stack.StackScreen
 import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.weather.day_impl.ui.DayScreen
-import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
-import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
-import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
+import uk.nightlines.feature.weather.common.LocalDependenciesProvider
+import uk.nightlines.feature.weather.common.OpenDayScreenCommand
+import uk.nightlines.feature.weather.common.OpenWeekScreenCommand
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 import uk.nightlines.feature.weather.week_impl.ui.WeekScreen
 
@@ -30,14 +32,9 @@ internal class WeatherStack(
             component.viewModel()
         }
 
-        val commands = viewModel.navigationCommands.collectAsState(OpenWeekScreenCommand)
+        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.screenInteractor().getWeekScreen()))
 
-        LaunchedEffect(key1 = commands.value) {
-            when (commands.value) {
-                OpenDayScreenCommand -> replace(DayScreen())
-                OpenWeekScreenCommand -> replace(WeekScreen())
-            }
-        }
+        LaunchedEffect(key1 = commands.value) { navigate(commands.value) }
 
         CompositionLocalProvider(
             LocalDependenciesProvider provides component

@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
+import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
 
 @Parcelize
