@@ -5,6 +5,7 @@ import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.weather.day_impl.DayScreen
 import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
@@ -23,7 +24,12 @@ internal class WeatherStack(
 
     @Composable
     override fun Content() {
-        val component = DaggerWeatherMainComponent.builder().build()
+        val component = remember {
+            DaggerWeatherMainComponent.builder().build()
+        }
+        val viewModel: WeatherViewModel = daggerViewModel {
+            component.viewModel()
+        }
 
         var currentCommand by remember {
             mutableStateOf<NavigationCommand>(OpenWeekScreenCommand)

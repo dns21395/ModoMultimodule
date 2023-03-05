@@ -26,6 +26,7 @@ dependencies {
             project(':feature:weather:main-api'),
 
             project(':core:di'),
+            project(':core:common'),
             project(':core:navigation'),
             project(':feature:weather:main-api'),
             project(':feature:weather:day-api'),
@@ -38,6 +39,8 @@ dependencies {
             deps.compose.material3,
             deps.compose.ui_tooling_preview,
             deps.dagger.dagger,
+            deps.lifecycle.viewmodel,
+            deps.lifecycle.viewmodel_compose,
             deps.modo.modo,
     )
 

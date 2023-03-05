@@ -15,6 +15,7 @@ dependencyResolutionManagement {
 rootProject.name = "ModoMultimodule"
 include ':app'
 include ':core:di'
+include ':core:common'
 include ':core:navigation'
 include ':feature:weather:main-api'
 include ':feature:weather:main-impl'
