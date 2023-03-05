@@ -6,7 +6,6 @@ import com.github.terrakok.modo.stack.StackScreen
 import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
-import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.feature.weather.day_impl.DayScreen
 import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
 import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
@@ -31,20 +30,12 @@ internal class WeatherStack(
             component.viewModel()
         }
 
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenWeekScreenCommand)
-        }
+        val commands = viewModel.navigationCommands.collectAsState(OpenWeekScreenCommand)
 
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
+        LaunchedEffect(key1 = commands.value) {
+            when (commands.value) {
                 OpenDayScreenCommand -> replace(DayScreen())
                 OpenWeekScreenCommand -> replace(WeekScreen())
-            }
-        }
-
-        LaunchedEffect(currentCommand) {
-            component.getWeatherNavigation().commandsFlow.collect { command ->
-                currentCommand = command
             }
         }
 

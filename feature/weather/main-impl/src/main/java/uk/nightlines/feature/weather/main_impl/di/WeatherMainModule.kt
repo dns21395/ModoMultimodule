@@ -11,7 +11,6 @@ import uk.nightlines.feature.weather.main_impl.ui.WeatherViewModel
 import uk.nightlines.feature.weather.week_api.WeekApi
 import uk.nightlines.feature.weather.week_impl.WeekImpl
 
-
 @Module
 internal class WeatherMainModule {
 
@@ -30,5 +29,7 @@ internal class WeatherMainModule {
 
     @PerFeature
     @Provides
-    fun provideViewModel(dayApi: DayApi): WeatherViewModel = WeatherViewModel(dayApi)
+    fun provideViewModel(
+        @WeatherNavigationQualifier navigation: Navigation
+    ): WeatherViewModel = WeatherViewModel(navigation)
 }
