@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
@@ -41,7 +42,9 @@ internal class WeatherStack(
             DaggerWeatherMainComponent.factory().create(coreProvider)
         }
 
-        val viewModel: WeatherViewModel = remember {
+        Log.d("GTA6", "WEATHER SCREEN KEY : ${stackNavModel.screenKey}")
+
+        val viewModel: WeatherViewModel = daggerViewModel(key = stackNavModel.screenKey.toString()) {
             component.viewModel()
         }
 
