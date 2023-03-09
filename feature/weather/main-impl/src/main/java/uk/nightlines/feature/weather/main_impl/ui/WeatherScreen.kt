@@ -1,7 +1,6 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
 import android.util.Log
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material.Button
@@ -13,21 +12,19 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.common.ScreenCounter
 import uk.nightlines.feature.weather.common.WeatherDependencies
-import uk.nightlines.feature.weather.common.WeatherDependenciesProvider
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 
 @Parcelize
 internal class WeatherStack(
     private val stackNavModel: StackNavModel,
     private val counter: Int
-) : StackScreen(stackNavModel), ScreenCounter, WeatherDependenciesProvider {
+) : StackScreen(stackNavModel), ScreenCounter {
 
     @IgnoredOnParcel
     private lateinit var weatherDependencies: WeatherDependencies
@@ -65,7 +62,9 @@ internal class WeatherStack(
             navigate(commands.value)
         }
 
-        CompositionLocalProvider {
+        CompositionLocalProvider(
+            LocalDependenciesProvider provides component
+        ) {
             Column {
                 Row {
                     Text(text = "WEATHER #$counter")
@@ -78,9 +77,5 @@ internal class WeatherStack(
                 TopScreenContent()
             }
         }
-    }
-
-    override fun weatherDependencies(): WeatherDependencies {
-        return weatherDependencies
     }
 }
