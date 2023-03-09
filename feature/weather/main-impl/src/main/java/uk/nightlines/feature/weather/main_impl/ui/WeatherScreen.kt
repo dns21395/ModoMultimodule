@@ -1,45 +1,70 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
-import uk.nightlines.feature.weather.day_impl.ui.DayScreen
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.common.OpenDayScreenCommand
-import uk.nightlines.feature.weather.common.OpenWeekScreenCommand
+import uk.nightlines.feature.weather.common.ScreenCounter
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
-import uk.nightlines.feature.weather.week_impl.ui.WeekScreen
 
 @Parcelize
 internal class WeatherStack(
     private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
+    private val counter: Int
+) : StackScreen(stackNavModel), ScreenCounter {
 
-    constructor() :  this(StackNavModel(emptyList()))
+    constructor(counter: Int) :  this(StackNavModel(emptyList()), counter)
 
+    override fun getCounter(): Int = counter
 
     @Composable
     override fun Content() {
+
+
+        val coreProvider = LocalCoreProvider.current
+
         val component = remember {
-            DaggerWeatherMainComponent.builder().build()
+            DaggerWeatherMainComponent.factory().create(coreProvider)
         }
+
         val viewModel: WeatherViewModel = daggerViewModel {
             component.viewModel()
         }
+
+        Log.d("GTA5", "Weather Stack. Component hashCode : ${component.hashCode()}")
+
+        val coroutineScope = rememberCoroutineScope()
 
         val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.screenInteractor().getWeekScreen()))
 
         LaunchedEffect(key1 = commands.value) { navigate(commands.value) }
 
         CompositionLocalProvider(
-            LocalDependenciesProvider provides component
+            LocalDependenciesProvider provides component,
         ) {
-            TopScreenContent()
+            Column {
+                Row {
+                    Text(text = "WEATHER #$counter")
+                    Button(onClick = {
+                        coroutineScope.launch { viewModel.onOpenNewWeatherScreenButtonClicked() }
+                    }) {
+                        Text(text = "Open New Weather Screen")
+                    }
+                }
+                TopScreenContent()
+            }
         }
     }
 }

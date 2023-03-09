@@ -35,6 +35,7 @@ dependencies {
             project(':feature:weather:week-api'),
             project(':feature:weather:week-impl'),
 
+            deps.compose.activity,
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,

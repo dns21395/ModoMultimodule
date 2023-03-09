@@ -1,5 +1,6 @@
 package uk.nightlines.feature.weather.day_impl.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -35,6 +36,9 @@ fun DayContent() {
     val component = remember {
         DaggerDayComponent.factory().create(coreProvider, weatherDependencies)
     }
+
+    Log.d("GTA5", "DayContent ; ${weatherDependencies.hashCode()}")
+
     val viewModel = daggerViewModel { component.viewModel() }
 
     val coroutineScope = rememberCoroutineScope()

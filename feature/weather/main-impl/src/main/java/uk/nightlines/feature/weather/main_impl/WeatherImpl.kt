@@ -6,7 +6,7 @@ import uk.nightlines.feature.weather.main_impl.ui.WeatherStack
 
 class WeatherImpl : WeatherApi {
 
-    override fun getWeatherScreen(): Screen {
-        return WeatherStack()
+    override fun getWeatherScreen(counter: Int): Screen {
+        return WeatherStack(counter)
     }
 }

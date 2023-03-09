@@ -1,5 +1,6 @@
 package uk.nightlines.feature.weather.week_impl.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -31,13 +32,15 @@ class WeekScreen(
 @Composable
 fun WeekContent() {
     val coreProvider = LocalCoreProvider.current
+
     val weatherDependencies = LocalDependenciesProvider.current
+
+    Log.d("GTA5", "WeekContent : ${weatherDependencies.hashCode()}")
+
     val coroutineScope = rememberCoroutineScope()
 
     val component = remember {
-        DaggerWeekComponent.factory().create(
-            coreProvider, weatherDependencies
-        )
+        DaggerWeekComponent.factory().create(coreProvider, weatherDependencies)
     }
 
     val viewModel: WeekViewModel = daggerViewModel { component.viewModel() }

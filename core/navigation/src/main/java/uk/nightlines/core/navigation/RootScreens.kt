@@ -6,5 +6,5 @@ interface RootScreens {
 
     fun settings(): Screen
 
-    fun weather(): Screen
+    fun weather(counter: Int): Screen
 }

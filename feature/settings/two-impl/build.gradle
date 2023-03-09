@@ -23,6 +23,7 @@ android {
 dependencies {
 
     implementation(
+            project(':core:common'),
             project(':core:navigation'),
             project(':core:di'),
             project(':feature:settings:main-api'),

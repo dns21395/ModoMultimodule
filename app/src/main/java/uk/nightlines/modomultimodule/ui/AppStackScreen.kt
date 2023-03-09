@@ -1,14 +1,16 @@
 package uk.nightlines.modomultimodule.ui
 
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.core.navigation.OpenSettingsCommand
-import uk.nightlines.core.navigation.OpenWeatherCommand
+import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.navigate
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 
 @Parcelize
@@ -20,30 +22,27 @@ class AppStackScreen(
 
     @Composable
     override fun Content() {
-        val coreProvider = DaggerAppComponent.builder().build()
-
-        val rootScreens = coreProvider.rootScreens()
-
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenSettingsCommand)
+        val component = remember {
+            DaggerAppComponent.builder().build()
         }
+        val viewModel = daggerViewModel { component.viewModel() }
+        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.rootScreens().weather(0)))
 
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
-                OpenWeatherCommand -> replace(rootScreens.weather())
-                OpenSettingsCommand -> replace(rootScreens.settings())
+        val coroutineScope = rememberCoroutineScope()
+
+        BackHandler {
+            coroutineScope.launch {
+                Log.d("GTA5", "BACK BUTTON")
+                viewModel.onBackButtonPressed()
             }
         }
 
-
-        LaunchedEffect(key1 = currentCommand) {
-            coreProvider.getCoreNavigation().commandsFlow.collect { command ->
-                currentCommand = command
-            }
+        LaunchedEffect(key1 = commands.value) {
+            navigate(commands.value)
         }
 
         CompositionLocalProvider(
-            LocalCoreProvider provides coreProvider
+            LocalCoreProvider provides component
         ) {
             TopScreenContent()
         }

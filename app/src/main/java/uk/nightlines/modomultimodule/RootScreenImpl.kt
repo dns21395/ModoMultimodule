@@ -13,5 +13,5 @@ class RootScreenImpl @Inject constructor(
 
     override fun settings(): Screen = settingsApi.getSettingsScreen()
 
-    override fun weather(): Screen = weatherApi.getWeatherScreen()
+    override fun weather(counter: Int): Screen = weatherApi.getWeatherScreen(counter)
 }

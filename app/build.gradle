@@ -52,6 +52,7 @@ android {
 dependencies {
 
     implementation(
+            project(':core:common'),
             project(':core:di'),
             project(':core:navigation'),
             project(':feature:weather:main-api'),

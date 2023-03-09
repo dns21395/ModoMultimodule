@@ -1,5 +1,6 @@
 package uk.nightlines.feature.weather.day_impl.ui
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.core.navigation.NavigationReplace
@@ -13,6 +14,8 @@ internal class DayViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun onOpenWeekScreenButtonClicked() {
+//        Log.d("GTA5", "onOpenWeekScreenButtonClicked\n" +
+//                "weather navigation : ${navigation.hashCode()}")
         navigation.navigate(NavigationReplace(screenInteractor.getWeekScreen()))
     }
 }

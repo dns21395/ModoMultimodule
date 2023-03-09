@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
 import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.feature.weather.day_api.DayApi
 import uk.nightlines.feature.weather.day_impl.DayImpl
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
@@ -31,14 +32,8 @@ internal class WeatherMainModule {
 
     @PerFeature
     @Provides
-    fun provideViewModel(
-        @WeatherNavigationQualifier navigation: Navigation,
-    ): WeatherViewModel = WeatherViewModel(navigation)
-
-    @PerFeature
-    @Provides
     fun provideScreenInteractor(
-        screenInteractorImpl: ScreenInteractorImpl
+        screenInteractorImpl: ScreenInteractorImpl,
     ): WeatherScreenInteractor {
         return screenInteractorImpl
     }
