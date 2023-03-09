@@ -38,6 +38,7 @@ class AppStackScreen(
         }
 
         LaunchedEffect(key1 = commands.value) {
+            Log.d("GTA5", "ROOT NAVIGATE : ${commands.value}")
             navigate(commands.value)
         }
 

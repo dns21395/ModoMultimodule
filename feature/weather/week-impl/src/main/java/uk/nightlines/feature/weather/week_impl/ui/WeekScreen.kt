@@ -7,6 +7,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
 import com.github.terrakok.modo.generateScreenKey
@@ -16,6 +17,8 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
+import uk.nightlines.feature.weather.common.WeatherDependencies
+import uk.nightlines.feature.weather.common.WeatherDependenciesProvider
 import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
 
 @Parcelize
@@ -32,18 +35,22 @@ class WeekScreen(
 @Composable
 fun WeekContent() {
     val coreProvider = LocalCoreProvider.current
-
-    val weatherDependencies = LocalDependenciesProvider.current
+    val weatherDependencies = (LocalContainerScreen.current as WeatherDependenciesProvider).weatherDependencies()
 
     Log.d("GTA5", "WeekContent : ${weatherDependencies.hashCode()}")
 
     val coroutineScope = rememberCoroutineScope()
 
     val component = remember {
+        Log.d("GTA5", "week component creation ${weatherDependencies.hashCode()}")
         DaggerWeekComponent.factory().create(coreProvider, weatherDependencies)
     }
 
-    val viewModel: WeekViewModel = daggerViewModel { component.viewModel() }
+    val viewModel: WeekViewModel = remember {
+        Log.d("GTA5", "daggeviewmodel week ${weatherDependencies.hashCode()}")
+
+        component.viewModel()
+    }
 
     Column {
         Text("WeekScreen")
