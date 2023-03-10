@@ -55,5 +55,12 @@ fun DayContent() {
         }) {
             Text("Open Week Screen")
         }
+        Button(onClick = {
+            coroutineScope.launch {
+                viewModel.onOpenDialogButtonClicked()
+            }
+        }) {
+            Text("Open Dialog")
+        }
     }
 }
