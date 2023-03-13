@@ -28,15 +28,6 @@ class AppStackScreen(
         val viewModel = daggerViewModel { component.viewModel() }
         val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.rootScreens().weather(0)))
 
-        val coroutineScope = rememberCoroutineScope()
-
-        BackHandler {
-            coroutineScope.launch {
-                Log.d("GTA5", "BACK BUTTON")
-                viewModel.onBackButtonPressed()
-            }
-        }
-
         LaunchedEffect(key1 = commands.value) {
             Log.d("GTA5", "ROOT NAVIGATE : ${commands.value}")
             navigate(commands.value)

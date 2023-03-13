@@ -10,15 +10,14 @@ import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.common.ScreenCounter
-import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 
 @Parcelize
@@ -26,9 +25,6 @@ internal class WeatherStack(
     private val stackNavModel: StackNavModel,
     private val counter: Int
 ) : StackScreen(stackNavModel), ScreenCounter {
-
-    @IgnoredOnParcel
-    private lateinit var weatherDependencies: WeatherDependencies
 
     constructor(counter: Int) :  this(StackNavModel(emptyList()), counter)
 
@@ -38,35 +34,29 @@ internal class WeatherStack(
     override fun Content() {
         val coreProvider = LocalCoreProvider.current
 
-        val component = remember {
-            DaggerWeatherMainComponent.factory().create(coreProvider)
+        Log.d("GTA6", "-------------------------------\n[WEATHER] SCREEN KEY : ${stackNavModel.screenKey}")
+
+        val component = daggerViewModel(key = "${stackNavModel.screenKey}WEATHER_COMP") {
+            Log.d("GTA5", "[WEATHER] component created")
+            ComponentHolder(DaggerWeatherMainComponent.factory().create(coreProvider))
         }
 
-        Log.d("GTA6", "WEATHER SCREEN KEY : ${stackNavModel.screenKey}")
+        val viewModel: WeatherViewModel = daggerViewModel(key = "${stackNavModel.screenKey}WEATHER") {
+            Log.d("GTA5", "[WEATHER] dagger created. DEPS : ${component.hashCode()}")
 
-        val viewModel: WeatherViewModel = daggerViewModel(key = stackNavModel.screenKey.toString()) {
-            component.viewModel()
-        }
-
-        LaunchedEffect("one") {
-            Log.d("GTA5", "SETTINGS WEATHER DEPS : ${component.hashCode()}")
-            weatherDependencies = component
+            component.component.viewModel()
         }
 
         val coroutineScope = rememberCoroutineScope()
 
-        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.screenInteractor().getWeekScreen()))
+        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.component.screenInteractor().getWeekScreen()))
 
         LaunchedEffect(key1 = commands.value) {
-
-            Log.d("GTA5", "LAUNCHED EFFECT : ${weatherDependencies.hashCode()}\n" +
-                    "command : ${commands.value}")
-
             navigate(commands.value)
         }
 
         CompositionLocalProvider(
-            LocalDependenciesProvider provides component
+            LocalDependenciesProvider provides component.component
         ) {
             Column {
                 Row {

@@ -15,6 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.day_impl.di.DaggerDayComponent
@@ -35,14 +36,16 @@ fun DayContent() {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
-    val component = remember {
-        DaggerDayComponent.factory().create(coreProvider, weatherDependencies)
+
+
+    val component = daggerViewModel(key = "${screen.screenKey}DAY_COMP") {
+        ComponentHolder(DaggerDayComponent.factory().create(coreProvider, weatherDependencies))
     }
 
-    Log.d("GTA5", "DayContent ; ${weatherDependencies.hashCode()}")
-    Log.d("GTA6", "DAY SCREEN KEY : ${screen.screenKey}")
+    Log.d("GTA5", "[DAY] DEPS ; ${weatherDependencies.hashCode()}")
+    Log.d("GTA6", "[DAY] SCREEN KEY : ${screen.screenKey}")
 
-    val viewModel =  daggerViewModel(key = screen.screenKey.toString())  { component.viewModel() }
+    val viewModel =  daggerViewModel(key = "${screen.screenKey}DAY")  { component.component.viewModel() }
 
     val coroutineScope = rememberCoroutineScope()
 

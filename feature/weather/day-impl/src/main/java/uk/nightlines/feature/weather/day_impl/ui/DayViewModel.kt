@@ -19,7 +19,7 @@ internal class DayViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun onOpenWeekScreenButtonClicked() {
-        Log.d("GTA5", "Day ViewModel : ${weatherDependencies.hashCode()}")
+        Log.d("GTA5", "[DAY] ViewModel DEPS : ${weatherDependencies.hashCode()}")
         navigation.navigate(NavigationReplace(screenInteractor.getWeekScreen()))
     }
 

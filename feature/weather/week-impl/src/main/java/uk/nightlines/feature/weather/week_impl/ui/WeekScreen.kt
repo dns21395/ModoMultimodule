@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
@@ -15,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
@@ -36,21 +36,22 @@ fun WeekContent() {
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
 
-    Log.d("GTA5", "WeekContent : ${weatherDependencies.hashCode()}")
+    Log.d("GTA5", "[WEEK] DEPS : ${weatherDependencies.hashCode()}")
 
-    Log.d("GTA6", "WEEK SCREEN KEY : ${screen.screenKey}")
+    Log.d("GTA6", "[WEEK] SCREEN KEY : ${screen.screenKey}")
 
     val coroutineScope = rememberCoroutineScope()
 
-    val component = remember {
-        Log.d("GTA5", "week component creation ${weatherDependencies.hashCode()}")
-        DaggerWeekComponent.factory().create(coreProvider, weatherDependencies)
+    val component = daggerViewModel(key = "${screen.screenKey}WEEK_COMP" ){
+        Log.d("GTA5", "[WEEK] component created. DEPS: ${weatherDependencies.hashCode()}")
+        ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
+
     }
 
-    val viewModel: WeekViewModel = daggerViewModel(key = screen.screenKey.toString()) {
-        Log.d("GTA5", "daggeviewmodel week ${weatherDependencies.hashCode()}")
+    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}WEEK") {
+        Log.d("GTA5", "[WEEK] dagger created. DEPS: ${weatherDependencies.hashCode()}")
 
-        component.viewModel()
+        component.component.viewModel()
     }
 
     Column {
