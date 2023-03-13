@@ -1,0 +1,34 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+    namespace 'uk.nightlines.feature.settings.common'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            project(':core:navigation'),
+
+            deps.compose.material,
+            deps.dagger.dagger,
+            deps.modo.modo,
+    )
+
+    kapt(
+            deps.dagger.compiler
+    )
+}

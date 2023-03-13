@@ -2,7 +2,7 @@ package uk.nightlines.feature.weather.common
 
 import com.github.terrakok.modo.Screen
 
-interface WeatherScreenInteractor {
+interface WeatherScreens {
 
     fun getDayScreen(): Screen
 

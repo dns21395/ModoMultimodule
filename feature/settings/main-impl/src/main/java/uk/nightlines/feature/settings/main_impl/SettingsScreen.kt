@@ -3,13 +3,13 @@ package uk.nightlines.feature.settings.main_impl
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.navigation.NavigationCommand
+import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
+import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
-import uk.nightlines.feature.settings.main_api.OpenSettingsOneScreenCommand
-import uk.nightlines.feature.settings.main_api.OpenSettingsTwoScreenCommand
-import uk.nightlines.feature.settings.main_api.SettingsDependencies
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
 @Parcelize
@@ -21,29 +21,26 @@ class SettingsStack(
 
     @Composable
     override fun Content() {
-        val settingsDependencies = DaggerSettingsComponent.builder().build() as SettingsDependencies
+        val coreProvider = LocalCoreProvider.current
 
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenSettingsOneScreenCommand)
+        val componentHolder = daggerViewModel {
+            ComponentHolder(DaggerSettingsComponent.factory().create(coreProvider))
         }
 
-
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
-                OpenSettingsOneScreenCommand -> replace(settingsDependencies.getOneApi().getScreen())
-                OpenSettingsTwoScreenCommand -> replace(settingsDependencies.getTwoApi().getSettingsTwoScreen())
-            }
+        val viewModel = daggerViewModel {
+            componentHolder.component.viewModel()
         }
 
+        val commands = viewModel.navigationCommands.collectAsState(
+            NavigationReplace(componentHolder.component.getOneApi().getScreen())
+        )
 
-        LaunchedEffect(currentCommand) {
-            settingsDependencies.getNavigation().commandsFlow.collect { command ->
-                currentCommand = command
-            }
+        LaunchedEffect(key1 = commands.value) {
+            navigate(commands.value)
         }
 
         CompositionLocalProvider(
-            LocalSettingsDependencies provides settingsDependencies
+            LocalSettingsDependencies provides componentHolder.component
         ) {
             TopScreenContent()
         }

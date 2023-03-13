@@ -8,19 +8,19 @@ import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
-import uk.nightlines.feature.weather.common.WeatherScreenInteractor
+import uk.nightlines.feature.weather.common.WeatherScreens
 import javax.inject.Inject
 
 internal class DayViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: Navigation,
     @WeatherNavigationQualifier private val navigation: Navigation,
-    private val screenInteractor: WeatherScreenInteractor,
+    private val weatherScreens: WeatherScreens,
     private val weatherDependencies: WeatherDependencies
 ) : ViewModel() {
 
     suspend fun onOpenWeekScreenButtonClicked() {
         Log.d("GTA5", "[DAY] ViewModel DEPS : ${weatherDependencies.hashCode()}")
-        navigation.navigate(NavigationReplace(screenInteractor.getWeekScreen()))
+        navigation.navigate(NavigationReplace(weatherScreens.getWeekScreen()))
     }
 
     suspend fun onOpenDialogButtonClicked() {

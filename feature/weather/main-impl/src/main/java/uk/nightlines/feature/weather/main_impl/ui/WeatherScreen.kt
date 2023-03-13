@@ -49,7 +49,7 @@ internal class WeatherStack(
 
         val coroutineScope = rememberCoroutineScope()
 
-        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.component.screenInteractor().getWeekScreen()))
+        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.component.weatherScreens().getWeekScreen()))
 
         LaunchedEffect(key1 = commands.value) {
             navigate(commands.value)

@@ -7,5 +7,5 @@ interface WeatherDependencies {
     @WeatherNavigationQualifier
     fun getWeatherNavigation(): Navigation
 
-    fun screenInteractor(): WeatherScreenInteractor
+    fun weatherScreens(): WeatherScreens
 }
