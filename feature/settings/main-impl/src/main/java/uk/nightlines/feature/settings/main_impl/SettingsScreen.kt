@@ -14,6 +14,9 @@ import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.common.SettingsDependencies
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
+private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
+
 @Parcelize
 class SettingsStack(
     private val stackNavModel: StackNavModel,
@@ -27,11 +30,11 @@ class SettingsStack(
 
         val screen = LocalContainerScreen.current
 
-        val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP") {
+        val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
             ComponentHolder(DaggerSettingsComponent.factory().create(coreProvider))
         }
 
-        val viewModel = daggerViewModel(key = "${screen.screenKey}") {
+        val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
             componentHolder.component.viewModel()
         }
 

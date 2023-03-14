@@ -17,6 +17,9 @@ import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.two_impl.di.DaggerSettingsTwoComponent
 
+private const val KEY_COMPONENT = "KEY_SETTINGS_TWO_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_VIEWMODEL"
+
 @Parcelize
 class SettingsTwoScreen(
     override val screenKey: ScreenKey = generateScreenKey(),
@@ -34,13 +37,13 @@ fun SettingsTwoContent() {
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP_TWO") {
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
         ComponentHolder(
             DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
         )
     }
 
-    val viewModel = daggerViewModel(key = "${screen.screenKey}_TWO") {
+    val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
         componentHolder.component.viewModel()
     }
 
