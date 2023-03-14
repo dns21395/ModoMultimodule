@@ -2,11 +2,15 @@ package uk.nightlines.feature.weather.day_impl.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
@@ -22,6 +26,7 @@ import uk.nightlines.feature.weather.day_impl.di.DaggerDayComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_DAY_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_DAY_VIEWMODEL"
+
 @Parcelize
 class DayScreen(
     override val screenKey: ScreenKey = generateScreenKey(),
@@ -47,7 +52,9 @@ fun DayContent() {
     Log.d("GTA5", "[DAY] DEPS ; ${weatherDependencies.hashCode()}")
     Log.d("GTA6", "[DAY] SCREEN KEY : ${screen.screenKey}")
 
-    val viewModel =  daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL")  { component.component.viewModel() }
+    val viewModel =
+        daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") { component.component.viewModel() }
+    val state = viewModel.state.collectAsState(DayViewState())
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -67,5 +74,9 @@ fun DayContent() {
         }) {
             Text("Open Dialog")
         }
+        BasicTextField(
+            value = state.value.editText,
+            onValueChange = { text -> coroutineScope.launch { viewModel.onTextChangedAction(text) } },
+        )
     }
 }
