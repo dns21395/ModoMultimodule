@@ -5,7 +5,7 @@ import uk.nightlines.feature.settings.main_api.SettingsApi
 
 class SettingsImpl : SettingsApi {
 
-    override fun getSettingsScreen(): Screen {
-        return SettingsStack()
+    override fun getSettingsScreen(count: Int): Screen {
+        return SettingsStack(count)
     }
 }

@@ -4,11 +4,14 @@ import uk.nightlines.core.common.WeatherScreenCounterInteractor
 
 internal class WeatherScreenCounterInteractorImpl : WeatherScreenCounterInteractor {
 
-    private var counter = 0
+    private var settingsCounter = 0
+    private var weatherCounter = 1
 
     override fun incrementScreenCount() {
-        counter++
+        weatherCounter++
     }
 
-    override fun getScreenCount(): Int = counter
+    override fun getWeatherScreenCount(): Int = weatherCounter++
+
+    override fun getSettingsScreenCount(): Int = settingsCounter++
 }

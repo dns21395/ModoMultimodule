@@ -4,5 +4,7 @@ interface WeatherScreenCounterInteractor {
 
     fun incrementScreenCount()
 
-    fun getScreenCount(): Int
+    fun getWeatherScreenCount(): Int
+
+    fun getSettingsScreenCount(): Int
 }

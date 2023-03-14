@@ -4,5 +4,5 @@ import com.github.terrakok.modo.Screen
 
 interface SettingsApi {
 
-    fun getSettingsScreen(): Screen
+    fun getSettingsScreen(count: Int): Screen
 }

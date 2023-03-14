@@ -2,6 +2,7 @@ package uk.nightlines.feature.weather.week_impl.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
+import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
@@ -13,7 +14,8 @@ internal class WeekViewModel @Inject constructor(
     @WeatherNavigationQualifier private val locatlNavigation: Navigation,
     private val weatherScreens: WeatherScreens,
     private val weatherDependencies: WeatherDependencies,
-    private val rootScreens: RootScreens
+    private val rootScreens: RootScreens,
+    private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor
 ) : ViewModel() {
 
     suspend fun onOpenDayScreenButtonClicked() {
@@ -22,6 +24,7 @@ internal class WeekViewModel @Inject constructor(
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {
-        rootNavigation.navigate(NavigationForward(rootScreens.settings()))
+        val settingsCount = weatherScreenCounterInteractor.getSettingsScreenCount()
+        rootNavigation.navigate(NavigationForward(rootScreens.settings(settingsCount)))
     }
 }

@@ -1,6 +1,11 @@
 package uk.nightlines.feature.settings.main_impl
 
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -11,7 +16,6 @@ import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.settings.common.LocalDependenciesProvider
-import uk.nightlines.feature.settings.common.SettingsDependencies
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
 private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
@@ -19,10 +23,11 @@ private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 
 @Parcelize
 class SettingsStack(
+    private val count: Int,
     private val stackNavModel: StackNavModel,
 ) : StackScreen(stackNavModel) {
 
-    constructor() : this(StackNavModel(emptyList()))
+    constructor(count: Int) : this(count, StackNavModel(emptyList()))
 
     @Composable
     override fun Content() {
@@ -47,9 +52,12 @@ class SettingsStack(
         }
 
         CompositionLocalProvider(
-            LocalDependenciesProvider provides componentHolder.component as SettingsDependencies
+            LocalDependenciesProvider provides componentHolder.component
         ) {
-            TopScreenContent()
+            Column {
+                Text(text = "SETTINGS SCREEN #$count")
+                TopScreenContent()
+            }
         }
     }
 }

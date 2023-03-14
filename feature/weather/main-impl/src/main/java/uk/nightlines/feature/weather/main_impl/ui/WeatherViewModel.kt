@@ -17,8 +17,7 @@ internal class WeatherViewModel @Inject constructor(
     val navigationCommands: SharedFlow<NavigationCommand> = weatherNavigation.commandsFlow
 
     suspend fun onOpenNewWeatherScreenButtonClicked() {
-        weatherScreenCounterInteractor.incrementScreenCount()
-        val weatherCounter = weatherScreenCounterInteractor.getScreenCount()
+        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
 
         rootNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
     }

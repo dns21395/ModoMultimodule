@@ -11,7 +11,7 @@ class RootScreenImpl @Inject constructor(
     private val weatherApi: WeatherApi
 ) : RootScreens {
 
-    override fun settings(): Screen = settingsApi.getSettingsScreen()
+    override fun settings(count: Int): Screen = settingsApi.getSettingsScreen(count)
 
     override fun weather(counter: Int): Screen = weatherApi.getWeatherScreen(counter)
 }
