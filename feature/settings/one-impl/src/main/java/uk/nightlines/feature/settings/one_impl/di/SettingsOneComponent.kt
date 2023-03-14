@@ -3,7 +3,8 @@ package uk.nightlines.feature.settings.one_impl.di
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
-import uk.nightlines.feature.settings.main_api.SettingsDependencies
+import uk.nightlines.feature.settings.common.SettingsDependencies
+import uk.nightlines.feature.settings.one_impl.ui.SettingsOneViewModel
 
 @FeatureScope
 @Component(
@@ -12,7 +13,7 @@ import uk.nightlines.feature.settings.main_api.SettingsDependencies
         SettingsDependencies::class
     ]
 )
-internal interface SettingsOneComponent : CoreProvider, SettingsDependencies {
+internal interface SettingsOneComponent {
 
     @Component.Factory
     interface Builder {
@@ -21,4 +22,6 @@ internal interface SettingsOneComponent : CoreProvider, SettingsDependencies {
             settingsDependencies: SettingsDependencies
         ): SettingsOneComponent
     }
+
+    fun viewModel(): SettingsOneViewModel
 }

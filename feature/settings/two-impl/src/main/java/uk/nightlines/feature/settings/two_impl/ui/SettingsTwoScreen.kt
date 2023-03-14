@@ -5,19 +5,21 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
 import com.github.terrakok.modo.generateScreenKey
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
-import uk.nightlines.feature.settings.main_api.OpenSettingsOneScreenCommand
+import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.two_impl.di.DaggerSettingsTwoComponent
 
 @Parcelize
 class SettingsTwoScreen(
-    override val screenKey: ScreenKey = generateScreenKey()
+    override val screenKey: ScreenKey = generateScreenKey(),
 ) : Screen {
 
     @Composable
@@ -29,16 +31,25 @@ class SettingsTwoScreen(
 @Composable
 fun SettingsTwoContent() {
     val coreProvider = LocalCoreProvider.current
-    val settingsDependencies = LocalSettingsDependencies.current
-    val component = DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
+    val settingsDependencies = LocalDependenciesProvider.current
+    val screen = LocalContainerScreen.current
+
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP") {
+        ComponentHolder(
+            DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
+        )
+    }
+
+    val viewModel = daggerViewModel(key = "${screen.screenKey}") {
+        componentHolder.component.viewModel()
+    }
 
     val coroutineScope = rememberCoroutineScope()
 
     Column {
         Text("Settings Two Screen")
         Button(onClick = {
-            val navigation = component.getNavigation()
-            coroutineScope.launch { navigation.navigate(OpenSettingsOneScreenCommand) }
+            coroutineScope.launch { viewModel.openSettingsOneScreenButtonClicked() }
         }) {
             Text("Open Settings One Screen")
         }

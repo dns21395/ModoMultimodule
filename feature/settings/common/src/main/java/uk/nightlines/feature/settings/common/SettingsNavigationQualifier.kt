@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.main_api
+package uk.nightlines.feature.settings.common
 
 import javax.inject.Qualifier
 

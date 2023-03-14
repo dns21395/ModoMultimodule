@@ -31,6 +31,7 @@ dependencies {
             project(':feature:settings:one-impl'),
             project(':feature:settings:two-api'),
             project(':feature:settings:two-impl'),
+            project(':feature:settings:common'),
 
             deps.compose.ui,
             deps.compose.material,

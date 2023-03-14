@@ -1,6 +1,7 @@
 package uk.nightlines.feature.settings.main_impl
 
 import androidx.compose.runtime.*
+import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.parcelize.Parcelize
@@ -9,7 +10,8 @@ import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
-import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
+import uk.nightlines.feature.settings.common.LocalDependenciesProvider
+import uk.nightlines.feature.settings.common.SettingsDependencies
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
 @Parcelize
@@ -23,16 +25,18 @@ class SettingsStack(
     override fun Content() {
         val coreProvider = LocalCoreProvider.current
 
-        val componentHolder = daggerViewModel {
+        val screen = LocalContainerScreen.current
+
+        val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP") {
             ComponentHolder(DaggerSettingsComponent.factory().create(coreProvider))
         }
 
-        val viewModel = daggerViewModel {
+        val viewModel = daggerViewModel(key = "${screen.screenKey}") {
             componentHolder.component.viewModel()
         }
 
         val commands = viewModel.navigationCommands.collectAsState(
-            NavigationReplace(componentHolder.component.getOneApi().getScreen())
+            NavigationReplace(componentHolder.component.getSettingsScreen().oneScreen())
         )
 
         LaunchedEffect(key1 = commands.value) {
@@ -40,7 +44,7 @@ class SettingsStack(
         }
 
         CompositionLocalProvider(
-            LocalSettingsDependencies provides componentHolder.component
+            LocalDependenciesProvider provides componentHolder.component as SettingsDependencies
         ) {
             TopScreenContent()
         }
