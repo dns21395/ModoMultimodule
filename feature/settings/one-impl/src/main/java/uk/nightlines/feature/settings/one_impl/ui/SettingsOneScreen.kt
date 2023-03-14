@@ -37,14 +37,14 @@ internal fun SettingsOneContent() {
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP") {
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP_ONE") {
 
         ComponentHolder(
             DaggerSettingsOneComponent.factory().create(coreProvider, settingsDependencies)
         )
     }
 
-    val viewModel = daggerViewModel(key = "${screen.screenKey}") {
+    val viewModel = daggerViewModel(key = "${screen.screenKey}_ONE") {
         componentHolder.component.viewModel()
     }
 

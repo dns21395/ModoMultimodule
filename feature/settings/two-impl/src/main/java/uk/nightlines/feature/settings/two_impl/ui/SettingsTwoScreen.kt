@@ -34,13 +34,13 @@ fun SettingsTwoContent() {
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP") {
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}_COMP_TWO") {
         ComponentHolder(
             DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
         )
     }
 
-    val viewModel = daggerViewModel(key = "${screen.screenKey}") {
+    val viewModel = daggerViewModel(key = "${screen.screenKey}_TWO") {
         componentHolder.component.viewModel()
     }
 
