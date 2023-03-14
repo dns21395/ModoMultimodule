@@ -19,6 +19,8 @@ import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
 
+private const val KEY_COMPONENT = "KEY_WEATHER_WEEK_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_WEATHER_WEEK_VIEWMODEL"
 @Parcelize
 class WeekScreen(
     override val screenKey: ScreenKey = generateScreenKey()
@@ -42,13 +44,13 @@ fun WeekContent() {
 
     val coroutineScope = rememberCoroutineScope()
 
-    val component = daggerViewModel(key = "${screen.screenKey}WEEK_COMP" ){
+    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT" ){
         Log.d("GTA5", "[WEEK] component created. DEPS: ${weatherDependencies.hashCode()}")
         ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
 
     }
 
-    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}WEEK") {
+    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
         Log.d("GTA5", "[WEEK] dagger created. DEPS: ${weatherDependencies.hashCode()}")
 
         component.component.viewModel()

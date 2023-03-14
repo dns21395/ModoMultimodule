@@ -18,7 +18,7 @@ import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.two_impl.di.DaggerSettingsTwoComponent
 
 private const val KEY_COMPONENT = "KEY_SETTINGS_TWO_COMPONENT"
-private const val KEY_VIEWMODEL = "KEY_VIEWMODEL"
+private const val KEY_VIEWMODEL = "KEY_SETTINGS_TWO_VIEWMODEL"
 
 @Parcelize
 class SettingsTwoScreen(

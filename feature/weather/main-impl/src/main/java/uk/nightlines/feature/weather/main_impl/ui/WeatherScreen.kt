@@ -20,6 +20,9 @@ import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.common.ScreenCounter
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
 
+private const val KEY_COMPONENT = "KEY_WEATHER_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_WEATHER_VIEWMODEL"
+
 @Parcelize
 internal class WeatherStack(
     private val stackNavModel: StackNavModel,
@@ -36,27 +39,27 @@ internal class WeatherStack(
 
         Log.d("GTA6", "-------------------------------\n[WEATHER] SCREEN KEY : ${stackNavModel.screenKey}")
 
-        val component = daggerViewModel(key = "${stackNavModel.screenKey}WEATHER_COMP") {
+        val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
             Log.d("GTA5", "[WEATHER] component created")
             ComponentHolder(DaggerWeatherMainComponent.factory().create(coreProvider))
         }
 
-        val viewModel: WeatherViewModel = daggerViewModel(key = "${stackNavModel.screenKey}WEATHER") {
-            Log.d("GTA5", "[WEATHER] dagger created. DEPS : ${component.hashCode()}")
+        val viewModel: WeatherViewModel = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
+            Log.d("GTA5", "[WEATHER] dagger created. DEPS : ${componentHolder.hashCode()}")
 
-            component.component.viewModel()
+            componentHolder.component.viewModel()
         }
 
         val coroutineScope = rememberCoroutineScope()
 
-        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(component.component.weatherScreens().getWeekScreen()))
+        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(componentHolder.component.weatherScreens().getWeekScreen()))
 
         LaunchedEffect(key1 = commands.value) {
             navigate(commands.value)
         }
 
         CompositionLocalProvider(
-            LocalDependenciesProvider provides component.component
+            LocalDependenciesProvider provides componentHolder.component
         ) {
             Column {
                 Row {

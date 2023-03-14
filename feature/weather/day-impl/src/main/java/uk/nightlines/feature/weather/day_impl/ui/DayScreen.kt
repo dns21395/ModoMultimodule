@@ -20,6 +20,8 @@ import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.day_impl.di.DaggerDayComponent
 
+private const val KEY_COMPONENT = "KEY_WEATHER_DAY_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_WEATHER_DAY_VIEWMODEL"
 @Parcelize
 class DayScreen(
     override val screenKey: ScreenKey = generateScreenKey(),
@@ -38,14 +40,14 @@ fun DayContent() {
     val weatherDependencies = LocalDependenciesProvider.current
 
 
-    val component = daggerViewModel(key = "${screen.screenKey}DAY_COMP") {
+    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
         ComponentHolder(DaggerDayComponent.factory().create(coreProvider, weatherDependencies))
     }
 
     Log.d("GTA5", "[DAY] DEPS ; ${weatherDependencies.hashCode()}")
     Log.d("GTA6", "[DAY] SCREEN KEY : ${screen.screenKey}")
 
-    val viewModel =  daggerViewModel(key = "${screen.screenKey}DAY")  { component.component.viewModel() }
+    val viewModel =  daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL")  { component.component.viewModel() }
 
     val coroutineScope = rememberCoroutineScope()
 
