@@ -34,18 +34,18 @@ class DayScreen(
 
     @Composable
     override fun Content() {
-        DayContent()
+        DayContent(this.hashCode())
     }
 }
 
 @Composable
-fun DayContent() {
+fun DayContent(screenHashCode: Int) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
 
 
-    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
+    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
         ComponentHolder(DaggerDayComponent.factory().create(coreProvider, weatherDependencies))
     }
 
@@ -53,13 +53,16 @@ fun DayContent() {
     Log.d("GTA6", "[DAY] SCREEN KEY : ${screen.screenKey}")
 
     val viewModel =
-        daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") { component.component.viewModel() }
+        daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") { component.component.viewModel() }
+
     val state = viewModel.state.collectAsState(DayViewState())
 
     val coroutineScope = rememberCoroutineScope()
 
     Column {
-        Text("DayScreen")
+        Text("DayScreen\n" +
+                "HASHCODE : ${screenHashCode}\n" +
+                "SCREEN_KEY = ${screen.screenKey}$KEY_COMPONENT")
         Button(onClick = {
             coroutineScope.launch(Dispatchers.Main) {
                 viewModel.onOpenWeekScreenButtonClicked()

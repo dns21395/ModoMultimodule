@@ -20,7 +20,7 @@ internal class WeekViewModel @Inject constructor(
 
     suspend fun onOpenDayScreenButtonClicked() {
                Log.d("GTA5", "[WEEK] ViewModel. DEPS : ${weatherDependencies.hashCode()}")
-        locatlNavigation.navigate(NavigationReplace(weatherScreens.getDayScreen()))
+        locatlNavigation.navigateNew(NavigationReplace(weatherScreens.getDayScreen()))
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {

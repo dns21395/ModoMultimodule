@@ -28,12 +28,12 @@ class WeekScreen(
 
     @Composable
     override fun Content() {
-        WeekContent()
+        WeekContent(this@WeekScreen.hashCode())
     }
 }
 
 @Composable
-fun WeekContent() {
+fun WeekContent(screenHashCode: Int) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
@@ -44,20 +44,21 @@ fun WeekContent() {
 
     val coroutineScope = rememberCoroutineScope()
 
-    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT" ){
+    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode" ){
         Log.d("GTA5", "[WEEK] component created. DEPS: ${weatherDependencies.hashCode()}")
         ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
 
     }
 
-    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
+    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
         Log.d("GTA5", "[WEEK] dagger created. DEPS: ${weatherDependencies.hashCode()}")
 
         component.component.viewModel()
     }
 
     Column {
-        Text("WeekScreen")
+        Text("WeekScreen\n" +
+                "HASHCODE: $screenHashCode")
         Button(onClick = {
             coroutineScope.launch(Dispatchers.Main) {
                 viewModel.onOpenDayScreenButtonClicked()
