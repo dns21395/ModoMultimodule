@@ -78,7 +78,7 @@ internal class WeatherStack(
                 .background(state.value.backgroundColor)) {
                 Text(text = "WEATHER #$counter\n" +
                         "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
-                        "SCREEN KEY : ${stackNavModel.screenKey}$KEY_COMPONENT")
+                        "SCREEN KEY : ${screenKey.value}")
                 Button(onClick = {
                     coroutineScope.launch(Dispatchers.Main) { viewModel.onOpenNewWeatherScreenButtonClicked() }
                 }) {

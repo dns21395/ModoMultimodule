@@ -34,12 +34,18 @@ class DayScreen(
 
     @Composable
     override fun Content() {
-        DayContent(this.hashCode())
+        DayContent(
+            this.hashCode(),
+            screenKey
+        )
     }
 }
 
 @Composable
-fun DayContent(screenHashCode: Int) {
+fun DayContent(
+    screenHashCode: Int,
+    screenKey: ScreenKey
+) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
@@ -60,9 +66,12 @@ fun DayContent(screenHashCode: Int) {
     val coroutineScope = rememberCoroutineScope()
 
     Column(modifier = Modifier.fillMaxSize().background(state.value.color)) {
-        Text("DayScreen\n" +
-                "HASHCODE : ${screenHashCode}\n" +
-                "SCREEN_KEY = ${screen.screenKey}$KEY_COMPONENT")
+        Text(
+            "DAY SCREEN \n" +
+                "HASHCODE: $screenHashCode\n" +
+                "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
+                "SCREEN KEY : ${screenKey.value}"
+        )
         Button(onClick = {
             coroutineScope.launch(Dispatchers.Main) {
                 viewModel.onOpenWeekScreenButtonClicked()
