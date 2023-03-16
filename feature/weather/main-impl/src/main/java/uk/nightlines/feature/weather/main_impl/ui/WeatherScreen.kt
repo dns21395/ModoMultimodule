@@ -5,9 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -76,7 +78,8 @@ internal class WeatherStack(
         ) {
             Column(modifier = Modifier.fillMaxSize()
                 .background(state.value.backgroundColor)) {
-                Text(text = "WEATHER #$counter\n" +
+                Text(text = state.value.emoji, style = MaterialTheme.typography.h1)
+                Text(text = "WEATHER #$counter\n " +
                         "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
                         "SCREEN KEY : ${screenKey.value}")
                 Button(onClick = {

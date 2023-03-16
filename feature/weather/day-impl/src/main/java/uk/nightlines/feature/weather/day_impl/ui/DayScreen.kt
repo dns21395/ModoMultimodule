@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -66,6 +67,11 @@ fun DayContent(
     val coroutineScope = rememberCoroutineScope()
 
     Column(modifier = Modifier.fillMaxSize().background(state.value.color)) {
+        Text(
+            text = state.value.emoji,
+            style = MaterialTheme.typography.h1
+        )
+
         Text(
             "DAY SCREEN \n" +
                 "HASHCODE: $screenHashCode\n" +
