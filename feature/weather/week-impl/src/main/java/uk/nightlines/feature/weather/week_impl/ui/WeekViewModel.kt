@@ -2,7 +2,6 @@ package uk.nightlines.feature.weather.week_impl.ui
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
@@ -26,7 +25,7 @@ internal class WeekViewModel @Inject constructor(
 
     suspend fun onOpenDayScreenButtonClicked() {
                Log.d("GTA5", "[WEEK] ViewModel. DEPS : ${weatherDependencies.hashCode()}")
-        locatlNavigation.navigateNew(NavigationReplace(weatherScreens.getDayScreen()))
+        locatlNavigation.navigate(NavigationReplace(weatherScreens.getDayScreen()))
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {

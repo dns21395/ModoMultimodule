@@ -23,16 +23,12 @@ internal class WeatherViewModel @Inject constructor(
     val state: StateFlow<WeatherViewState> = _state
 
     init {
-        Log.d("GTA5", "[WEATHER] VIEWMODEL : ${hashCode()}")
-
         viewModelScope.launch {
-            weatherNavigation.navigateNew(NavigationForward(weatherScreens.getWeekScreen()))
+            weatherNavigation.navigate(NavigationForward(weatherScreens.getWeekScreen()))
         }
     }
 
-    val flowCommands: SharedFlow<NavigationCommand> = weatherNavigation.commandsFlow
-
-    val channelCommands: Flow<NavigationCommand> = weatherNavigation.channel.receiveAsFlow()
+    val channelCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
 
     suspend fun onOpenNewWeatherScreenButtonClicked() {
         val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()

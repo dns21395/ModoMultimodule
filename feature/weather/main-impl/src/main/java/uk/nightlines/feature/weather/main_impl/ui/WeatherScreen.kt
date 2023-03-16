@@ -67,10 +67,6 @@ internal class WeatherStack(
                 Log.d("GTA5", "[WEATHER] ***LAUNCHED*** CHANNEL : ${it}")
                 navigate(it)
             }
-
-            viewModel.flowCommands.collectLatest {
-                Log.d("GTA5", "[WEATHER] ***LAUNCHED***  FLOW  : ${it}")
-            }
         }
 
         CompositionLocalProvider(

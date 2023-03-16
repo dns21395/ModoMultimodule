@@ -5,15 +5,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.navigate
 import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
@@ -43,19 +42,21 @@ class SettingsStack(
             componentHolder.component.viewModel()
         }
 
-        val commands = viewModel.navigationCommands.collectAsState(
-            NavigationReplace(componentHolder.component.getSettingsScreen().oneScreen())
-        )
-
-        LaunchedEffect(key1 = commands.value) {
-            navigate(commands.value)
+        LaunchedEffect(Unit) {
+            viewModel.navigationCommands.collectLatest { command ->
+                navigate(command)
+            }
         }
 
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
             Column {
-                Text(text = "SETTINGS SCREEN #$count")
+                Text(
+                    text = "SETTINGS SCREEN #$count\n" +
+                            "CONTAINER HASCODE : ${this@SettingsStack.hashCode()}\n" +
+                            "SCREEN KEY : ${screenKey.value}"
+                )
                 TopScreenContent()
             }
         }

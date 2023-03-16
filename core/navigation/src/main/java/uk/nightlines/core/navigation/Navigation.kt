@@ -1,20 +1,16 @@
 package uk.nightlines.core.navigation
 
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 
 class Navigation {
 
-    val channel = Channel<NavigationCommand>()
+    private val _commandsFlow = Channel<NavigationCommand>()
 
-    val commandsFlow = MutableSharedFlow<NavigationCommand>()
+    val commandsFlow: Flow<NavigationCommand> = _commandsFlow.receiveAsFlow()
 
     suspend fun navigate(command: NavigationCommand) {
-        commandsFlow.emit(command)
-    }
-
-    suspend fun navigateNew(command: NavigationCommand) {
-        commandsFlow.emit(command)
-        channel.send(command)
+        _commandsFlow.send(command)
     }
 }

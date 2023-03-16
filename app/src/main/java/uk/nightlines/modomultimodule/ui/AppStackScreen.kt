@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
@@ -30,11 +31,12 @@ class AppStackScreen(
             ComponentHolder(DaggerAppComponent.builder().build())
         }
         val viewModel = daggerViewModel(key = KEY_VIEWMODEL) { componentHolder.component.viewModel() }
-        val commands = viewModel.navigationCommands.collectAsState(NavigationReplace(componentHolder.component.rootScreens().weather(0)))
 
-        LaunchedEffect(key1 = commands.value) {
-            Log.d("GTA5", "ROOT NAVIGATE : ${commands.value}")
-            navigate(commands.value)
+        LaunchedEffect(Unit) {
+            viewModel.navigationCommands.collectLatest { command ->
+                Log.d("GTA5", "ROOT NAVIGATE : ${command}")
+                navigate(command)
+            }
         }
 
         CompositionLocalProvider(
