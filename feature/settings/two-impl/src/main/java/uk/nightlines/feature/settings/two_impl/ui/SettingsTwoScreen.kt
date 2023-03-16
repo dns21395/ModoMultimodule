@@ -27,23 +27,29 @@ class SettingsTwoScreen(
 
     @Composable
     override fun Content() {
-        SettingsTwoContent()
+        SettingsTwoContent(
+            hashCode(),
+            screenKey
+        )
     }
 }
 
 @Composable
-fun SettingsTwoContent() {
+fun SettingsTwoContent(
+    screenHashCode: Int,
+    screenKey: ScreenKey
+) {
     val coreProvider = LocalCoreProvider.current
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
         ComponentHolder(
             DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
         )
     }
 
-    val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
+    val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
         componentHolder.component.viewModel()
     }
 

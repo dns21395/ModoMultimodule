@@ -27,12 +27,18 @@ internal class SettingsOneScreen(
 
     @Composable
     override fun Content() {
-        SettingsOneContent()
+        SettingsOneContent(
+            hashCode(),
+            screenKey
+        )
     }
 }
 
 @Composable
-internal fun SettingsOneContent() {
+internal fun SettingsOneContent(
+    screenHashCode: Int,
+    screenKey: ScreenKey
+) {
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -40,14 +46,14 @@ internal fun SettingsOneContent() {
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
+    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
 
         ComponentHolder(
             DaggerSettingsOneComponent.factory().create(coreProvider, settingsDependencies)
         )
     }
 
-    val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
+    val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
         componentHolder.component.viewModel()
     }
 

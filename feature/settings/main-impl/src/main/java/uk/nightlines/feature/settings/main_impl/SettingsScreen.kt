@@ -32,13 +32,11 @@ class SettingsStack(
     override fun Content() {
         val coreProvider = LocalCoreProvider.current
 
-        val screen = LocalContainerScreen.current
-
-        val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT") {
+        val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
             ComponentHolder(DaggerSettingsComponent.factory().create(coreProvider))
         }
 
-        val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL") {
+        val viewModel = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
             componentHolder.component.viewModel()
         }
 
