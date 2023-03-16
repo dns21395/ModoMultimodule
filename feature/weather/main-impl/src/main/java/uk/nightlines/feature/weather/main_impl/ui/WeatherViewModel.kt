@@ -26,7 +26,7 @@ internal class WeatherViewModel @Inject constructor(
         Log.d("GTA5", "[WEATHER] VIEWMODEL : ${hashCode()}")
 
         viewModelScope.launch {
-            weatherNavigation.navigateNew(NavigationForward(weatherScreens.getDayScreen()))
+            weatherNavigation.navigateNew(NavigationForward(weatherScreens.getWeekScreen()))
         }
     }
 
