@@ -1,10 +1,14 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +54,8 @@ internal class WeatherStack(
             componentHolder.component.viewModel()
         }
 
+        val state = viewModel.state.collectAsStateWithLifecycle()
+
         val coroutineScope = rememberCoroutineScope()
 
         LaunchedEffect(Unit) {
@@ -68,7 +74,8 @@ internal class WeatherStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            Column {
+            Column(modifier = Modifier.fillMaxSize()
+                .background(state.value.backgroundColor)) {
                 Text(text = "WEATHER #$counter\n" +
                         "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
                         "SCREEN KEY : ${stackNavModel.screenKey}$KEY_COMPONENT")

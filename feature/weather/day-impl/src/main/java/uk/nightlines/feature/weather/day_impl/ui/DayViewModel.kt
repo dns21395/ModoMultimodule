@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
@@ -21,7 +22,7 @@ internal class DayViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(DayViewState())
-    val state: Flow<DayViewState> = mutableState
+    val state: StateFlow<DayViewState> = mutableState
 
     suspend fun onOpenWeekScreenButtonClicked() {
         Log.d("GTA5", "[DAY] ViewModel DEPS : ${weatherDependencies.hashCode()}")

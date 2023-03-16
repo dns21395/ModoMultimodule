@@ -1,16 +1,16 @@
 package uk.nightlines.feature.weather.day_impl.ui
 
 import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
@@ -55,11 +55,11 @@ fun DayContent(screenHashCode: Int) {
     val viewModel =
         daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") { component.component.viewModel() }
 
-    val state = viewModel.state.collectAsState(DayViewState())
+    val state = viewModel.state.collectAsStateWithLifecycle()
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column {
+    Column(modifier = Modifier.fillMaxSize().background(state.value.color)) {
         Text("DayScreen\n" +
                 "HASHCODE : ${screenHashCode}\n" +
                 "SCREEN_KEY = ${screen.screenKey}$KEY_COMPONENT")

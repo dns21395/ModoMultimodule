@@ -19,6 +19,9 @@ internal class WeatherViewModel @Inject constructor(
     private val weatherScreens: WeatherScreens,
 ) : ViewModel() {
 
+    private val _state = MutableStateFlow(WeatherViewState())
+    val state: StateFlow<WeatherViewState> = _state
+
     init {
         Log.d("GTA5", "[WEATHER] VIEWMODEL : ${hashCode()}")
 

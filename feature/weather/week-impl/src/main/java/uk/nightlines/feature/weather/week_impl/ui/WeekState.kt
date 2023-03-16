@@ -1,9 +1,8 @@
-package uk.nightlines.feature.weather.day_impl.ui
+package uk.nightlines.feature.weather.week_impl.ui
 
 import androidx.compose.ui.graphics.Color
 import kotlin.random.Random
 
-data class DayViewState(
-    val editText: String = "",
+data class WeekState(
     val color: Color = Color(Random.nextInt())
 )
