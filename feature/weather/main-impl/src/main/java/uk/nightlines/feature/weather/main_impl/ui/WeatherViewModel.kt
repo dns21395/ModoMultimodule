@@ -57,4 +57,8 @@ internal class WeatherViewModel @Inject constructor(
 
         _state.emit(_state.value.copy(positionEditText = ""))
     }
+
+    suspend fun onBackToRootButtonClicked() {
+        weatherNavigation.navigate(NavigationBackToRoot)
+    }
 }

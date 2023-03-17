@@ -131,6 +131,9 @@ internal class WeatherStack(
                 }) {
                     Text("Remove By positions ")
                 }
+                Button(onClick = { coroutineScope.launch { viewModel.onBackToRootButtonClicked() } }) {
+                    Text("BACK TO ROOT")
+                }
                 TopScreenContent()
             }
         }

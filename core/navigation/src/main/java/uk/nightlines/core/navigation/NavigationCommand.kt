@@ -10,6 +10,8 @@ data class NavigationReplace(val screen: Screen, val screens: List<Screen> = emp
 
 data class NavigationNewStack(val screens: List<Screen>) : NavigationCommand
 
+data class NavigationBackTo(val screen: Screen) : NavigationCommand
+
 data class NavigationRemoveScreen(val positions: List<Int>) : NavigationCommand
 
 object NavigationBackToRoot : NavigationCommand
