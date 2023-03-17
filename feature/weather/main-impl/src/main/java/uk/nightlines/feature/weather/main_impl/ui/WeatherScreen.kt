@@ -2,18 +2,24 @@ package uk.nightlines.feature.weather.main_impl.ui
 
 import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Button
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -78,7 +84,8 @@ internal class WeatherStack(
                 Text(text = state.value.emoji, style = MaterialTheme.typography.h1)
                 Text(text = "WEATHER #$counter\n " +
                         "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
-                        "SCREEN KEY : ${screenKey.value}")
+                        "SCREEN KEY : ${screenKey.value}\n" +
+                        "STACK : ${navigationState.stack.map { it.screenKey.value }}")
                 Button(onClick = {
                     coroutineScope.launch { viewModel.onOpenNewWeatherScreenButtonClicked() }
                 }) {
@@ -88,6 +95,41 @@ internal class WeatherStack(
                     coroutineScope.launch { viewModel.openNewStackButtonClicked() }
                 }) {
                     Text(text = "Open New Stack of Screen in container ${screenKey.value}")
+                }
+                BasicTextField(
+                    value = state.value.positionEditText,
+                    onValueChange = { text -> coroutineScope.launch { viewModel.onRemoveEditTextPositionChanged(text) } },
+                    decorationBox = { innerTextField ->
+                        Row(
+                            modifier = Modifier
+                                .padding(horizontal = 64.dp) // margin left and right
+                                .fillMaxWidth()
+                                .background(
+                                    color = Color(0xFF5E35B1),
+                                    shape = RoundedCornerShape(size = 16.dp)
+                                )
+                                .border(
+                                    width = 2.dp,
+                                    color = Color(0xFFFBC02D),
+                                    shape = RoundedCornerShape(size = 16.dp)
+                                )
+                                .padding(all = 16.dp), // inner padding
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Favorite icon",
+                                tint = Color.DarkGray
+                            )
+                            Spacer(modifier = Modifier.width(width = 8.dp))
+                            innerTextField()
+                        }
+                    }
+                )
+                Button(onClick = {
+                    coroutineScope.launch { viewModel.onRemoveScreensButtonClicked() }
+                }) {
+                    Text("Remove By positions ")
                 }
                 TopScreenContent()
             }

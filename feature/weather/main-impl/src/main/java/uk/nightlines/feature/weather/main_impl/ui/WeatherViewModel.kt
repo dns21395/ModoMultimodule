@@ -46,4 +46,15 @@ internal class WeatherViewModel @Inject constructor(
             )
         ))
     }
+
+    suspend fun onRemoveEditTextPositionChanged(text: String) {
+        _state.emit(_state.value.copy(positionEditText = text))
+    }
+
+    suspend fun onRemoveScreensButtonClicked() {
+        val list = state.value.positionEditText.split(',').map { it.toInt() }
+        weatherNavigation.navigate(NavigationRemoveScreen(list))
+
+        _state.emit(_state.value.copy(positionEditText = ""))
+    }
 }
