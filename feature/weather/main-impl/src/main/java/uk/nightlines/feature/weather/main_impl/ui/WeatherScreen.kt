@@ -72,16 +72,22 @@ internal class WeatherStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            Column(modifier = Modifier.fillMaxSize()
+            Column(modifier = Modifier
+                .fillMaxSize()
                 .background(state.value.backgroundColor)) {
                 Text(text = state.value.emoji, style = MaterialTheme.typography.h1)
                 Text(text = "WEATHER #$counter\n " +
                         "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
                         "SCREEN KEY : ${screenKey.value}")
                 Button(onClick = {
-                    coroutineScope.launch(Dispatchers.Main) { viewModel.onOpenNewWeatherScreenButtonClicked() }
+                    coroutineScope.launch { viewModel.onOpenNewWeatherScreenButtonClicked() }
                 }) {
                     Text(text = "Open New Weather Screen")
+                }
+                Button(onClick = {
+                    coroutineScope.launch { viewModel.openNewStackButtonClicked() }
+                }) {
+                    Text(text = "Open New Stack of Screen in container ${screenKey.value}")
                 }
                 TopScreenContent()
             }

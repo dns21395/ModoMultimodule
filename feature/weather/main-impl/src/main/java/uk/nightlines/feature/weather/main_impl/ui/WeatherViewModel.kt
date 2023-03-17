@@ -36,4 +36,14 @@ internal class WeatherViewModel @Inject constructor(
         rootNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
     }
 
+    suspend fun openNewStackButtonClicked() {
+        weatherNavigation.navigate(NavigationNewStack(
+            listOf(
+                weatherScreens.getDayScreen(),
+                weatherScreens.getWeekScreen(),
+                weatherScreens.getDayScreen(),
+                weatherScreens.getWeekScreen()
+            )
+        ))
+    }
 }
