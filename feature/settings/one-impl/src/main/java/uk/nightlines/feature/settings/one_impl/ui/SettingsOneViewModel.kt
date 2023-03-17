@@ -29,4 +29,8 @@ internal class SettingsOneViewModel @Inject constructor(
 
         rootNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
     }
+
+    suspend fun onTextChangedAction(text: String) {
+        mutableState.emit(mutableState.value.copy(editText = text))
+    }
 }
