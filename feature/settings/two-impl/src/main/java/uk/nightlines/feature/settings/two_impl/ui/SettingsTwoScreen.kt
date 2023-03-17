@@ -1,10 +1,15 @@
 package uk.nightlines.feature.settings.two_impl.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
@@ -55,8 +60,21 @@ fun SettingsTwoContent(
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column {
-        Text("Settings Two Screen")
+    val state = viewModel.state.collectAsStateWithLifecycle()
+
+    Column(modifier = Modifier.fillMaxSize()
+        .background(state.value.backgroundColor)) {
+        Text("SETTINGS TWO\n" +
+                "HASHCODE : $screenHashCode\n" +
+                "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
+                "SCREEN KEY : ${screenKey.value}",
+            style = MaterialTheme.typography.h6
+        )
+        Text(
+            text = state.value.emoji,
+            style = MaterialTheme.typography.h1
+        )
+
         Button(onClick = {
             coroutineScope.launch { viewModel.openSettingsOneScreenButtonClicked() }
         }) {

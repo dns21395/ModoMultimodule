@@ -1,10 +1,16 @@
 package uk.nightlines.feature.settings.one_impl.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.ScreenKey
@@ -37,7 +43,7 @@ internal class SettingsOneScreen(
 @Composable
 internal fun SettingsOneContent(
     screenHashCode: Int,
-    screenKey: ScreenKey
+    screenKey: ScreenKey,
 ) {
 
     val coroutineScope = rememberCoroutineScope()
@@ -46,19 +52,33 @@ internal fun SettingsOneContent(
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
-
-        ComponentHolder(
-            DaggerSettingsOneComponent.factory().create(coreProvider, settingsDependencies)
-        )
-    }
+    val componentHolder =
+        daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
+            ComponentHolder(
+                DaggerSettingsOneComponent.factory().create(coreProvider, settingsDependencies)
+            )
+        }
 
     val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
         componentHolder.component.viewModel()
     }
 
-    Column {
-        Text("Settings One")
+    val state = viewModel.state.collectAsStateWithLifecycle()
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(state.value.color)) {
+        Text(
+            text = state.value.emoji,
+            style = MaterialTheme.typography.h1
+        )
+        Text(
+            "SETTINGS ONE\n" +
+                    "HASHCODE : $screenHashCode\n" +
+                    "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
+                    "SCREEN KEY : ${screenKey.value}",
+            style = MaterialTheme.typography.h6
+        )
         Button(
             onClick = {
                 coroutineScope.launch { viewModel.onOpenSettingsTwoScreenClicked() }

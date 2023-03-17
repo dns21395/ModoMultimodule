@@ -40,6 +40,7 @@ dependencies {
             deps.dagger.dagger,
             deps.lifecycle.viewmodel,
             deps.lifecycle.viewmodel_compose,
+            deps.lifecycle.runtime_compose,
             deps.modo.modo,
     )
 

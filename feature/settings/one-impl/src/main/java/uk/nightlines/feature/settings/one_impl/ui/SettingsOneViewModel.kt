@@ -1,6 +1,8 @@
 package uk.nightlines.feature.settings.one_impl.ui
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
@@ -14,6 +16,9 @@ internal class SettingsOneViewModel @Inject constructor(
     private val rootScreens: RootScreens,
     private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor
 ) : ViewModel() {
+
+    private val mutableState = MutableStateFlow(SettingsOneViewState())
+    val state: StateFlow<SettingsOneViewState> = mutableState
 
     suspend fun onOpenSettingsTwoScreenClicked() {
         settingsNavigation.navigate(NavigationReplace(settingsScreens.twoScreen()))

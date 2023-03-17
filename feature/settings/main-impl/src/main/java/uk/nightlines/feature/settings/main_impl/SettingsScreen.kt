@@ -1,10 +1,15 @@
 package uk.nightlines.feature.settings.main_impl
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -46,14 +51,22 @@ class SettingsStack(
             }
         }
 
+        val state = viewModel.state.collectAsStateWithLifecycle()
+
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            Column {
+            Column(modifier = Modifier.fillMaxSize().background(state.value.backgroundColor)) {
+                Text(
+                    text = state.value.emoji,
+                    style = MaterialTheme.typography.h1
+                )
                 Text(
                     text = "SETTINGS SCREEN #$count\n" +
                             "CONTAINER HASCODE : ${this@SettingsStack.hashCode()}\n" +
-                            "SCREEN KEY : ${screenKey.value}"
+                            "SCREEN KEY : ${screenKey.value}",
+                    style = MaterialTheme.typography.h6
+
                 )
                 TopScreenContent()
             }

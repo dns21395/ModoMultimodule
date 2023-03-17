@@ -1,6 +1,8 @@
 package uk.nightlines.feature.settings.two_impl.ui
 
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
@@ -12,6 +14,8 @@ internal class SettingsTwoViewModel @Inject constructor(
     private val settingsScreens: SettingsScreens,
 ) : ViewModel() {
 
+    private val mutableState = MutableStateFlow(SettingsTwoViewState())
+    val state: StateFlow<SettingsTwoViewState> = mutableState
     suspend fun openSettingsOneScreenButtonClicked() {
         settingsNavigation.navigate(NavigationReplace(settingsScreens.oneScreen()))
     }
