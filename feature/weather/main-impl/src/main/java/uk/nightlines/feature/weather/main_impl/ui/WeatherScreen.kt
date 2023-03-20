@@ -131,11 +131,10 @@ internal class WeatherStack(
                     .padding(2.dp)
                     .background(Color.White)
             ) {
-                Text(text = state.emoji, style = MaterialTheme.typography.h3)
+                Text(text = state.emoji, style = MaterialTheme.typography.h4)
                 Text(
-                    text = "WEATHER #$counter\n " +
+                    text = "WEATHER #$counter (${screenKey.value})\n " +
                             "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
-                            "SCREEN KEY : ${screenKey.value}\n" +
                             "STACK : ${navigationState.stack.map { it.screenKey.value }}"
                 )
 

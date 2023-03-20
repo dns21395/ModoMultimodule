@@ -71,47 +71,89 @@ fun DayContent(
 
     val state = viewModel.state.collectAsStateWithLifecycle()
 
+    DayContentState(
+        screenHashCode = screenHashCode,
+        weatherDependenciesHashCode = weatherDependencies.hashCode(),
+        containerScreenKey = screen.screenKey.value,
+        screenKey = screenKey.value,
+        state = state.value,
+        onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
+        onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+        onOpenDialogButtonClicked = { viewModel.onOpenDialogButtonClicked() },
+        onEditTextChanged = { viewModel.onTextChangedAction(it) }
+    )
+}
+
+@Composable
+fun DayContentState(
+    screenHashCode: Int,
+    weatherDependenciesHashCode: Int,
+    containerScreenKey: String,
+    screenKey: String,
+    state: DayViewState,
+    onForwardButtonClicked: suspend () -> Unit,
+    onReplaceButtonClicked: suspend () -> Unit,
+    onOpenDialogButtonClicked: suspend () -> Unit,
+    onEditTextChanged: suspend (String) -> Unit,
+) {
+
     val coroutineScope = rememberCoroutineScope()
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(state.value.color)) {
-        Text(
-            text = state.value.emoji,
-            style = MaterialTheme.typography.h1
-        )
 
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(state.backgroundColor)
+    ) {
         Text(
-            "DAY SCREEN \n" +
-                    "HASHCODE: $screenHashCode\n" +
-                    "DEPENDENCIES PROVIDER HASHCODE: ${weatherDependencies.hashCode()}\n" +
-                    "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
-                    "SCREEN KEY : ${screenKey.value}"
+            text = state.emoji,
+            style = MaterialTheme.typography.h4
         )
-        Button(onClick = {
-            coroutineScope.launch(Dispatchers.Main) {
-                viewModel.onOpenWeekScreenButtonClicked()
+        Text(
+            "DAY SCREEN ($screenKey) \n" +
+                    "HASHCODE: $screenHashCode\n" +
+                    "DEPENDENCIES PROVIDER HASHCODE: $weatherDependenciesHashCode\n" +
+                    "CONTAINER SCREEN KEY : $containerScreenKey\n"
+        )
+        Row {
+            Button(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 2.dp),
+                onClick = {
+                    coroutineScope.launch(Dispatchers.Main) {
+                        onReplaceButtonClicked()
+                    }
+                }) {
+                Text("REPLACE")
             }
-        }) {
-            Text("Open Week Screen (Replace)")
-        }
-        Button(onClick = {
-            coroutineScope.launch(Dispatchers.Main) {
-                viewModel.onForwardWeekScreenButtonClicked()
+            Button(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 2.dp),
+                onClick = {
+                    coroutineScope.launch(Dispatchers.Main) {
+                        onForwardButtonClicked()
+                    }
+                }) {
+                Text("FORWARD")
             }
-        }) {
-            Text("Open Week Screen (Forward)")
-        }
-        Button(onClick = {
-            coroutineScope.launch {
-                viewModel.onOpenDialogButtonClicked()
+            Button(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 2.dp),
+                onClick = {
+                    coroutineScope.launch {
+                        onOpenDialogButtonClicked()
+                    }
+                }) {
+                Text("DIALOG")
             }
-        }) {
-            Text("Open Dialog")
         }
+
         BasicTextField(
-            value = state.value.editText,
-            onValueChange = { text -> coroutineScope.launch { viewModel.onTextChangedAction(text) } },
+            value = state.editText,
+            onValueChange = { text -> coroutineScope.launch { onEditTextChanged(text) } },
             decorationBox = { innerTextField ->
                 Row(
                     modifier = Modifier
