@@ -172,7 +172,7 @@ internal class WeatherStack(
                         onClick = {
                             coroutineScope.launch { viewModel.onRemoveScreensButtonClicked() }
                         }) {
-                        Text("Remove By positions ")
+                        Text("REMOVE BY POSITIONS")
                     }
                 }
                 Row(
@@ -213,6 +213,35 @@ internal class WeatherStack(
                             coroutineScope.launch { viewModel.openNewStackButtonClicked() }
                         }) {
                         Text(text = "SET STACK")
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onMultiForwardButtonClicked() }
+                        }) {
+                        Text(text = "MULTI FORWARD")
+                    }
+                }
+                Row {
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onNewRootButtonClicked() }
+                        }) {
+                        Text(text = "NEW ROOT")
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onContainerButtonClicked() }
+                        }) {
+                        Text(text = "CONTAINER")
                     }
                 }
                 TopScreenContent()

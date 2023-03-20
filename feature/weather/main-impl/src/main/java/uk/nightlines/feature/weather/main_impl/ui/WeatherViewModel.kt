@@ -37,14 +37,16 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun openNewStackButtonClicked() {
-        weatherNavigation.navigate(NavigationSetStack(
-            listOf(
-                weatherScreens.getDayScreen(),
-                weatherScreens.getWeekScreen(),
-                weatherScreens.getDayScreen(),
-                weatherScreens.getWeekScreen()
+        weatherNavigation.navigate(
+            NavigationSetStack(
+                listOf(
+                    weatherScreens.getDayScreen(),
+                    weatherScreens.getWeekScreen(),
+                    weatherScreens.getDayScreen(),
+                    weatherScreens.getWeekScreen()
+                )
             )
-        ))
+        )
     }
 
     suspend fun onRemoveEditTextPositionChanged(text: String) {
@@ -70,5 +72,29 @@ internal class WeatherViewModel @Inject constructor(
         val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
 
         rootNavigation.navigate(NavigationReplace(rootScreens.weather(weatherCounter)))
+    }
+
+    suspend fun onMultiForwardButtonClicked() {
+        weatherNavigation.navigate(
+            NavigationForward(
+                weatherScreens.getDayScreen(),
+                listOf(
+                    weatherScreens.getWeekScreen(),
+                    weatherScreens.getDayScreen(),
+                    weatherScreens.getWeekScreen()
+                )
+            )
+        )
+    }
+
+    suspend fun onNewRootButtonClicked() {
+        weatherNavigation.navigate(NavigationNewStack(weatherScreens.getWeekScreen()))
+    }
+
+    suspend fun onContainerButtonClicked() {
+        // TODO
+//        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+//
+//        weatherNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
     }
 }

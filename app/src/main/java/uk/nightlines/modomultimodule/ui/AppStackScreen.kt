@@ -1,6 +1,8 @@
 package uk.nightlines.modomultimodule.ui
 
 import android.util.Log
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
@@ -42,7 +44,10 @@ class AppStackScreen(
         CompositionLocalProvider(
             LocalCoreProvider provides componentHolder.component as CoreProvider
         ) {
-            TopScreenContent()
+            Column {
+                Text(text = "App Container : ${navigationModel.navigationState.stack.map { it.screenKey.value }}")
+                TopScreenContent()
+            }
         }
     }
 }

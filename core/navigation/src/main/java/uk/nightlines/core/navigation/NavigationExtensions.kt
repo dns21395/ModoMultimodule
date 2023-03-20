@@ -6,6 +6,7 @@ import com.github.terrakok.modo.stack.*
 fun NavigationContainer<StackState>.navigate(command: NavigationCommand) {
     when (command) {
         is NavigationSetStack -> setStack(StackState(stack = command.screens))
+        is NavigationNewStack -> newStack(command.screen, *command.screens.toTypedArray())
         is NavigationForward -> forward(command.screen, *command.screens.toTypedArray())
         is NavigationReplace -> replace(command.screen, *command.screens.toTypedArray())
         is NavigationRemoveScreen -> removeScreen(*command.positions.toIntArray())
