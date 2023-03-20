@@ -90,7 +90,14 @@ fun DayContent(
                 viewModel.onOpenWeekScreenButtonClicked()
             }
         }) {
-            Text("Open Week Screen")
+            Text("Open Week Screen (Replace)")
+        }
+        Button(onClick = {
+            coroutineScope.launch(Dispatchers.Main) {
+                viewModel.onForwardWeekScreenButtonClicked()
+            }
+        }) {
+            Text("Open Week Screen (Forward)")
         }
         Button(onClick = {
             coroutineScope.launch {

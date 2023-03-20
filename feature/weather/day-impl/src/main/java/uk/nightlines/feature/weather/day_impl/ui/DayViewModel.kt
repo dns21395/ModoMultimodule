@@ -29,6 +29,11 @@ internal class DayViewModel @Inject constructor(
         navigation.navigate(NavigationReplace(weatherScreens.getWeekScreen()))
     }
 
+    suspend fun onForwardWeekScreenButtonClicked() {
+        navigation.navigate(NavigationForward(weatherScreens.getWeekScreen()))
+
+    }
+
     suspend fun onOpenDialogButtonClicked() {
         rootNavigation.navigate(NavigationForward(DayDialog()))
     }

@@ -1,8 +1,8 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
@@ -37,7 +37,7 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun openNewStackButtonClicked() {
-        weatherNavigation.navigate(NavigationNewStack(
+        weatherNavigation.navigate(NavigationSetStack(
             listOf(
                 weatherScreens.getDayScreen(),
                 weatherScreens.getWeekScreen(),
@@ -60,5 +60,15 @@ internal class WeatherViewModel @Inject constructor(
 
     suspend fun onBackToRootButtonClicked() {
         weatherNavigation.navigate(NavigationBackToRoot)
+    }
+
+    suspend fun onBackToSecondScreenClicked(screen: Screen) {
+        weatherNavigation.navigate(NavigationBackTo(screen))
+    }
+
+    suspend fun onReplaceButtonClicked() {
+        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+
+        rootNavigation.navigate(NavigationReplace(rootScreens.weather(weatherCounter)))
     }
 }
