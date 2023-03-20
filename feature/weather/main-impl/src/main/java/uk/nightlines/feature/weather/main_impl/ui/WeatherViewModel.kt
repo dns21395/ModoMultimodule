@@ -93,8 +93,8 @@ internal class WeatherViewModel @Inject constructor(
 
     suspend fun onContainerButtonClicked() {
         // TODO
-//        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
-//
-//        weatherNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
+        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+
+        weatherNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
     }
 }

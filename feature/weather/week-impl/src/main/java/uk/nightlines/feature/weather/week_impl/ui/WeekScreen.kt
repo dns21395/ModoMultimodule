@@ -26,9 +26,10 @@ import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_WEEK_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_WEEK_VIEWMODEL"
+
 @Parcelize
 class WeekScreen(
-    override val screenKey: ScreenKey = generateScreenKey()
+    override val screenKey: ScreenKey = generateScreenKey(),
 ) : Screen {
 
     @Composable
@@ -43,7 +44,7 @@ class WeekScreen(
 @Composable
 fun WeekContent(
     screenHashCode: Int,
-    screenKey: ScreenKey
+    screenKey: ScreenKey,
 ) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
@@ -55,30 +56,34 @@ fun WeekContent(
 
     val coroutineScope = rememberCoroutineScope()
 
-    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode" ){
+    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
         Log.d("GTA5", "[WEEK] component created. DEPS: ${weatherDependencies.hashCode()}")
         ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
 
     }
 
-    val viewModel: WeekViewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
-        Log.d("GTA5", "[WEEK] dagger created. DEPS: ${weatherDependencies.hashCode()}")
+    val viewModel: WeekViewModel =
+        daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
+            Log.d("GTA5", "[WEEK] dagger created. DEPS: ${weatherDependencies.hashCode()}")
 
-        component.component.viewModel()
-    }
+            component.component.viewModel()
+        }
 
     val state = viewModel.state.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.fillMaxSize().background(state.value.color)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(state.value.color)) {
         Text(
             text = state.value.emoji,
             style = MaterialTheme.typography.h1
         )
         Text(
             "WEEK SCREEN \n" +
-                "HASHCODE: $screenHashCode\n" +
-                "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
-                "SCREEN KEY : ${screenKey.value}"
+                    "HASHCODE: $screenHashCode\n" +
+                    "DEPENDENCIES PROVIDER HASHCODE: ${weatherDependencies.hashCode()}\n" +
+                    "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
+                    "SCREEN KEY : ${screenKey.value}"
         )
         Button(onClick = {
             coroutineScope.launch(Dispatchers.Main) {

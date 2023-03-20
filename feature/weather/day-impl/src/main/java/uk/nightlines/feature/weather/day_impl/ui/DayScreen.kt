@@ -52,7 +52,7 @@ class DayScreen(
 @Composable
 fun DayContent(
     screenHashCode: Int,
-    screenKey: ScreenKey
+    screenKey: ScreenKey,
 ) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
@@ -73,7 +73,9 @@ fun DayContent(
 
     val coroutineScope = rememberCoroutineScope()
 
-    Column(modifier = Modifier.fillMaxSize().background(state.value.color)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(state.value.color)) {
         Text(
             text = state.value.emoji,
             style = MaterialTheme.typography.h1
@@ -81,9 +83,10 @@ fun DayContent(
 
         Text(
             "DAY SCREEN \n" +
-                "HASHCODE: $screenHashCode\n" +
-                "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
-                "SCREEN KEY : ${screenKey.value}"
+                    "HASHCODE: $screenHashCode\n" +
+                    "DEPENDENCIES PROVIDER HASHCODE: ${weatherDependencies.hashCode()}\n" +
+                    "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
+                    "SCREEN KEY : ${screenKey.value}"
         )
         Button(onClick = {
             coroutineScope.launch(Dispatchers.Main) {
@@ -114,7 +117,10 @@ fun DayContent(
                     modifier = Modifier
                         .padding(horizontal = 64.dp) // margin left and right
                         .fillMaxWidth()
-                        .background(color = Color(0xFFD2F3F2), shape = RoundedCornerShape(size = 16.dp))
+                        .background(
+                            color = Color(0xFFD2F3F2),
+                            shape = RoundedCornerShape(size = 16.dp)
+                        )
                         .border(
                             width = 2.dp,
                             color = Color(0xFFAAE9E6),
