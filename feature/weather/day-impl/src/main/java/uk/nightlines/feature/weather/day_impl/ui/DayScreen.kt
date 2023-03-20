@@ -1,6 +1,5 @@
 package uk.nightlines.feature.weather.day_impl.ui
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -58,13 +57,9 @@ fun DayContent(
     val screen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
 
-
     val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
         ComponentHolder(DaggerDayComponent.factory().create(coreProvider, weatherDependencies))
     }
-
-    Log.d("GTA5", "[DAY] DEPS ; ${weatherDependencies.hashCode()}")
-    Log.d("GTA6", "[DAY] SCREEN KEY : ${screen.screenKey}")
 
     val viewModel =
         daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") { component.component.viewModel() }
@@ -98,7 +93,6 @@ fun DayContentState(
 ) {
 
     val coroutineScope = rememberCoroutineScope()
-
 
     Column(
         modifier = Modifier
@@ -152,6 +146,7 @@ fun DayContentState(
         }
 
         BasicTextField(
+            modifier = Modifier.padding(top = 2.dp),
             value = state.editText,
             onValueChange = { text -> coroutineScope.launch { onEditTextChanged(text) } },
             decorationBox = { innerTextField ->
