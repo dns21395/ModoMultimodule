@@ -154,7 +154,7 @@ internal class WeatherStack(
                             onClick = {
                                 coroutineScope.launch { onForwardButtonClicked() }
                             }) {
-                            Text(text = "FORWARD [WEATHER]")
+                            Text(text = "FORWARD")
                         }
                         Button(
                             modifier = Modifier
@@ -163,7 +163,7 @@ internal class WeatherStack(
                             onClick = {
                                 coroutineScope.launch { onReplaceButtonClicked() }
                             }) {
-                            Text(text = "REPLACE [WEATHER]")
+                            Text(text = "REPLACE")
                         }
                     }
                     Row(

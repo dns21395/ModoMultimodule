@@ -23,9 +23,13 @@ internal class WeekViewModel @Inject constructor(
     private val mutableState = MutableStateFlow(WeekState())
     val state: StateFlow<WeekState> = mutableState
 
-    suspend fun onOpenDayScreenButtonClicked() {
+    suspend fun onReplaceButtonClicked() {
                Log.d("GTA5", "[WEEK] ViewModel. DEPS : ${weatherDependencies.hashCode()}")
         locatlNavigation.navigate(NavigationReplace(weatherScreens.getDayScreen()))
+    }
+
+    suspend fun onForwardButtonClicked() {
+        locatlNavigation.navigate(NavigationForward(weatherScreens.getDayScreen()))
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {
