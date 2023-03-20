@@ -7,5 +7,6 @@ import kotlin.random.Random
 internal data class WeatherViewState(
     val backgroundColor: Color = Color(Random.nextInt()),
     val emoji: String = emojis[Random.nextInt(emojis.size - 1)],
-    val positionEditText: String = ""
+    val positionEditText: String = "",
+    val isOptionsVisible: Boolean = false
 )

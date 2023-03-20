@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.github.terrakok.modo.Screen
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.flow.collectLatest
@@ -73,8 +74,6 @@ internal class WeatherStack(
 
         val state = viewModel.state.collectAsStateWithLifecycle()
 
-        val coroutineScope = rememberCoroutineScope()
-
         LaunchedEffect(Unit) {
             Log.d("GTA5", "[WEATHER] ***LAUNCHED*** HASHCODE : ${this.hashCode()}")
 
@@ -87,165 +86,207 @@ internal class WeatherStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
+            WeatherScreenContent(
+                state = state.value,
+                onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
+                onForwardButtonClicked = { viewModel.onOpenNewWeatherScreenButtonClicked() },
+                onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+                onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked() },
+                onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked(it) },
+                onBackToRootClicked = { viewModel.onBackToRootButtonClicked() },
+                onNewStackButtonClicked = { viewModel.openNewStackButtonClicked() },
+                onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
+                onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
+                onContainerButtonClicked = { viewModel.onContainerButtonClicked() })
+        }
+    }
+
+    @Composable
+    fun WeatherScreenContent(
+        state: WeatherViewState,
+        onShowOptionsButtonClicked: suspend () -> Unit,
+        onForwardButtonClicked: suspend () -> Unit,
+        onReplaceButtonClicked: suspend () -> Unit,
+        onRemoveByPositionsEditTextChanged: suspend (String) -> Unit,
+        onRemoveByPositionsButtonClicked: suspend () -> Unit,
+        onBackToSecondScreenButtonClicked: suspend (Screen) -> Unit,
+        onBackToRootClicked: suspend () -> Unit,
+        onNewStackButtonClicked: suspend () -> Unit,
+        onMultiForwardButtonClicked: suspend () -> Unit,
+        onNewRootButtonClicked: suspend () -> Unit,
+        onContainerButtonClicked: suspend () -> Unit,
+    ) {
+        val coroutineScope = rememberCoroutineScope()
+
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(state.backgroundColor)
+        ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
-                    .background(state.value.backgroundColor)
-                    .verticalScroll(rememberScrollState())
+                    .padding(8.dp)
+                    .background(Color.Gray)
+                    .padding(2.dp)
+                    .background(Color.White)
             ) {
-                Text(text = state.value.emoji, style = MaterialTheme.typography.h1)
-                Text(text = "WEATHER #$counter\n " +
-                        "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
-                        "SCREEN KEY : ${screenKey.value}\n" +
-                        "STACK : ${navigationState.stack.map { it.screenKey.value }}"
+                Text(text = state.emoji, style = MaterialTheme.typography.h3)
+                Text(
+                    text = "WEATHER #$counter\n " +
+                            "CONTAINER HASCODE : ${this@WeatherStack.hashCode()}\n" +
+                            "SCREEN KEY : ${screenKey.value}\n" +
+                            "STACK : ${navigationState.stack.map { it.screenKey.value }}"
                 )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onOpenNewWeatherScreenButtonClicked() }
-                        }) {
-                        Text(text = "FORWARD [WEATHER]")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onReplaceButtonClicked() }
-                        }) {
-                        Text(text = "REPLACE [WEATHER]")
-                    }
+
+                Button(onClick = { coroutineScope.launch { onShowOptionsButtonClicked() } }) {
+                    Text(if (state.isOptionsVisible) "HIDE OPTIONS" else "SHOW OPTIONS")
                 }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    BasicTextField(
-                        value = state.value.positionEditText,
-                        onValueChange = { text ->
-                            coroutineScope.launch {
-                                viewModel.onRemoveEditTextPositionChanged(
-                                    text
-                                )
-                            }
-                        },
-                        decorationBox = { innerTextField ->
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .background(
-                                        color = Color(0xFF5E35B1),
-                                        shape = RoundedCornerShape(size = 16.dp)
-                                    )
-                                    .border(
-                                        width = 2.dp,
-                                        color = Color(0xFFFBC02D),
-                                        shape = RoundedCornerShape(size = 16.dp)
-                                    )
-                                    .padding(all = 16.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Search,
-                                    contentDescription = "Favorite icon",
-                                    tint = Color.DarkGray
-                                )
-                                Spacer(modifier = Modifier.width(width = 8.dp))
-                                innerTextField()
-                            }
-                        },
+
+                if (state.isOptionsVisible) {
+                    Row(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .weight(1f)
-                            .padding(16.dp)
-                    )
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onRemoveScreensButtonClicked() }
-                        }) {
-                        Text("REMOVE BY POSITIONS")
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                viewModel.onBackToSecondScreenClicked(
-                                    navigationState.stack[1]
-                                )
-                            }
-                        },
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .weight(1f)
-                            .padding(horizontal = 16.dp)
+                            .fillMaxWidth()
                     ) {
-                        Text("BACK TO 2ND SCREEN")
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onForwardButtonClicked() }
+                            }) {
+                            Text(text = "FORWARD [WEATHER]")
+                        }
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onReplaceButtonClicked() }
+                            }) {
+                            Text(text = "REPLACE [WEATHER]")
+                        }
                     }
-                    Button(
-                        onClick = { coroutineScope.launch { viewModel.onBackToRootButtonClicked() } },
+                    Row(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .weight(1f)
-                            .padding(horizontal = 16.dp)
+                            .fillMaxWidth()
                     ) {
-                        Text("BACK TO ROOT")
+                        BasicTextField(
+                            value = state.positionEditText,
+                            onValueChange = { text ->
+                                coroutineScope.launch { onRemoveByPositionsEditTextChanged(text) }
+                            },
+                            decorationBox = { innerTextField ->
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .background(
+                                            color = Color(0xFF5E35B1),
+                                            shape = RoundedCornerShape(size = 16.dp)
+                                        )
+                                        .border(
+                                            width = 2.dp,
+                                            color = Color(0xFFFBC02D),
+                                            shape = RoundedCornerShape(size = 16.dp)
+                                        )
+                                        .padding(all = 16.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Default.Search,
+                                        contentDescription = "Favorite icon",
+                                        tint = Color.DarkGray
+                                    )
+                                    Spacer(modifier = Modifier.width(width = 8.dp))
+                                    innerTextField()
+                                }
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(16.dp)
+                        )
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(16.dp),
+                            onClick = {
+                                coroutineScope.launch { onRemoveByPositionsButtonClicked() }
+                            }) {
+                            Text("REMOVE BY POSITIONS")
+                        }
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                    ) {
+                        Button(
+                            onClick = {
+                                coroutineScope.launch {
+                                    onBackToSecondScreenButtonClicked(
+                                        navigationState.stack[1]
+                                    )
+                                }
+                            },
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            Text("BACK TO 2ND SCREEN")
+                        }
+                        Button(
+                            onClick = { coroutineScope.launch { onBackToRootClicked() } },
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp)
+                        ) {
+                            Text("BACK TO ROOT")
+                        }
+                    }
+                    Row {
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onNewStackButtonClicked() }
+                            }) {
+                            Text(text = "SET STACK")
+                        }
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onMultiForwardButtonClicked() }
+                            }) {
+                            Text(text = "MULTI FORWARD")
+                        }
+                    }
+                    Row {
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onNewRootButtonClicked() }
+                            }) {
+                            Text(text = "NEW ROOT")
+                        }
+                        Button(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 16.dp),
+                            onClick = {
+                                coroutineScope.launch { onContainerButtonClicked() }
+                            }) {
+                            Text(text = "CONTAINER")
+                        }
                     }
                 }
-                Row {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.openNewStackButtonClicked() }
-                        }) {
-                        Text(text = "SET STACK")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onMultiForwardButtonClicked() }
-                        }) {
-                        Text(text = "MULTI FORWARD")
-                    }
-                }
-                Row {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onNewRootButtonClicked() }
-                        }) {
-                        Text(text = "NEW ROOT")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onContainerButtonClicked() }
-                        }) {
-                        Text(text = "CONTAINER")
-                    }
-                }
+
                 TopScreenContent()
             }
         }
+
     }
 }

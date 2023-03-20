@@ -30,6 +30,10 @@ internal class WeatherViewModel @Inject constructor(
 
     val channelCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
 
+    suspend fun onShowOptionsButtonClicked() {
+        _state.emit(state.value.copy(isOptionsVisible = !state.value.isOptionsVisible))
+    }
+
     suspend fun onOpenNewWeatherScreenButtonClicked() {
         val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
 
