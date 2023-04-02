@@ -92,7 +92,14 @@ internal fun SettingsOneContent(
                 coroutineScope.launch { viewModel.onOpenSettingsTwoScreenClicked() }
             }
         ) {
-            Text("Open Settings Two Screen")
+            Text("REPLACE")
+        }
+        Button(
+            onClick = {
+                coroutineScope.launch { viewModel.onForwardTwoButtonClicked() }
+            }
+        ) {
+            Text("FORWARD")
         }
         Button(
             onClick = {

@@ -17,12 +17,15 @@ abstract class BaseContainerScreen(
 
     @Composable
     override fun Content() {
-        BaseTopScreenContent()
+
     }
 
     @OptIn(ExperimentalModoApi::class)
     @Composable
-    private fun BaseTopScreenContent(content: RendererContent<StackState> = defaultRendererContent) {
+    fun BaseTopScreenContent(
+        backButtonHandle: () -> Unit,
+        content: RendererContent<StackState> = defaultRendererContent,
+    ) {
         val screensToRender: Pair<Screen?, DialogScreen?> by remember {
             derivedStateOf {
                 val stack = navigationState.stack
@@ -37,14 +40,14 @@ abstract class BaseContainerScreen(
         }
         val (screen, dialog) = screensToRender
         if (screen != null) {
-            BaseContent(screen, content)
+            BaseContent(screen, backButtonHandle, content)
         }
         if (dialog != null) {
             Dialog(
-                onDismissRequest = { onBackButtonPressed() },
+                onDismissRequest = { backButtonHandle.invoke() },
                 properties = remember { dialog.provideDialogProperties() }
             ) {
-                BaseContent(screen = dialog)
+                BaseContent(screen = dialog, backButtonHandle)
             }
         }
     }
@@ -52,7 +55,8 @@ abstract class BaseContainerScreen(
     @Composable
     private fun BaseContent(
         screen: Screen,
-        content: RendererContent<StackState> = defaultRendererContent
+        backButtonHandle: () -> Unit,
+        content: RendererContent<StackState> = defaultRendererContent,
     ) {
         val isBackHandlerEnabled by remember {
             derivedStateOf {
@@ -60,10 +64,8 @@ abstract class BaseContainerScreen(
             }
         }
         BackHandler(enabled = isBackHandlerEnabled) {
-            onBackButtonPressed()
+            backButtonHandle()
         }
         super.InternalContent(screen, content)
     }
-
-    abstract fun onBackButtonPressed()
 }

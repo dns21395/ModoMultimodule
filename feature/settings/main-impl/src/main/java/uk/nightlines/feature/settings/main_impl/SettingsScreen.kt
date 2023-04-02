@@ -1,24 +1,19 @@
 package uk.nightlines.feature.settings.main_impl
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.stack.StackNavModel
-import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.navigate
+import uk.nightlines.core.navigation.setstack.BaseContainerScreen
 import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
@@ -29,7 +24,7 @@ private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 class SettingsStack(
     private val count: Int,
     private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
+) : BaseContainerScreen(stackNavModel) {
 
     constructor(count: Int) : this(count, StackNavModel(emptyList()))
 
@@ -47,28 +42,29 @@ class SettingsStack(
 
         LaunchedEffect(Unit) {
             viewModel.navigationCommands.collectLatest { command ->
-                navigate(command)
+                Log.d("GTA5", "[SETTINGS] command : $command")
+                dispatch(command)
             }
         }
+
+        val coroutineScope = rememberCoroutineScope()
 
         val state = viewModel.state.collectAsStateWithLifecycle()
 
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            Column(modifier = Modifier.fillMaxSize().background(state.value.backgroundColor)) {
-                Text(
-                    text = state.value.emoji,
-                    style = MaterialTheme.typography.h1
+            SettingsContent(
+                state = state.value,
+                screenCounter = count.toString(),
+                screenHashCode = hashCode().toString(),
+                screenKey = screenKey.value,
+            ) {
+                BaseTopScreenContent(
+                    backButtonHandle = {
+                        coroutineScope.launch { viewModel.onBackButtonClicked() }
+                    }
                 )
-                Text(
-                    text = "SETTINGS SCREEN #$count\n" +
-                            "CONTAINER HASCODE : ${this@SettingsStack.hashCode()}\n" +
-                            "SCREEN KEY : ${screenKey.value}",
-                    style = MaterialTheme.typography.h6
-
-                )
-                TopScreenContent()
             }
         }
     }

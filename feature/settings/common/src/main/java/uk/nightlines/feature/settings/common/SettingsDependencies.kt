@@ -1,10 +1,10 @@
 package uk.nightlines.feature.settings.common
 
-import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.navigation.NavigationStackList
 
 interface SettingsDependencies {
     @SettingsNavigationQualifier
-    fun getSettingsNavigation(): Navigation
+    fun getSettingsNavigation(): NavigationStackList
 
     fun getSettingsScreen(): SettingsScreens
 }

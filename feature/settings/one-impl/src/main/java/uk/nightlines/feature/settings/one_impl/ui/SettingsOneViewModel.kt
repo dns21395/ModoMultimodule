@@ -1,6 +1,8 @@
 package uk.nightlines.feature.settings.one_impl.ui
 
 import androidx.lifecycle.ViewModel
+import com.github.terrakok.modo.stack.Forward
+import com.github.terrakok.modo.stack.Replace
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
@@ -11,7 +13,7 @@ import javax.inject.Inject
 
 internal class SettingsOneViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: Navigation,
-    @SettingsNavigationQualifier private val settingsNavigation: Navigation,
+    @SettingsNavigationQualifier private val settingsNavigation: NavigationStackList,
     private val settingsScreens: SettingsScreens,
     private val rootScreens: RootScreens,
     private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor
@@ -21,7 +23,11 @@ internal class SettingsOneViewModel @Inject constructor(
     val state: StateFlow<SettingsOneViewState> = mutableState
 
     suspend fun onOpenSettingsTwoScreenClicked() {
-        settingsNavigation.navigate(NavigationReplace(settingsScreens.twoScreen()))
+        settingsNavigation.navigate(Replace(settingsScreens.twoScreen()))
+    }
+
+    suspend fun onForwardTwoButtonClicked() {
+        settingsNavigation.navigate(Forward(settingsScreens.twoScreen()))
     }
 
     suspend fun onOpenWeatherScreenClicked() {
