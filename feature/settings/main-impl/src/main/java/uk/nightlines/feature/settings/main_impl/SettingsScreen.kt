@@ -6,7 +6,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.github.terrakok.modo.stack.SetStack
 import com.github.terrakok.modo.stack.StackNavModel
+import com.github.terrakok.modo.stack.StackState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
@@ -41,9 +43,9 @@ class SettingsStack(
         }
 
         LaunchedEffect(Unit) {
-            viewModel.navigationCommands.collectLatest { command ->
-                Log.d("GTA5", "[SETTINGS] command : $command")
-                dispatch(command)
+            viewModel.navigationCommands.collectLatest { screensStack ->
+                Log.d("GTA5", "[SETTINGS] command : $screensStack")
+                dispatch(SetStack(StackState(screensStack)))
             }
         }
 

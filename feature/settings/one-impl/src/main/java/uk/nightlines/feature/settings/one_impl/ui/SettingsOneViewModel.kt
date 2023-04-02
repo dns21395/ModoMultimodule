@@ -23,11 +23,11 @@ internal class SettingsOneViewModel @Inject constructor(
     val state: StateFlow<SettingsOneViewState> = mutableState
 
     suspend fun onOpenSettingsTwoScreenClicked() {
-        settingsNavigation.navigate(Replace(settingsScreens.twoScreen()))
+        settingsNavigation.navigate(NavigationReplace(settingsScreens.twoScreen()))
     }
 
     suspend fun onForwardTwoButtonClicked() {
-        settingsNavigation.navigate(Forward(settingsScreens.twoScreen()))
+        settingsNavigation.navigate(NavigationForward(settingsScreens.twoScreen()))
     }
 
     suspend fun onOpenWeatherScreenClicked() {
