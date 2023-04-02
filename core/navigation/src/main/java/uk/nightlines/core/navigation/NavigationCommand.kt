@@ -18,5 +18,7 @@ data class NavigationRemoveScreen(val positions: List<Int>) : NavigationCommand
 
 object NavigationBackToRoot : NavigationCommand
 
+object NavigationBack : NavigationCommand
+
 object NavigationExit : NavigationCommand
 
