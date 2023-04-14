@@ -7,7 +7,7 @@ import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.modomultimodule.RootScreenImpl
-import uk.nightlines.modomultimodule.domain.interactor.WeatherScreenCounterInteractorImpl
+import uk.nightlines.modomultimodule.domain.interactor.RootScreensCounterInteractorImpl
 import javax.inject.Singleton
 
 @Module
@@ -25,5 +25,5 @@ internal class AppModuule {
     @Provides
     @Singleton
     fun provideRootScreensCounterInteractor(): RootScreensCounterInteractor =
-        WeatherScreenCounterInteractorImpl()
+        RootScreensCounterInteractorImpl()
 }

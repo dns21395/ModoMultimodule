@@ -16,7 +16,7 @@ internal class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            navigation.navigate(NavigationReplace(rootScreensInteractor.weather(0)))
+            navigation.navigate(NavigationReplace(rootScreensInteractor.commandScreen(0)))
         }
     }
 

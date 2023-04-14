@@ -44,13 +44,13 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     suspend fun onForwardButtonClicked() {
-        val counter = screenCounterInteractor.getWeatherScreenCount()
-        rootNavigation.navigate(NavigationForward(rootScreens.settings(counter)))
+        val counter = screenCounterInteractor.getCommandScreenCount()
+        rootNavigation.navigate(NavigationForward(rootScreens.setStackScreen(counter)))
     }
 
     suspend fun onReplaceButtonClicked() {
-        val counter = screenCounterInteractor.getWeatherScreenCount()
-        rootNavigation.navigate(NavigationReplace(rootScreens.settings(counter)))
+        val counter = screenCounterInteractor.getCommandScreenCount()
+        rootNavigation.navigate(NavigationReplace(rootScreens.setStackScreen(counter)))
     }
 
     suspend fun onRemoveEditTextPositionChanged(text: String) {

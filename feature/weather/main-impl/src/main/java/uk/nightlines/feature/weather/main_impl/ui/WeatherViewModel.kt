@@ -37,9 +37,9 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onOpenNewWeatherScreenButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
 
-        rootNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
     }
 
     suspend fun openNewStackButtonClicked() {
@@ -75,9 +75,9 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onReplaceButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
 
-        rootNavigation.navigate(NavigationReplace(rootScreens.weather(weatherCounter)))
+        rootNavigation.navigate(NavigationReplace(rootScreens.commandScreen(weatherCounter)))
     }
 
     suspend fun onMultiForwardButtonClicked() {
@@ -99,8 +99,8 @@ internal class WeatherViewModel @Inject constructor(
 
     suspend fun onContainerButtonClicked() {
         // TODO
-        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
 
-        weatherNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
+        weatherNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
     }
 }

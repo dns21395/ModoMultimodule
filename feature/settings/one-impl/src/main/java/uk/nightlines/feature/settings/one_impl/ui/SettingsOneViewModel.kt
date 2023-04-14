@@ -32,9 +32,9 @@ internal class SettingsOneViewModel @Inject constructor(
     }
 
     suspend fun onOpenWeatherScreenClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getWeatherScreenCount()
+        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
 
-        rootNavigation.navigate(NavigationForward(rootScreens.weather(weatherCounter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
     }
 
     suspend fun onTextChangedAction(text: String) {

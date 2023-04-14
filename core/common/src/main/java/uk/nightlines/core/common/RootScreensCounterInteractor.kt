@@ -2,9 +2,7 @@ package uk.nightlines.core.common
 
 interface RootScreensCounterInteractor {
 
-    fun incrementScreenCount()
+    fun getCommandScreenCount(): Int
 
-    fun getWeatherScreenCount(): Int
-
-    fun getSettingsScreenCount(): Int
+    fun getSetStackScreenCount(): Int
 }

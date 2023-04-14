@@ -4,7 +4,7 @@ import com.github.terrakok.modo.Screen
 
 interface RootScreensInteractor {
 
-    fun settings(count: Int): Screen
+    fun setStackScreen(count: Int): Screen
 
-    fun weather(counter: Int): Screen
+    fun commandScreen(counter: Int): Screen
 }

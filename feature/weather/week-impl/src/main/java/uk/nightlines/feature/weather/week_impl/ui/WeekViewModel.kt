@@ -35,7 +35,7 @@ internal class WeekViewModel @Inject constructor(
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {
-        val settingsCount = weatherScreenCounterInteractor.getSettingsScreenCount()
-        rootNavigation.navigate(NavigationForward(rootScreens.settings(settingsCount)))
+        val settingsCount = weatherScreenCounterInteractor.getSetStackScreenCount()
+        rootNavigation.navigate(NavigationForward(rootScreens.setStackScreen(settingsCount)))
     }
 }
