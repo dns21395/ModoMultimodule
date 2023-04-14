@@ -21,6 +21,9 @@ android {
 dependencies {
 
     implementation(
+            deps.compose.ui,
+            deps.compose.runtime,
+            deps.compose.activity,
             deps.coroutines.coroutines,
             deps.dagger.dagger,
             deps.modo.modo,
