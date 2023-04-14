@@ -7,7 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.WeatherScreenCounterInteractor
+import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.core.navigation.type.NavigationTypeSetStack
@@ -19,8 +20,8 @@ internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val settingsScreens: SettingsScreens,
-    private val screenCounterInteractor: WeatherScreenCounterInteractor,
-    private val rootScreens: RootScreens,
+    private val screenCounterInteractor: RootScreensCounterInteractor,
+    private val rootScreens: RootScreensInteractor,
     ) : ViewModel() {
 
     val navigationCommands: Flow<List<Screen>> = settingsNavigation.screensStackFlow

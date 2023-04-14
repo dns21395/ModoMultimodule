@@ -3,7 +3,8 @@ package uk.nightlines.feature.settings.one_impl.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.common.WeatherScreenCounterInteractor
+import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.core.navigation.type.NavigationTypeSetStack
@@ -15,8 +16,8 @@ internal class SettingsOneViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val settingsScreens: SettingsScreens,
-    private val rootScreens: RootScreens,
-    private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor
+    private val rootScreens: RootScreensInteractor,
+    private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(SettingsOneViewState())

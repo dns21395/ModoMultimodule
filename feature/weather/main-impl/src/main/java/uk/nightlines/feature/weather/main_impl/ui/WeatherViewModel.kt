@@ -5,7 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.WeatherScreenCounterInteractor
+import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
@@ -15,8 +16,8 @@ import javax.inject.Inject
 internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
-    private val rootScreens: RootScreens,
-    private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor,
+    private val rootScreens: RootScreensInteractor,
+    private val weatherScreenCounterInteractor: RootScreensCounterInteractor,
     private val weatherScreens: WeatherScreens,
 ) : ViewModel() {
 

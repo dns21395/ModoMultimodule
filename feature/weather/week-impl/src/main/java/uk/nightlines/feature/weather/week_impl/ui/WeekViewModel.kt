@@ -4,7 +4,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.common.WeatherScreenCounterInteractor
+import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherDependencies
@@ -17,8 +18,8 @@ internal class WeekViewModel @Inject constructor(
     @WeatherNavigationQualifier private val locatlNavigation: NavigationTypeCommand,
     private val weatherScreens: WeatherScreens,
     private val weatherDependencies: WeatherDependencies,
-    private val rootScreens: RootScreens,
-    private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor
+    private val rootScreens: RootScreensInteractor,
+    private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(WeekState())

@@ -1,8 +1,8 @@
 package uk.nightlines.modomultimodule.domain.interactor
 
-import uk.nightlines.core.common.WeatherScreenCounterInteractor
+import uk.nightlines.core.common.RootScreensCounterInteractor
 
-internal class WeatherScreenCounterInteractorImpl : WeatherScreenCounterInteractor {
+internal class WeatherScreenCounterInteractorImpl : RootScreensCounterInteractor {
 
     private var settingsCounter = 0
     private var weatherCounter = 1

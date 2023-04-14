@@ -1,8 +1,8 @@
-package uk.nightlines.core.navigation
+package uk.nightlines.core.common
 
 import com.github.terrakok.modo.Screen
 
-interface RootScreens {
+interface RootScreensInteractor {
 
     fun settings(count: Int): Screen
 

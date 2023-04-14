@@ -1,6 +1,6 @@
 package uk.nightlines.core.common
 
-interface WeatherScreenCounterInteractor {
+interface RootScreensCounterInteractor {
 
     fun incrementScreenCount()
 
