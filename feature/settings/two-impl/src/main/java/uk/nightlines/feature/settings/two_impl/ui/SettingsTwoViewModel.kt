@@ -5,13 +5,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.setstack.NavigationReplace
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
-import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
-import uk.nightlines.feature.settings.common.SettingsScreens
+import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
+import uk.nightlines.feature.settings.common.SetStackScreens
 import javax.inject.Inject
 
 internal class SettingsTwoViewModel @Inject constructor(
-    @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val settingsScreens: SettingsScreens,
+    @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
+    private val settingsScreens: SetStackScreens,
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(SettingsTwoViewState())

@@ -12,14 +12,14 @@ import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.setstack.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
-import uk.nightlines.feature.settings.common.SettingsScreens
+import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
+import uk.nightlines.feature.settings.common.SetStackScreens
 import javax.inject.Inject
 
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
-    @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val settingsScreens: SettingsScreens,
+    @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
+    private val settingsScreens: SetStackScreens,
     private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
     ) : ViewModel() {

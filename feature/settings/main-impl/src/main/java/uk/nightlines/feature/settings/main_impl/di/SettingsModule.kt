@@ -4,8 +4,8 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
-import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
-import uk.nightlines.feature.settings.common.SettingsScreens
+import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
+import uk.nightlines.feature.settings.common.SetStackScreens
 import uk.nightlines.feature.settings.main_impl.SettingsScreensImpl
 import uk.nightlines.feature.settings.one_api.SettingsOneApi
 import uk.nightlines.feature.settings.one_impl.SettingsOneImpl
@@ -25,11 +25,11 @@ internal class SettingsModule {
 
     @PerFeature
     @Provides
-    @SettingsNavigationQualifier
+    @SetStackNavigationQualifier
     fun provideNavigationStackList(): NavigationTypeSetStack = NavigationTypeSetStack()
 
     @PerFeature
     @Provides
-    fun provideSettingsScreens(settingsScreensImpl: SettingsScreensImpl): SettingsScreens =
+    fun provideSettingsScreens(settingsScreensImpl: SettingsScreensImpl): SetStackScreens =
         settingsScreensImpl
 }

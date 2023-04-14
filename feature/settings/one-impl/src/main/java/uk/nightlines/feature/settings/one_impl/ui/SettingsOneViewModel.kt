@@ -10,14 +10,14 @@ import uk.nightlines.core.navigation.setstack.NavigationForward
 import uk.nightlines.core.navigation.setstack.NavigationReplace
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
-import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
-import uk.nightlines.feature.settings.common.SettingsScreens
+import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
+import uk.nightlines.feature.settings.common.SetStackScreens
 import javax.inject.Inject
 
 internal class SettingsOneViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
-    @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val settingsScreens: SettingsScreens,
+    @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
+    private val settingsScreens: SetStackScreens,
     private val rootScreens: RootScreensInteractor,
     private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
