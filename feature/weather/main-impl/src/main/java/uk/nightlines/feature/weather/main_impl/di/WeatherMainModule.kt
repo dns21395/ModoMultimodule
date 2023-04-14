@@ -3,7 +3,7 @@ package uk.nightlines.feature.weather.main_impl.di
 import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.day_api.DayApi
 import uk.nightlines.feature.weather.day_impl.DayImpl
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier

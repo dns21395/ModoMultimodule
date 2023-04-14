@@ -1,6 +1,6 @@
 package uk.nightlines.feature.settings.common
 
-import uk.nightlines.core.navigation.type.NavigationTypeSetStack
+import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
 
 interface SettingsDependencies {
     @SettingsNavigationQualifier

@@ -10,8 +10,8 @@ import kotlinx.coroutines.launch
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.navigation.*
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
-import uk.nightlines.core.navigation.type.NavigationTypeSetStack
+import uk.nightlines.core.navigation.setstack.*
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
 import uk.nightlines.feature.settings.common.SettingsScreens
 import javax.inject.Inject

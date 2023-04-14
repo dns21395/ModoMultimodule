@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
+import uk.nightlines.core.navigation.setstack.NavigationCommand
+import uk.nightlines.core.navigation.setstack.NavigationReplace
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import javax.inject.Inject
 
 internal class MainViewModel @Inject constructor(

@@ -2,6 +2,7 @@ package uk.nightlines.core.navigation
 
 import com.github.terrakok.modo.NavigationContainer
 import com.github.terrakok.modo.stack.*
+import uk.nightlines.core.navigation.setstack.*
 
 fun NavigationContainer<StackState>.navigate(command: NavigationCommand) {
     when (command) {

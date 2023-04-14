@@ -3,7 +3,7 @@ package uk.nightlines.modomultimodule.di
 import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.common.RootScreensCounterInteractor
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.modomultimodule.RootScreenImpl

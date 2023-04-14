@@ -1,6 +1,6 @@
 package uk.nightlines.feature.weather.common
 
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 
 interface WeatherDependencies {
 

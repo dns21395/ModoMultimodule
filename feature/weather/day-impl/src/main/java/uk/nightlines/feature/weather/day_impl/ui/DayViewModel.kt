@@ -4,9 +4,9 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.navigation.type.NavigationTypeCommand
-import uk.nightlines.core.navigation.NavigationForward
-import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.setstack.NavigationForward
+import uk.nightlines.core.navigation.setstack.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
