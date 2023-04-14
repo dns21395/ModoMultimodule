@@ -7,13 +7,14 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
 import uk.nightlines.feature.weather.common.WeatherScreens
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: Navigation,
-    @WeatherNavigationQualifier private val weatherNavigation: Navigation,
+    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+    @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreens,
     private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor,
     private val weatherScreens: WeatherScreens,

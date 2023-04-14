@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
@@ -14,8 +14,8 @@ import uk.nightlines.feature.weather.common.WeatherScreens
 import javax.inject.Inject
 
 internal class DayViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: Navigation,
-    @WeatherNavigationQualifier private val navigation: Navigation,
+    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+    @WeatherNavigationQualifier private val navigation: NavigationTypeCommand,
     private val weatherScreens: WeatherScreens,
     private val weatherDependencies: WeatherDependencies
 ) : ViewModel() {

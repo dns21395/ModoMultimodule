@@ -1,12 +1,13 @@
-package uk.nightlines.core.navigation
+package uk.nightlines.core.navigation.type
 
 import android.util.Log
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.receiveAsFlow
+import uk.nightlines.core.navigation.*
 
-class NavigationStackList {
+class NavigationTypeSetStack {
 
     private val state: ArrayList<Screen> = arrayListOf()
 

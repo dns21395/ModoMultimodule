@@ -3,14 +3,13 @@ package uk.nightlines.modomultimodule
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import uk.nightlines.core.navigation.*
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import javax.inject.Inject
 
 internal class MainViewModel @Inject constructor(
-    @RootNavigationQualifier private val navigation: Navigation,
+    @RootNavigationQualifier private val navigation: NavigationTypeCommand,
     private val rootScreens: RootScreens
 ) : ViewModel() {
 

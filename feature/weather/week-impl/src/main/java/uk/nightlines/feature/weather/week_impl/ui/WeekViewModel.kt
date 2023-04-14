@@ -6,14 +6,15 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
 import uk.nightlines.feature.weather.common.WeatherScreens
 import javax.inject.Inject
 
 internal class WeekViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: Navigation,
-    @WeatherNavigationQualifier private val locatlNavigation: Navigation,
+    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+    @WeatherNavigationQualifier private val locatlNavigation: NavigationTypeCommand,
     private val weatherScreens: WeatherScreens,
     private val weatherDependencies: WeatherDependencies,
     private val rootScreens: RootScreens,

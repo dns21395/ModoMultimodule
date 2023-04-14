@@ -1,19 +1,19 @@
 package uk.nightlines.feature.settings.one_impl.ui
 
 import androidx.lifecycle.ViewModel
-import com.github.terrakok.modo.stack.Forward
-import com.github.terrakok.modo.stack.Replace
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
+import uk.nightlines.core.navigation.type.NavigationTypeSetStack
 import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
 import uk.nightlines.feature.settings.common.SettingsScreens
 import javax.inject.Inject
 
 internal class SettingsOneViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: Navigation,
-    @SettingsNavigationQualifier private val settingsNavigation: NavigationStackList,
+    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+    @SettingsNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val settingsScreens: SettingsScreens,
     private val rootScreens: RootScreens,
     private val weatherScreenCounterInteractor: WeatherScreenCounterInteractor

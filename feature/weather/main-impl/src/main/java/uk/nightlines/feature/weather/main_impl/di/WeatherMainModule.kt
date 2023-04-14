@@ -3,7 +3,7 @@ package uk.nightlines.feature.weather.main_impl.di
 import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.navigation.type.NavigationTypeCommand
 import uk.nightlines.feature.weather.day_api.DayApi
 import uk.nightlines.feature.weather.day_impl.DayImpl
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
@@ -18,7 +18,7 @@ internal class WeatherMainModule {
     @PerFeature
     @Provides
     @WeatherNavigationQualifier
-    fun provideNavigation() = Navigation()
+    fun provideNavigation() = NavigationTypeCommand()
 
     @PerFeature
     @Provides
