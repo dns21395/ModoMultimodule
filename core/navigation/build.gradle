@@ -21,13 +21,8 @@ android {
 dependencies {
 
     implementation(
-            deps.compose.navigation,
             deps.coroutines.coroutines,
             deps.dagger.dagger,
             deps.modo.modo,
-    )
-
-    kapt(
-            deps.dagger.compiler
     )
 }
