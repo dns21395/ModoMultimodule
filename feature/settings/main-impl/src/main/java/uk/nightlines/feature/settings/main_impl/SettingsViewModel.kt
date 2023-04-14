@@ -13,13 +13,13 @@ import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.setstack.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
-import uk.nightlines.feature.settings.common.SetStackScreens
+import uk.nightlines.feature.settings.one_api.SettingsOneApi
 import javax.inject.Inject
 
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val settingsScreens: SetStackScreens,
+    private val oneApi: SettingsOneApi,
     private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
     ) : ViewModel() {
@@ -31,7 +31,7 @@ internal class SettingsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            settingsNavigation.navigate(NavigationForward(settingsScreens.oneScreen()))
+            settingsNavigation.navigate(NavigationForward(oneApi.getScreen()))
         }
     }
 

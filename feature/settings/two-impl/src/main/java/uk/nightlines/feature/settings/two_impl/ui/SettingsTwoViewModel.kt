@@ -6,17 +6,17 @@ import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.setstack.NavigationReplace
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
 import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
-import uk.nightlines.feature.settings.common.SetStackScreens
+import uk.nightlines.feature.settings.one_api.SettingsOneApi
 import javax.inject.Inject
 
 internal class SettingsTwoViewModel @Inject constructor(
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val settingsScreens: SetStackScreens,
+    private val oneApi: SettingsOneApi,
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(SettingsTwoViewState())
     val state: StateFlow<SettingsTwoViewState> = mutableState
     suspend fun openSettingsOneScreenButtonClicked() {
-        settingsNavigation.navigate(NavigationReplace(settingsScreens.oneScreen()))
+        settingsNavigation.navigate(NavigationReplace(oneApi.getScreen()))
     }
 }
