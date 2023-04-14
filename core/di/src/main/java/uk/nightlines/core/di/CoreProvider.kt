@@ -8,9 +8,9 @@ import uk.nightlines.core.common.RootScreensInteractor
 interface CoreProvider {
 
     @RootNavigationQualifier
-    fun getCoreNavigation(): NavigationTypeCommand
+    fun getRootNavigation(): NavigationTypeCommand
 
     fun rootScreens(): RootScreensInteractor
 
-    fun weatherScreenCounterInteractor(): RootScreensCounterInteractor
+    fun rootScreensCounterInteractor(): RootScreensCounterInteractor
 }
