@@ -1,0 +1,50 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+
+    namespace 'uk.nightlines.core.redux'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            project(':core:di'),
+            project(':core:common'),
+            project(':core:navigation'),
+            project(':feature:weather:common'),
+            project(':feature:weather:week-api'),
+
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.material3,
+            deps.compose.ui_tooling_preview,
+            deps.coroutines.coroutines,
+            deps.dagger.dagger,
+            deps.lifecycle.viewmodel,
+            deps.lifecycle.viewmodel_compose,
+            deps.lifecycle.runtime_compose,
+    )
+
+    kapt(
+            deps.dagger.compiler
+    )
+
+    debugImplementation(
+            deps.compose.ui_tooling
+    )
+}

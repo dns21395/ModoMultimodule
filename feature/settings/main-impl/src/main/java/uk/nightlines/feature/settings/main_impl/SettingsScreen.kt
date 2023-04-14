@@ -56,11 +56,24 @@ class SettingsStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            SettingsContent(
+
+            SetStackScreenContent(
                 state = state.value,
-                screenCounter = count.toString(),
-                screenHashCode = hashCode().toString(),
+                counter = count.toString(),
                 screenKey = screenKey.value,
+                screenHashCode = hashCode().toString(),
+                navigationStack = navigationState.stack,
+                onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
+                onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
+                onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+                onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked()} ,
+                onBackToSecondScreenButtonClicked = {  },
+                onBackToRootClicked = {},
+                onNewStackButtonClicked = {},
+                onMultiForwardButtonClicked = {},
+                onNewRootButtonClicked = {},
+                onContainerButtonClicked = {}
             ) {
                 BaseTopScreenContent(
                     backButtonHandle = {

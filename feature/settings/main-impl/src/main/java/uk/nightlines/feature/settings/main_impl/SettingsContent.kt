@@ -27,7 +27,7 @@ fun SettingsContent(
             style = MaterialTheme.typography.h1
         )
         Text(
-            text = "SETTINGS SCREEN #$screenCounter\n" +
+            text = "[SET STACK] SCREEN #$screenCounter\n" +
                     "CONTAINER HASHCODE : $screenHashCode\n" +
                     "SCREEN KEY : $screenKey",
             style = MaterialTheme.typography.h6

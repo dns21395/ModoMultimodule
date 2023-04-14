@@ -64,7 +64,7 @@ fun SettingsTwoContent(
 
     Column(modifier = Modifier.fillMaxSize()
         .background(state.value.backgroundColor)) {
-        Text("SETTINGS TWO\n" +
+        Text("SCREEN TWO\n" +
                 "HASHCODE : $screenHashCode\n" +
                 "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
                 "SCREEN KEY : ${screenKey.value}",

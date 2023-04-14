@@ -81,7 +81,7 @@ internal fun SettingsOneContent(
             style = MaterialTheme.typography.h1
         )
         Text(
-            "SETTINGS ONE\n" +
+            "SCREEN ONE\n" +
                     "HASHCODE : $screenHashCode\n" +
                     "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
                     "SCREEN KEY : ${screenKey.value}",

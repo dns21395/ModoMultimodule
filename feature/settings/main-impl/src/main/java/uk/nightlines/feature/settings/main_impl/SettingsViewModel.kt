@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import uk.nightlines.core.common.WeatherScreenCounterInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.feature.settings.common.SettingsNavigationQualifier
 import uk.nightlines.feature.settings.common.SettingsScreens
@@ -15,13 +16,15 @@ import javax.inject.Inject
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: Navigation,
     @SettingsNavigationQualifier private val settingsNavigation: NavigationStackList,
-    private val settingsScreens: SettingsScreens
-) : ViewModel() {
+    private val settingsScreens: SettingsScreens,
+    private val screenCounterInteractor: WeatherScreenCounterInteractor,
+    private val rootScreens: RootScreens,
+    ) : ViewModel() {
 
     val navigationCommands: Flow<List<Screen>> = settingsNavigation.screensStackFlow
 
-    private val mutableState = MutableStateFlow(SettingsStateViewState())
-    val state: StateFlow<SettingsStateViewState> = mutableState
+    private val _state = MutableStateFlow(SettingsStateViewState())
+    val state: StateFlow<SettingsStateViewState> = _state
 
     init {
         viewModelScope.launch {
@@ -29,7 +32,36 @@ internal class SettingsViewModel @Inject constructor(
         }
     }
 
+    suspend fun onShowOptionsButtonClicked() {
+        _state.emit(state.value.copy(isOptionsVisible = !state.value.isOptionsVisible))
+    }
+
     suspend fun onBackButtonClicked() {
         settingsNavigation.navigate(NavigationBack)
+    }
+
+    suspend fun onForwardButtonClicked() {
+        val counter = screenCounterInteractor.getWeatherScreenCount()
+        rootNavigation.navigate(NavigationForward(rootScreens.settings(counter)))
+    }
+
+    suspend fun onReplaceButtonClicked() {
+        val counter = screenCounterInteractor.getWeatherScreenCount()
+        rootNavigation.navigate(NavigationReplace(rootScreens.settings(counter)))
+    }
+
+    suspend fun onRemoveEditTextPositionChanged(text: String) {
+        _state.emit(_state.value.copy(positionEditText = text))
+    }
+
+    suspend fun onRemoveScreensButtonClicked() {
+        val list = state.value.positionEditText.split(',').map { it.toInt() }
+        settingsNavigation.navigate(NavigationRemoveScreen(list))
+
+        _state.emit(_state.value.copy(positionEditText = ""))
+    }
+
+    suspend fun onBackToSecondScreenClicked() {
+        // TODO
     }
 }
