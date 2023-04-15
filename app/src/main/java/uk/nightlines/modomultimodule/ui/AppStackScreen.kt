@@ -2,6 +2,7 @@ package uk.nightlines.modomultimodule.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
@@ -31,7 +32,8 @@ class AppStackScreen(
         val componentHolder = daggerViewModel(key = KEY_COMPONENT) {
             ComponentHolder(DaggerAppComponent.builder().build())
         }
-        val viewModel = daggerViewModel(key = KEY_VIEWMODEL) { componentHolder.component.viewModel() }
+        val viewModel =
+            daggerViewModel(key = KEY_VIEWMODEL) { componentHolder.component.viewModel() }
 
         LaunchedEffect(Unit) {
             viewModel.navigationCommands.collectLatest { command ->
@@ -43,9 +45,13 @@ class AppStackScreen(
         CompositionLocalProvider(
             LocalCoreProvider provides componentHolder.component as CoreProvider
         ) {
-            Column {
-                Text(text = "App Container : ${navigationModel.navigationState.stack.map { it.screenKey.value }}")
-                TopScreenContent()
+            LazyColumn {
+                item {
+                    Text(text = "App Container : ${navigationModel.navigationState.stack.map { it.screenKey.value }}")
+                }
+                item {
+                    TopScreenContent()
+                }
             }
         }
     }
