@@ -45,14 +45,14 @@ internal fun SetStackScreenContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(state.backgroundColor)
+            .background(state.backgroundColor),
     ) {
         Column(
             modifier = Modifier
                 .padding(8.dp)
                 .background(Color.Gray)
                 .padding(2.dp)
-                .background(Color.White)
+                .background(Color.White),
         ) {
             Text(text = state.emoji, style = MaterialTheme.typography.h4)
             Text(
@@ -60,7 +60,6 @@ internal fun SetStackScreenContent(
                         "CONTAINER HASCODE : $screenHashCode\n" +
                         "STACK : ${navigationStack.map { it.screenKey.value }}"
             )
-
             Button(onClick = { coroutineScope.launch { onShowOptionsButtonClicked() } }) {
                 Text(if (state.isOptionsVisible) "HIDE OPTIONS" else "SHOW OPTIONS")
             }

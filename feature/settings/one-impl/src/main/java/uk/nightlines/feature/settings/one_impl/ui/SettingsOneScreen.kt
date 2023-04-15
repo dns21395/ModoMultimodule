@@ -75,18 +75,20 @@ internal fun SettingsOneContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(state.value.color)
+            .background(state.value.color),
+        horizontalAlignment = Alignment.End
     ) {
+
         Text(
             text = state.value.emoji,
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h2
         )
         Text(
             "ONE (${screenKey.value})\n" +
                     "HASHCODE : $screenHashCode\n" +
                     "CONTAINER : ${screen.screenKey.value}\n",
-            style = MaterialTheme.typography.h6
         )
+
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
@@ -98,7 +100,7 @@ internal fun SettingsOneContent(
                     .weight(1f)
                     .padding(horizontal = 16.dp),
             ) {
-                Text("REPLACE [TWO]")
+                Text("REPLACE")
             }
             Button(
                 onClick = {
@@ -108,7 +110,7 @@ internal fun SettingsOneContent(
                     .weight(1f)
                     .padding(horizontal = 16.dp),
             ) {
-                Text("FORWARD [TWO]")
+                Text("FORWARD")
             }
         }
         Spacer(modifier = Modifier.height(16.dp))

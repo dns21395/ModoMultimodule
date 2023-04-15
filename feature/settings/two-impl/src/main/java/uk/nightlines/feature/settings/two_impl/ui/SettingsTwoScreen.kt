@@ -1,14 +1,15 @@
 package uk.nightlines.feature.settings.two_impl.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.LocalContainerScreen
 import com.github.terrakok.modo.Screen
@@ -48,11 +49,12 @@ fun SettingsTwoContent(
     val settingsDependencies = LocalDependenciesProvider.current
     val screen = LocalContainerScreen.current
 
-    val componentHolder = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
-        ComponentHolder(
-            DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
-        )
-    }
+    val componentHolder =
+        daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
+            ComponentHolder(
+                DaggerSettingsTwoComponent.factory().create(coreProvider, settingsDependencies)
+            )
+        }
 
     val viewModel = daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
         componentHolder.component.viewModel()
@@ -62,23 +64,45 @@ fun SettingsTwoContent(
 
     val state = viewModel.state.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier.fillMaxSize()
-        .background(state.value.backgroundColor)) {
-        Text("SCREEN TWO\n" +
-                "HASHCODE : $screenHashCode\n" +
-                "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
-                "SCREEN KEY : ${screenKey.value}",
-            style = MaterialTheme.typography.h6
-        )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(state.value.backgroundColor),
+        horizontalAlignment = Alignment.End
+    ) {
         Text(
             text = state.value.emoji,
-            style = MaterialTheme.typography.h1
+            style = MaterialTheme.typography.h2
+        )
+        Text(
+            "TWO (${screenKey.value})\n" +
+                    "HASHCODE : $screenHashCode\n" +
+                    "CONTAINER : ${screen.screenKey.value}\n",
         )
 
-        Button(onClick = {
-            coroutineScope.launch { viewModel.openSettingsOneScreenButtonClicked() }
-        }) {
-            Text("Open Settings One Screen")
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Button(
+                onClick = {
+                    coroutineScope.launch { viewModel.onReplaceClicked() }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("REPLACE")
+            }
+            Button(
+                onClick = {
+                    coroutineScope.launch { viewModel.onForwardClicked() }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("FORWARD")
+            }
         }
     }
 }
