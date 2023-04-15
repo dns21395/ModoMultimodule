@@ -11,9 +11,10 @@ import uk.nightlines.feature.weather.day_impl.ui.DayViewModel
     dependencies = [
         CoreProvider::class,
         WeatherDependencies::class
-    ]
+    ],
+    modules = [DayModule::class]
 )
-internal interface DayComponent : CoreProvider, WeatherDependencies {
+internal interface DayComponent {
 
     @Component.Factory
     interface Builder {

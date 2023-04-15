@@ -11,9 +11,10 @@ import uk.nightlines.feature.weather.week_impl.ui.WeekViewModel
     dependencies = [
         CoreProvider::class,
         WeatherDependencies::class
-    ]
+    ],
+    modules = [WeekModule::class]
 )
-internal interface WeekComponent : CoreProvider, WeatherDependencies {
+internal interface WeekComponent {
 
     @Component.Factory
     interface Builder {

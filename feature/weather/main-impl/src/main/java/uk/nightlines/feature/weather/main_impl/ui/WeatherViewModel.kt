@@ -3,15 +3,18 @@ package uk.nightlines.feature.weather.main_impl.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.terrakok.modo.Screen
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.common.RootScreensCounterInteractor
-import uk.nightlines.core.navigation.*
-import uk.nightlines.core.navigation.setstack.*
+import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.setstack.*
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
-import uk.nightlines.feature.weather.common.WeatherScreens
+import uk.nightlines.feature.weather.day_api.DayScreenApi
+import uk.nightlines.feature.weather.week_api.WeekScreenApi
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(
@@ -19,7 +22,8 @@ internal class WeatherViewModel @Inject constructor(
     @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
     private val weatherScreenCounterInteractor: RootScreensCounterInteractor,
-    private val weatherScreens: WeatherScreens,
+    private val weekScreenApi: WeekScreenApi,
+    private val dayScreenApi: DayScreenApi
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(WeatherViewState())
@@ -27,7 +31,7 @@ internal class WeatherViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            weatherNavigation.navigate(NavigationForward(weatherScreens.getWeekScreen()))
+            weatherNavigation.navigate(NavigationForward(weekScreenApi.getWeekScreen()))
         }
     }
 
@@ -47,10 +51,10 @@ internal class WeatherViewModel @Inject constructor(
         weatherNavigation.navigate(
             NavigationSetStack(
                 listOf(
-                    weatherScreens.getDayScreen(),
-                    weatherScreens.getWeekScreen(),
-                    weatherScreens.getDayScreen(),
-                    weatherScreens.getWeekScreen()
+                    dayScreenApi.getDayScreen(),
+                    weekScreenApi.getWeekScreen(),
+                    dayScreenApi.getDayScreen(),
+                    weekScreenApi.getWeekScreen()
                 )
             )
         )
@@ -84,18 +88,18 @@ internal class WeatherViewModel @Inject constructor(
     suspend fun onMultiForwardButtonClicked() {
         weatherNavigation.navigate(
             NavigationForward(
-                weatherScreens.getDayScreen(),
+                dayScreenApi.getDayScreen(),
                 listOf(
-                    weatherScreens.getWeekScreen(),
-                    weatherScreens.getDayScreen(),
-                    weatherScreens.getWeekScreen()
+                    weekScreenApi.getWeekScreen(),
+                    dayScreenApi.getDayScreen(),
+                    weekScreenApi.getWeekScreen()
                 )
             )
         )
     }
 
     suspend fun onNewRootButtonClicked() {
-        weatherNavigation.navigate(NavigationNewStack(weatherScreens.getWeekScreen()))
+        weatherNavigation.navigate(NavigationNewStack(weekScreenApi.getWeekScreen()))
     }
 
     suspend fun onContainerButtonClicked() {

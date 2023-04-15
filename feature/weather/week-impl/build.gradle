@@ -27,6 +27,7 @@ dependencies {
             project(':core:common'),
             project(':core:navigation'),
             project(':feature:weather:common'),
+            project(':feature:weather:day-api'),
             project(':feature:weather:week-api'),
 
             deps.compose.ui,
