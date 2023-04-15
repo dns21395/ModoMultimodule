@@ -4,10 +4,9 @@ import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.PerFeature
 import uk.nightlines.feature.settings.common.NavigationTypeSetStackProvider
-import uk.nightlines.feature.settings.common.SetStackDependencies
 import uk.nightlines.feature.settings.main_impl.SettingsViewModel
-import uk.nightlines.feature.settings.one_api.SettingsOneApiProvider
-import uk.nightlines.feature.settings.two_api.TwoApiProvider
+import uk.nightlines.feature.settings.one_api.OneScreenApiProvider
+import uk.nightlines.feature.settings.two_api.TwoScreenApiProvider
 
 @Component(
     dependencies = [CoreProvider::class],
@@ -15,8 +14,8 @@ import uk.nightlines.feature.settings.two_api.TwoApiProvider
 )
 @PerFeature
 internal interface SettingsComponent :
-    SettingsOneApiProvider,
-    TwoApiProvider,
+    OneScreenApiProvider,
+    TwoScreenApiProvider,
     NavigationTypeSetStackProvider {
 
     @Component.Factory

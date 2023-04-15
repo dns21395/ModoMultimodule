@@ -13,13 +13,13 @@ import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.setstack.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
-import uk.nightlines.feature.settings.one_api.SettingsOneApi
+import uk.nightlines.feature.settings.one_api.OneScreenApi
 import javax.inject.Inject
 
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val oneApi: SettingsOneApi,
+    private val oneApi: OneScreenApi,
     private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
     ) : ViewModel() {

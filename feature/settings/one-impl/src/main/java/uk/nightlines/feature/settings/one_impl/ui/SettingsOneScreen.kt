@@ -12,7 +12,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -73,41 +72,46 @@ internal fun SettingsOneContent(
 
     val state = viewModel.state.collectAsStateWithLifecycle()
 
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(state.value.color)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(state.value.color)
+    ) {
         Text(
             text = state.value.emoji,
             style = MaterialTheme.typography.h1
         )
         Text(
-            "SCREEN ONE\n" +
+            "ONE (${screenKey.value})\n" +
                     "HASHCODE : $screenHashCode\n" +
-                    "CONTAINER SCREEN KEY : ${screen.screenKey.value}\n" +
-                    "SCREEN KEY : ${screenKey.value}",
+                    "CONTAINER : ${screen.screenKey.value}\n",
             style = MaterialTheme.typography.h6
         )
-        Button(
-            onClick = {
-                coroutineScope.launch { viewModel.onOpenSettingsTwoScreenClicked() }
-            }
+        Row(
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Text("REPLACE")
-        }
-        Button(
-            onClick = {
-                coroutineScope.launch { viewModel.onForwardTwoButtonClicked() }
+            Button(
+                onClick = {
+                    coroutineScope.launch { viewModel.onOpenSettingsTwoScreenClicked() }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("REPLACE [TWO]")
             }
-        ) {
-            Text("FORWARD")
-        }
-        Button(
-            onClick = {
-                coroutineScope.launch { viewModel.onOpenWeatherScreenClicked() }
+            Button(
+                onClick = {
+                    coroutineScope.launch { viewModel.onForwardTwoButtonClicked() }
+                },
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text("FORWARD [TWO]")
             }
-        ) {
-            Text("Open Weather")
         }
+        Spacer(modifier = Modifier.height(16.dp))
         BasicTextField(
             value = state.value.editText,
             onValueChange = { text -> coroutineScope.launch { viewModel.onTextChangedAction(text) } },
@@ -116,7 +120,10 @@ internal fun SettingsOneContent(
                     modifier = Modifier
                         .padding(horizontal = 64.dp) // margin left and right
                         .fillMaxWidth()
-                        .background(color = Color(0xFFD2F3F2), shape = RoundedCornerShape(size = 16.dp))
+                        .background(
+                            color = Color(0xFFD2F3F2),
+                            shape = RoundedCornerShape(size = 16.dp)
+                        )
                         .border(
                             width = 2.dp,
                             color = Color(0xFFAAE9E6),
