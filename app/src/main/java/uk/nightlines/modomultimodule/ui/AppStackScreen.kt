@@ -11,7 +11,7 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.command.navigateNew
+import uk.nightlines.core.navigation.command.navigate
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 
 private const val KEY_COMPONENT = "KEY_APP_COMPONENT"
@@ -35,7 +35,7 @@ class AppStackScreen(
 
         LaunchedEffect(Unit) {
             viewModel.navigationCommands.collectLatest { command ->
-                navigateNew(command)
+                navigate(command)
             }
         }
 

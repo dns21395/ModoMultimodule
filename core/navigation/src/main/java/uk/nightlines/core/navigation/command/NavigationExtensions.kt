@@ -4,7 +4,7 @@ import com.github.terrakok.modo.NavigationContainer
 import com.github.terrakok.modo.stack.*
 import uk.nightlines.core.navigation.*
 
-fun NavigationContainer<StackState>.navigateNew(command: NavigationCommand) {
+fun NavigationContainer<StackState>.navigate(command: NavigationCommand) {
     val action = when (command) {
         is NavigationSetStack -> SetStack(StackState(stack = command.screens))
         is NavigationForward -> Forward(command.screen, *command.screens.toTypedArray())
