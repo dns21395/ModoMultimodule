@@ -1,7 +1,5 @@
 package uk.nightlines.modomultimodule.ui
 
-import android.util.Log
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
@@ -13,7 +11,7 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.navigate
+import uk.nightlines.core.navigation.command.navigateNew
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 
 private const val KEY_COMPONENT = "KEY_APP_COMPONENT"
@@ -37,8 +35,7 @@ class AppStackScreen(
 
         LaunchedEffect(Unit) {
             viewModel.navigationCommands.collectLatest { command ->
-                Log.d("GTA5", "ROOT NAVIGATE : ${command}")
-                navigate(command)
+                navigateNew(command)
             }
         }
 

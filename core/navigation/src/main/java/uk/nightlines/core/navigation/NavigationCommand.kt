@@ -1,4 +1,4 @@
-package uk.nightlines.core.navigation.setstack
+package uk.nightlines.core.navigation
 
 import com.github.terrakok.modo.Screen
 

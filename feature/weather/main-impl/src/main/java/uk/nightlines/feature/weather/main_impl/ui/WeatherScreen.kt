@@ -12,7 +12,7 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.navigateNew
+import uk.nightlines.core.navigation.command.navigateNew
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
 import uk.nightlines.feature.weather.common.ScreenCounter
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent

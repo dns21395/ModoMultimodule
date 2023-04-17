@@ -3,8 +3,8 @@ package uk.nightlines.feature.settings.two_impl.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.navigation.setstack.NavigationForward
-import uk.nightlines.core.navigation.setstack.NavigationReplace
+import uk.nightlines.core.navigation.NavigationForward
+import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
 import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
 import uk.nightlines.feature.settings.one_api.OneScreenApi
