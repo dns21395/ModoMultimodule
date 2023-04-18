@@ -19,19 +19,19 @@ import javax.inject.Inject
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
-    private val oneApi: OneScreenApi,
+    private val oneScreenApi: OneScreenApi,
     private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
     ) : ViewModel() {
 
-    val navigationCommands: Flow<List<Screen>> = settingsNavigation.screensStackFlow
+    val screensStack: Flow<List<Screen>> = settingsNavigation.screensStackFlow
 
     private val _state = MutableStateFlow(SettingsStateViewState())
     val state: StateFlow<SettingsStateViewState> = _state
 
     init {
         viewModelScope.launch {
-            settingsNavigation.navigate(NavigationForward(oneApi.getScreen()))
+            settingsNavigation.navigate(NavigationForward(oneScreenApi.getScreen()))
         }
     }
 

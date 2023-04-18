@@ -25,6 +25,8 @@ internal class WeatherViewModel @Inject constructor(
     private val dayScreenApi: DayScreenApi
 ) : ViewModel() {
 
+    val navigationCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
+
     private val _state = MutableStateFlow(WeatherViewState())
     val state: StateFlow<WeatherViewState> = _state
 
@@ -33,8 +35,6 @@ internal class WeatherViewModel @Inject constructor(
             weatherNavigation.navigate(NavigationForward(weekScreenApi.getWeekScreen()))
         }
     }
-
-    val channelCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
 
     suspend fun onShowOptionsButtonClicked() {
         _state.emit(state.value.copy(isOptionsVisible = !state.value.isOptionsVisible))

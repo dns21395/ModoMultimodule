@@ -34,37 +34,22 @@ internal class WeatherStack(
     override fun Content() {
         val coreProvider = LocalCoreProvider.current
 
-        Log.d(
-            "GTA6",
-            "-------------------------------\n[WEATHER] SCREEN KEY : ${stackNavModel.screenKey}\n" +
-                    "hashCode : ${this.hashCode()}"
-        )
-
         val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
-            Log.d("GTA5", "[WEATHER] component created")
             ComponentHolder(DaggerWeatherMainComponent.factory().create(coreProvider))
         }
 
         val viewModel: WeatherViewModel =
             daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
-                Log.d(
-                    "GTA5",
-                    "[WEATHER] dagger created. DEPS : ${componentHolder.component.hashCode()}"
-                )
-
                 componentHolder.component.viewModel()
             }
 
-        val state = viewModel.state.collectAsStateWithLifecycle()
-
         LaunchedEffect(Unit) {
-            Log.d("GTA5", "[WEATHER] ***LAUNCHED*** HASHCODE : ${this.hashCode()}")
-
-            viewModel.channelCommands.collectLatest {
-                Log.d("GTA5", "[WEATHER] ***LAUNCHED*** CHANNEL : ${it}")
+            viewModel.navigationCommands.collectLatest {
                 navigate(it)
             }
         }
+
+        val state = viewModel.state.collectAsStateWithLifecycle()
 
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component

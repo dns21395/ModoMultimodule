@@ -43,8 +43,7 @@ class SettingsStack(
         }
 
         LaunchedEffect(Unit) {
-            viewModel.navigationCommands.collectLatest { screensStack ->
-                Log.d("GTA5", "[SETTINGS] command : $screensStack")
+            viewModel.screensStack.collectLatest { screensStack ->
                 dispatch(SetStack(StackState(screensStack)))
             }
         }

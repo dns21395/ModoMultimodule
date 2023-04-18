@@ -16,8 +16,6 @@ class NavigationTypeSetStack {
     val screensStackFlow: Flow<List<Screen>> = _screensStackFlow.receiveAsFlow()
 
     suspend fun navigate(action: NavigationCommand) {
-        Log.d("GTA5", "receive : $action")
-
         val newState: List<Screen> = when (action) {
             is NavigationSetStack -> {
                 action.screens
