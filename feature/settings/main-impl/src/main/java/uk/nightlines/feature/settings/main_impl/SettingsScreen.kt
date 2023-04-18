@@ -15,6 +15,7 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.SlideTransition
 import uk.nightlines.core.navigation.setstack.BaseContainerScreen
 import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
@@ -78,7 +79,9 @@ class SettingsStack(
                     backButtonHandle = {
                         coroutineScope.launch { viewModel.onBackButtonClicked() }
                     }
-                )
+                ) {
+                    SlideTransition()
+                }
             }
         }
     }

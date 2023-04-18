@@ -22,6 +22,7 @@ dependencies {
 
     implementation(
             deps.compose.ui,
+            deps.compose.material,
             deps.compose.runtime,
             deps.compose.activity,
             deps.coroutines.coroutines,
