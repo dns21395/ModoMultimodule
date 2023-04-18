@@ -66,13 +66,13 @@ class SettingsStack(
                 onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
                 onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
                 onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
-                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked()} ,
-                onBackToSecondScreenButtonClicked = {  },
-                onBackToRootClicked = {},
-                onNewStackButtonClicked = {},
-                onMultiForwardButtonClicked = {},
-                onNewRootButtonClicked = {},
-                onContainerButtonClicked = {}
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked() },
+                onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked() },
+                onBackToRootClicked = { viewModel.onBackToRootClicked() },
+                onNewStackButtonClicked = { viewModel.onNewStackButtonClicked() },
+                onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
+                onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
+                onContainerButtonClicked = { viewModel.onContainerButtonClicked() }
             ) {
                 BaseTopScreenContent(
                     backButtonHandle = {

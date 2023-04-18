@@ -7,22 +7,24 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.common.RootScreensCounterInteractor
+import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
-import uk.nightlines.core.navigation.setstack.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
 import uk.nightlines.feature.settings.common.SetStackNavigationQualifier
 import uk.nightlines.feature.settings.one_api.OneScreenApi
+import uk.nightlines.feature.settings.two_api.TwoScreenApi
 import javax.inject.Inject
 
 internal class SettingsViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val oneScreenApi: OneScreenApi,
+    private val twoScreenApi: TwoScreenApi,
     private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
-    ) : ViewModel() {
+) : ViewModel() {
 
     val screensStack: Flow<List<Screen>> = settingsNavigation.screensStackFlow
 
@@ -65,6 +67,50 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     suspend fun onBackToSecondScreenClicked() {
-        // TODO
+        val isSizeMoreThanTwo = settingsNavigation.getState().size > 1
+
+        if (isSizeMoreThanTwo) {
+            settingsNavigation.navigate(NavigationBackTo(settingsNavigation.getState()[1]))
+        }
+    }
+
+    suspend fun onBackToRootClicked() {
+        settingsNavigation.navigate(NavigationBackToRoot)
+    }
+
+    suspend fun onNewStackButtonClicked() {
+        settingsNavigation.navigate(
+            NavigationNewStack(
+                oneScreenApi.getScreen(),
+                listOf(
+                    twoScreenApi.getScreen(),
+                    oneScreenApi.getScreen(),
+                    twoScreenApi.getScreen()
+                )
+            )
+        )
+    }
+
+    suspend fun onMultiForwardButtonClicked() {
+        settingsNavigation.navigate(
+            NavigationForward(
+                oneScreenApi.getScreen(),
+                listOf(
+                    twoScreenApi.getScreen(),
+                    oneScreenApi.getScreen(),
+                    twoScreenApi.getScreen()
+                )
+            )
+        )
+    }
+
+    suspend fun onNewRootButtonClicked() {
+        settingsNavigation.navigate(NavigationNewStack(oneScreenApi.getScreen()))
+    }
+
+    suspend fun onContainerButtonClicked() {
+        val setStackCounter = screenCounterInteractor.getSetStackScreenCount()
+
+        settingsNavigation.navigate(NavigationForward(rootScreens.setStackScreen(setStackCounter)))
     }
 }
