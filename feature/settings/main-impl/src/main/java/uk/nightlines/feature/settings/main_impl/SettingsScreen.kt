@@ -1,51 +1,88 @@
 package uk.nightlines.feature.settings.main_impl
 
-import androidx.compose.runtime.*
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.github.terrakok.modo.stack.SetStack
 import com.github.terrakok.modo.stack.StackNavModel
-import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
+import com.github.terrakok.modo.stack.StackState
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.feature.settings.main_api.LocalSettingsDependencies
-import uk.nightlines.feature.settings.main_api.OpenSettingsOneScreenCommand
-import uk.nightlines.feature.settings.main_api.OpenSettingsTwoScreenCommand
-import uk.nightlines.feature.settings.main_api.SettingsDependencies
+import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
+import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.SlideTransition
+import uk.nightlines.core.navigation.setstack.BaseContainerScreen
+import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
+
+private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 
 @Parcelize
 class SettingsStack(
+    private val count: Int,
     private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
+) : BaseContainerScreen(stackNavModel) {
 
-    constructor() : this(StackNavModel(emptyList()))
+    constructor(count: Int) : this(count, StackNavModel(emptyList()))
 
     @Composable
     override fun Content() {
-        val settingsDependencies = DaggerSettingsComponent.builder().build() as SettingsDependencies
+        val coreProvider = LocalCoreProvider.current
 
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenSettingsOneScreenCommand)
+        val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
+            ComponentHolder(DaggerSettingsComponent.factory().create(coreProvider))
         }
 
+        val viewModel = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
+            componentHolder.component.viewModel()
+        }
 
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
-                OpenSettingsOneScreenCommand -> replace(settingsDependencies.getOneApi().getScreen())
-                OpenSettingsTwoScreenCommand -> replace(settingsDependencies.getTwoApi().getSettingsTwoScreen())
+        LaunchedEffect(Unit) {
+            viewModel.screensStack.collectLatest { screensStack ->
+                dispatch(SetStack(StackState(screensStack)))
             }
         }
 
+        val coroutineScope = rememberCoroutineScope()
 
-        LaunchedEffect(currentCommand) {
-            settingsDependencies.getNavigation().commandsFlow.collect { command ->
-                currentCommand = command
-            }
-        }
+        val state = viewModel.state.collectAsStateWithLifecycle()
 
         CompositionLocalProvider(
-            LocalSettingsDependencies provides settingsDependencies
+            LocalDependenciesProvider provides componentHolder.component
         ) {
-            TopScreenContent()
+
+            SetStackScreenContent(
+                state = state.value,
+                counter = count.toString(),
+                screenKey = screenKey.value,
+                screenHashCode = hashCode().toString(),
+                navigationStack = navigationState.stack,
+                onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
+                onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
+                onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+                onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked() },
+                onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked() },
+                onBackToRootClicked = { viewModel.onBackToRootClicked() },
+                onNewStackButtonClicked = { viewModel.onNewStackButtonClicked() },
+                onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
+                onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
+                onContainerButtonClicked = { viewModel.onContainerButtonClicked() }
+            ) {
+                BaseTopScreenContent(
+                    backButtonHandle = {
+                        coroutineScope.launch { viewModel.onBackButtonClicked() }
+                    }
+                ) {
+                    SlideTransition()
+                }
+            }
         }
     }
 }

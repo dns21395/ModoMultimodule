@@ -3,16 +3,18 @@ package uk.nightlines.feature.weather.day_impl.di
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
-import uk.nightlines.feature.weather.main_api.WeatherDependencies
+import uk.nightlines.feature.weather.common.WeatherDependencies
+import uk.nightlines.feature.weather.day_impl.ui.DayViewModel
 
 @FeatureScope
 @Component(
     dependencies = [
         CoreProvider::class,
         WeatherDependencies::class
-    ]
+    ],
+    modules = [DayModule::class]
 )
-interface DayComponent : CoreProvider, WeatherDependencies {
+internal interface DayComponent {
 
     @Component.Factory
     interface Builder {
@@ -21,4 +23,6 @@ interface DayComponent : CoreProvider, WeatherDependencies {
             weatherDependencies: WeatherDependencies
         ): DayComponent
     }
+
+    fun viewModel(): DayViewModel
 }

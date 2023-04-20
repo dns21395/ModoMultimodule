@@ -17,7 +17,7 @@ versions.dagger = '2.44.2'
 
 versions.gson = '2.10'
 
-versions.lifecycle = '2.5.0'
+versions.lifecycle = '2.6.0'
 
 versions.modo = '0.7.1'
 
@@ -60,6 +60,7 @@ deps.gson = gson
 def lifecycle = [:]
 lifecycle.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.lifecycle"
 lifecycle.viewmodel_compose = "androidx.lifecycle:lifecycle-viewmodel-compose:$versions.lifecycle"
+lifecycle.runtime_compose = "androidx.lifecycle:lifecycle-runtime-compose:$versions.lifecycle"
 deps.lifecycle = lifecycle
 
 def modo = [:]

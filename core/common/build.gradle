@@ -1,0 +1,28 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+    namespace 'uk.nightlines.core.common'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            deps.lifecycle.viewmodel,
+            deps.lifecycle.viewmodel_compose,
+            deps.modo.modo,
+    )
+}

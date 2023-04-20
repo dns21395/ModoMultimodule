@@ -1,51 +1,78 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
-import androidx.compose.runtime.*
+import android.util.Log
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.LaunchedEffect
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.feature.weather.day_impl.DayScreen
-import uk.nightlines.feature.weather.main_api.LocalDependenciesProvider
-import uk.nightlines.feature.weather.main_api.OpenDayScreenCommand
-import uk.nightlines.feature.weather.main_api.OpenWeekScreenCommand
+import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
+import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.core.navigation.command.navigate
+import uk.nightlines.feature.weather.common.LocalDependenciesProvider
+import uk.nightlines.feature.weather.common.ScreenCounter
 import uk.nightlines.feature.weather.main_impl.di.DaggerWeatherMainComponent
-import uk.nightlines.feature.weather.week_impl.WeekScreen
+
+private const val KEY_COMPONENT = "KEY_WEATHER_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_WEATHER_VIEWMODEL"
 
 @Parcelize
 internal class WeatherStack(
     private val stackNavModel: StackNavModel,
-) : StackScreen(stackNavModel) {
+    private val counter: Int,
+) : StackScreen(stackNavModel), ScreenCounter {
 
-    constructor() :  this(StackNavModel(emptyList()))
+    constructor(counter: Int) : this(StackNavModel(emptyList()), counter)
 
+    override fun getCounter(): Int = counter
 
     @Composable
     override fun Content() {
-        val component = DaggerWeatherMainComponent.builder().build()
+        val coreProvider = LocalCoreProvider.current
 
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenWeekScreenCommand)
+        val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
+            ComponentHolder(DaggerWeatherMainComponent.factory().create(coreProvider))
         }
 
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
-                OpenDayScreenCommand -> replace(DayScreen())
-                OpenWeekScreenCommand -> replace(WeekScreen())
+        val viewModel: WeatherViewModel =
+            daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
+                componentHolder.component.viewModel()
+            }
+
+        LaunchedEffect(Unit) {
+            viewModel.navigationCommands.collectLatest {
+                navigate(it)
             }
         }
 
-        LaunchedEffect(currentCommand) {
-            component.getWeatherNavigation().commandsFlow.collect { command ->
-                currentCommand = command
-            }
-        }
+        val state = viewModel.state.collectAsStateWithLifecycle()
 
         CompositionLocalProvider(
-            LocalDependenciesProvider provides component
+            LocalDependenciesProvider provides componentHolder.component
         ) {
-            TopScreenContent()
+            WeatherScreenContent(
+                state = state.value,
+                counter = counter.toString(),
+                screenKey = screenKey.value,
+                screenHashCode = hashCode().toString(),
+                navigationStack = navigationState.stack,
+                onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
+                onForwardButtonClicked = { viewModel.onOpenNewWeatherScreenButtonClicked() },
+                onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+                onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked() },
+                onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked(it) },
+                onBackToRootClicked = { viewModel.onBackToRootButtonClicked() },
+                onNewStackButtonClicked = { viewModel.openNewStackButtonClicked() },
+                onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
+                onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
+                onContainerButtonClicked = { viewModel.onContainerButtonClicked() },
+                topScreenContent =  { TopScreenContent() }
+            )
         }
     }
 }

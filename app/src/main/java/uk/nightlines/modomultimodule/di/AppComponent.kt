@@ -2,6 +2,7 @@ package uk.nightlines.modomultimodule.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
+import uk.nightlines.modomultimodule.MainViewModel
 import javax.inject.Singleton
 
 @Component(
@@ -11,4 +12,6 @@ import javax.inject.Singleton
     ]
 )
 @Singleton
-interface AppComponent : CoreProvider
+internal interface AppComponent : CoreProvider {
+    fun viewModel(): MainViewModel
+}

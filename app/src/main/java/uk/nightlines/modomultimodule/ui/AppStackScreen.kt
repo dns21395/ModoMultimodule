@@ -1,15 +1,21 @@
 package uk.nightlines.modomultimodule.ui
 
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
-import com.github.terrakok.modo.stack.replace
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.di.ComponentHolder
+import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.NavigationCommand
-import uk.nightlines.core.navigation.OpenSettingsCommand
-import uk.nightlines.core.navigation.OpenWeatherCommand
+import uk.nightlines.core.navigation.command.navigate
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
+
+private const val KEY_COMPONENT = "KEY_APP_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_APP_VIEWMODEL"
 
 @Parcelize
 class AppStackScreen(
@@ -20,32 +26,30 @@ class AppStackScreen(
 
     @Composable
     override fun Content() {
-        val coreProvider = DaggerAppComponent.builder().build()
 
-        val rootScreens = coreProvider.rootScreens()
-
-        var currentCommand by remember {
-            mutableStateOf<NavigationCommand>(OpenSettingsCommand)
+        val componentHolder = daggerViewModel(key = KEY_COMPONENT) {
+            ComponentHolder(DaggerAppComponent.builder().build())
         }
+        val viewModel =
+            daggerViewModel(key = KEY_VIEWMODEL) { componentHolder.component.viewModel() }
 
-        LaunchedEffect(key1 = currentCommand) {
-            when (currentCommand) {
-                OpenWeatherCommand -> replace(rootScreens.weather())
-                OpenSettingsCommand -> replace(rootScreens.settings())
-            }
-        }
-
-
-        LaunchedEffect(key1 = currentCommand) {
-            coreProvider.getCoreNavigation().commandsFlow.collect { command ->
-                currentCommand = command
+        LaunchedEffect(Unit) {
+            viewModel.navigationCommands.collectLatest { command ->
+                navigate(command)
             }
         }
 
         CompositionLocalProvider(
-            LocalCoreProvider provides coreProvider
+            LocalCoreProvider provides componentHolder.component as CoreProvider
         ) {
-            TopScreenContent()
+            LazyColumn {
+                item {
+                    Text(text = "App Container : ${navigationModel.navigationState.stack.map { it.screenKey.value }}")
+                }
+                item {
+                    TopScreenContent()
+                }
+            }
         }
     }
 }

@@ -23,6 +23,8 @@ android {
 dependencies {
 
     implementation(
+            project(':feature:settings:common'),
+
             deps.compose.ui,
             deps.compose.material,
             deps.compose.material3,

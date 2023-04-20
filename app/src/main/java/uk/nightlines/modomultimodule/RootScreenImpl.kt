@@ -1,7 +1,7 @@
 package uk.nightlines.modomultimodule
 
 import com.github.terrakok.modo.Screen
-import uk.nightlines.core.navigation.RootScreens
+import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.feature.settings.main_api.SettingsApi
 import uk.nightlines.feature.weather.main_api.WeatherApi
 import javax.inject.Inject
@@ -9,9 +9,9 @@ import javax.inject.Inject
 class RootScreenImpl @Inject constructor(
     private val settingsApi: SettingsApi,
     private val weatherApi: WeatherApi
-) : RootScreens {
+) : RootScreensInteractor {
 
-    override fun settings(): Screen = settingsApi.getSettingsScreen()
+    override fun setStackScreen(count: Int): Screen = settingsApi.getSetStackScreen(count)
 
-    override fun weather(): Screen = weatherApi.getWeatherScreen()
+    override fun commandScreen(counter: Int): Screen = weatherApi.getWeatherScreen(counter)
 }

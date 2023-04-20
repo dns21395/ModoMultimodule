@@ -7,18 +7,26 @@ apply from: "$rootDir/common.gradle"
 
 android {
     namespace 'uk.nightlines.core.navigation'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
 }
 
 dependencies {
 
     implementation(
-            deps.compose.navigation,
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.runtime,
+            deps.compose.activity,
             deps.coroutines.coroutines,
             deps.dagger.dagger,
             deps.modo.modo,
-    )
-
-    kapt(
-            deps.dagger.compiler
     )
 }

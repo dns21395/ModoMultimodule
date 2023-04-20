@@ -2,24 +2,28 @@ package uk.nightlines.modomultimodule.di
 
 import dagger.Module
 import dagger.Provides
-import uk.nightlines.core.navigation.Navigation
+import uk.nightlines.core.common.RootScreensCounterInteractor
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.RootScreens
-import uk.nightlines.feature.weather.main_api.WeatherApi
-import uk.nightlines.feature.weather.main_impl.WeatherImpl
+import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.modomultimodule.RootScreenImpl
-import javax.inject.Named
+import uk.nightlines.modomultimodule.domain.interactor.RootScreensCounterInteractorImpl
 import javax.inject.Singleton
 
 @Module
-class AppModuule {
+internal class AppModuule {
 
     @Provides
     @Singleton
     @RootNavigationQualifier
-    fun provideNavigation(): Navigation = Navigation()
+    fun provideNavigationTypeCommand(): NavigationTypeCommand = NavigationTypeCommand()
 
     @Provides
     @Singleton
-    fun provideRootScreens(rootScreenImpl: RootScreenImpl): RootScreens = rootScreenImpl
+    fun provideRootScreensInteractor(rootScreenImpl: RootScreenImpl): RootScreensInteractor = rootScreenImpl
+
+    @Provides
+    @Singleton
+    fun provideRootScreensCounterInteractor(): RootScreensCounterInteractor =
+        RootScreensCounterInteractorImpl()
 }

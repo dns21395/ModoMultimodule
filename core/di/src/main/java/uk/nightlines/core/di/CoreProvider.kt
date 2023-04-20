@@ -1,14 +1,16 @@
 package uk.nightlines.core.di
 
-import uk.nightlines.core.navigation.Navigation
-import uk.nightlines.core.navigation.RootNavigationProvider
+import uk.nightlines.core.common.RootScreensCounterInteractor
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.RootScreens
+import uk.nightlines.core.common.RootScreensInteractor
 
 interface CoreProvider {
 
     @RootNavigationQualifier
-    fun getCoreNavigation(): Navigation
+    fun getRootNavigation(): NavigationTypeCommand
 
-    fun rootScreens(): RootScreens
+    fun rootScreens(): RootScreensInteractor
+
+    fun rootScreensCounterInteractor(): RootScreensCounterInteractor
 }
