@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.main_impl
+package uk.nightlines.feature.settings.main_impl.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import uk.nightlines.core.common.ContainerState
 import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
@@ -28,8 +29,8 @@ internal class SettingsViewModel @Inject constructor(
 
     val screensStack: Flow<List<Screen>> = settingsNavigation.screensStackFlow
 
-    private val _state = MutableStateFlow(SettingsStateViewState())
-    val state: StateFlow<SettingsStateViewState> = _state
+    private val _state = MutableStateFlow(ContainerState())
+    val state: StateFlow<ContainerState> = _state
 
     init {
         viewModelScope.launch {

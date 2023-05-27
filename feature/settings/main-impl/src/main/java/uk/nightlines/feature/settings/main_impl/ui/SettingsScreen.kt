@@ -1,6 +1,5 @@
-package uk.nightlines.feature.settings.main_impl
+package uk.nightlines.feature.settings.main_impl.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -12,6 +11,7 @@ import com.github.terrakok.modo.stack.StackState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.ContainerScreenContent
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
@@ -57,7 +57,8 @@ class SettingsStack(
             LocalDependenciesProvider provides componentHolder.component
         ) {
 
-            SetStackScreenContent(
+            ContainerScreenContent(
+                title = "SETTINGS",
                 state = state.value,
                 counter = count.toString(),
                 screenKey = screenKey.value,
