@@ -1,4 +1,4 @@
-package uk.nightlines.core.common
+package uk.nightlines.core.common.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.launch
+import uk.nightlines.core.common.state.ContainerState
 
 @Composable
 fun ContainerScreenContent(

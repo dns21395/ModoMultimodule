@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.ContainerState
+import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*

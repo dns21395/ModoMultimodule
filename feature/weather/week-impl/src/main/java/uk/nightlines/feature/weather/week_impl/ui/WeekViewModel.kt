@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.state.SimpleState
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.NavigationForward
@@ -24,8 +25,8 @@ internal class WeekViewModel @Inject constructor(
     private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(WeekState())
-    val state: StateFlow<WeekState> = mutableState
+    private val mutableState = MutableStateFlow(SimpleState())
+    val state: StateFlow<SimpleState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
         Log.d("GTA5", "[WEEK] ViewModel. DEPS : ${weatherDependencies.hashCode()}")

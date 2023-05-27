@@ -11,7 +11,7 @@ import com.github.terrakok.modo.stack.StackState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.common.ContainerScreenContent
+import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider

@@ -8,7 +8,7 @@ import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.common.ContainerScreenContent
+import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
