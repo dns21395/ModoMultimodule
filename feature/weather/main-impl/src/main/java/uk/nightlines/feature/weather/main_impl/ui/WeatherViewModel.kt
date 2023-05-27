@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import uk.nightlines.core.common.ContainerState
 import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
@@ -27,8 +28,8 @@ internal class WeatherViewModel @Inject constructor(
 
     val navigationCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
 
-    private val _state = MutableStateFlow(WeatherViewState())
-    val state: StateFlow<WeatherViewState> = _state
+    private val _state = MutableStateFlow(ContainerState())
+    val state: StateFlow<ContainerState> = _state
 
     init {
         viewModelScope.launch {

@@ -1,6 +1,5 @@
 package uk.nightlines.feature.weather.main_impl.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -9,6 +8,7 @@ import com.github.terrakok.modo.stack.StackNavModel
 import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
+import uk.nightlines.core.common.ContainerScreenContent
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
@@ -54,7 +54,8 @@ internal class WeatherStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-            WeatherScreenContent(
+            ContainerScreenContent(
+                title = "WEATHER",
                 state = state.value,
                 counter = counter.toString(),
                 screenKey = screenKey.value,
@@ -71,7 +72,7 @@ internal class WeatherStack(
                 onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
                 onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
                 onContainerButtonClicked = { viewModel.onContainerButtonClicked() },
-                topScreenContent =  { TopScreenContent() }
+                topScreenContent = { TopScreenContent() }
             )
         }
     }

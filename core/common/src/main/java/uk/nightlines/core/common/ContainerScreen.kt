@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.main_impl.ui
+package uk.nightlines.core.common
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -21,8 +21,9 @@ import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.launch
 
 @Composable
-internal fun WeatherScreenContent(
-    state: WeatherViewState,
+fun ContainerScreenContent(
+    title: String,
+    state: ContainerState,
     counter: String,
     screenKey: String,
     screenHashCode: String,
@@ -40,6 +41,7 @@ internal fun WeatherScreenContent(
     onContainerButtonClicked: suspend () -> Unit,
     topScreenContent: @Composable () -> Unit
 ) {
+
     val coroutineScope = rememberCoroutineScope()
 
     Column(
@@ -56,7 +58,7 @@ internal fun WeatherScreenContent(
         ) {
             Text(text = state.emoji, style = MaterialTheme.typography.h4)
             Text(
-                text = "WEATHER #$counter ($screenKey)\n " +
+                text = "$title #$counter ($screenKey)\n " +
                         "CONTAINER HASCODE : $screenHashCode\n" +
                         "STACK : ${navigationStack.map { it.screenKey.value }}"
             )
@@ -209,4 +211,5 @@ internal fun WeatherScreenContent(
             topScreenContent()
         }
     }
+
 }
