@@ -3,10 +3,11 @@ package uk.nightlines.feature.weather.day_impl.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.common.state.SimpleEditTextState
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.RootNavigationQualifier
+import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
 import uk.nightlines.feature.weather.week_api.WeekScreenApi
 import javax.inject.Inject
@@ -17,8 +18,8 @@ internal class DayViewModel @Inject constructor(
     private val weekScreenApi: WeekScreenApi
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(DayViewState())
-    val state: StateFlow<DayViewState> = mutableState
+    private val mutableState = MutableStateFlow(SimpleEditTextState())
+    val state: StateFlow<SimpleEditTextState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
         navigation.navigate(NavigationReplace(weekScreenApi.getWeekScreen()))

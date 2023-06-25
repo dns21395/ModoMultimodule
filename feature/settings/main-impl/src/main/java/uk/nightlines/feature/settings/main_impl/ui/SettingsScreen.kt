@@ -56,7 +56,6 @@ class SettingsStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-
             ContainerScreenContent(
                 title = "SETTINGS",
                 state = state.value,
