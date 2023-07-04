@@ -11,8 +11,8 @@ import com.github.terrakok.modo.stack.StackState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
-import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.SlideTransition
@@ -25,11 +25,10 @@ private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 
 @Parcelize
 class SettingsStack(
-    private val count: Int,
     private val stackNavModel: StackNavModel,
 ) : BaseContainerScreen(stackNavModel) {
 
-    constructor(count: Int) : this(count, StackNavModel(emptyList()))
+    constructor() : this(StackNavModel(emptyList()))
 
     @Composable
     override fun Content() {
@@ -59,7 +58,6 @@ class SettingsStack(
             ContainerScreenContent(
                 title = "SETTINGS",
                 state = state.value,
-                counter = count.toString(),
                 screenKey = screenKey.value,
                 screenHashCode = hashCode().toString(),
                 navigationStack = navigationState.stack,

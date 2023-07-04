@@ -3,7 +3,6 @@ package uk.nightlines.feature.weather.week_impl.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.common.state.SimpleState
 import uk.nightlines.core.navigation.NavigationForward
@@ -19,7 +18,6 @@ internal class WeekViewModel @Inject constructor(
     @WeatherNavigationQualifier private val locatlNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
     private val dayApi: DayScreenApi,
-    private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(SimpleState())
@@ -34,7 +32,6 @@ internal class WeekViewModel @Inject constructor(
     }
 
     suspend fun onOpenSettingScreenButtonClicked() {
-        val settingsCount = weatherScreenCounterInteractor.getSetStackScreenCount()
-        rootNavigation.navigate(NavigationForward(rootScreens.setStackScreen(settingsCount)))
+        rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
     }
 }

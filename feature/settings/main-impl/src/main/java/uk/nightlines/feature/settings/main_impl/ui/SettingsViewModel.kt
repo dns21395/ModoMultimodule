@@ -7,9 +7,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.state.ContainerState
-import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.core.navigation.setstack.NavigationTypeSetStack
@@ -23,7 +22,6 @@ internal class SettingsViewModel @Inject constructor(
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val oneScreenApi: OneScreenApi,
     private val twoScreenApi: TwoScreenApi,
-    private val screenCounterInteractor: RootScreensCounterInteractor,
     private val rootScreens: RootScreensInteractor,
 ) : ViewModel() {
 
@@ -47,13 +45,11 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     suspend fun onForwardButtonClicked() {
-        val counter = screenCounterInteractor.getCommandScreenCount()
-        rootNavigation.navigate(NavigationForward(rootScreens.setStackScreen(counter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
     }
 
     suspend fun onReplaceButtonClicked() {
-        val counter = screenCounterInteractor.getCommandScreenCount()
-        rootNavigation.navigate(NavigationReplace(rootScreens.setStackScreen(counter)))
+        rootNavigation.navigate(NavigationReplace(rootScreens.settingsScreen()))
     }
 
     suspend fun onRemoveEditTextPositionChanged(text: String) {
@@ -110,8 +106,6 @@ internal class SettingsViewModel @Inject constructor(
     }
 
     suspend fun onContainerButtonClicked() {
-        val setStackCounter = screenCounterInteractor.getSetStackScreenCount()
-
-        settingsNavigation.navigate(NavigationForward(rootScreens.setStackScreen(setStackCounter)))
+        settingsNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
     }
 }

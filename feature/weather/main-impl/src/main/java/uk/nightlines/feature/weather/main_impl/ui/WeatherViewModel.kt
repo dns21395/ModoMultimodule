@@ -8,7 +8,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uk.nightlines.core.common.state.ContainerState
-import uk.nightlines.core.common.RootScreensCounterInteractor
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
@@ -21,7 +20,6 @@ internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
-    private val weatherScreenCounterInteractor: RootScreensCounterInteractor,
     private val weekScreenApi: WeekScreenApi,
     private val dayScreenApi: DayScreenApi
 ) : ViewModel() {
@@ -42,9 +40,7 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onOpenNewWeatherScreenButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        rootNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 
     suspend fun openNewStackButtonClicked() {
@@ -80,9 +76,7 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onReplaceButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        rootNavigation.navigate(NavigationReplace(rootScreens.commandScreen(weatherCounter)))
+        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
     }
 
     suspend fun onMultiForwardButtonClicked() {
@@ -103,9 +97,6 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onContainerButtonClicked() {
-        // TODO
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        weatherNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
+        weatherNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 }

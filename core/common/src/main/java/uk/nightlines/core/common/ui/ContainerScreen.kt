@@ -25,7 +25,6 @@ import uk.nightlines.core.common.state.ContainerState
 fun ContainerScreenContent(
     title: String,
     state: ContainerState,
-    counter: String,
     screenKey: String,
     screenHashCode: String,
     navigationStack: List<Screen>,
@@ -59,7 +58,7 @@ fun ContainerScreenContent(
         ) {
             Text(text = state.emoji, style = MaterialTheme.typography.h4)
             Text(
-                text = "$title #$counter ($screenKey)\n " +
+                text = "$title ($screenKey)\n " +
                         "CONTAINER HASCODE : $screenHashCode\n" +
                         "STACK : ${navigationStack.map { it.screenKey.value }}"
             )
