@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.RootScreensInteractor
+import uk.nightlines.core.common.state.SimpleEditTextState
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
@@ -20,14 +21,14 @@ internal class SettingsOneViewModel @Inject constructor(
     private val rootScreens: RootScreensInteractor,
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(SettingsOneViewState())
-    val state: StateFlow<SettingsOneViewState> = mutableState
+    private val mutableState = MutableStateFlow(SimpleEditTextState())
+    val state: StateFlow<SimpleEditTextState> = mutableState
 
-    suspend fun onOpenSettingsTwoScreenClicked() {
+    suspend fun onReplaceButtonClicked() {
         settingsNavigation.navigate(NavigationReplace(twoApi.getScreen()))
     }
 
-    suspend fun onForwardTwoButtonClicked() {
+    suspend fun onForwardButtonClicked() {
         settingsNavigation.navigate(NavigationForward(twoApi.getScreen()))
     }
 
