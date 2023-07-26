@@ -37,15 +37,15 @@ fun WeekContent(
     screenKey: ScreenKey,
 ) {
     val coreProvider = LocalCoreProvider.current
-    val screen = LocalContainerScreen.current
+    val containerScreen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
 
-    val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
+    val component = daggerViewModel(key = "${containerScreen.screenKey}$KEY_COMPONENT$screenHashCode") {
         ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
     }
 
     val viewModel: WeekViewModel =
-        daggerViewModel(key = "${screen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
+        daggerViewModel(key = "${containerScreen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
             component.component.viewModel()
         }
 
@@ -55,7 +55,7 @@ fun WeekContent(
         screenName = "WEEK",
         screenHashCode = screenHashCode,
         dependenciesProviderHashCode = weatherDependencies.hashCode(),
-        containerKeyScreen = screen.screenKey.value,
+        containerKeyScreen = containerScreen.screenKey.value,
         keyScreen = screenKey.value,
         state = state.value,
         onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
