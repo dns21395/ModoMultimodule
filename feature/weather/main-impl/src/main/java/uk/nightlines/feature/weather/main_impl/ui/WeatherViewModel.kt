@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.RootScreensCounterInteractor
+import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
@@ -20,15 +20,14 @@ internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
-    private val weatherScreenCounterInteractor: RootScreensCounterInteractor,
     private val weekScreenApi: WeekScreenApi,
     private val dayScreenApi: DayScreenApi
 ) : ViewModel() {
 
     val navigationCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
 
-    private val _state = MutableStateFlow(WeatherViewState())
-    val state: StateFlow<WeatherViewState> = _state
+    private val _state = MutableStateFlow(ContainerState())
+    val state: StateFlow<ContainerState> = _state
 
     init {
         viewModelScope.launch {
@@ -41,9 +40,7 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onOpenNewWeatherScreenButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        rootNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 
     suspend fun openNewStackButtonClicked() {
@@ -59,15 +56,8 @@ internal class WeatherViewModel @Inject constructor(
         )
     }
 
-    suspend fun onRemoveEditTextPositionChanged(text: String) {
-        _state.emit(_state.value.copy(positionEditText = text))
-    }
-
-    suspend fun onRemoveScreensButtonClicked() {
-        val list = state.value.positionEditText.split(',').map { it.toInt() }
-        weatherNavigation.navigate(NavigationRemoveScreen(list))
-
-        _state.emit(_state.value.copy(positionEditText = ""))
+    suspend fun onRemoveFirstAndThirdScreensButtonClicked() {
+        weatherNavigation.navigate(NavigationRemoveScreen(listOf(0, 2)))
     }
 
     suspend fun onBackToRootButtonClicked() {
@@ -79,9 +69,7 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onReplaceButtonClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        rootNavigation.navigate(NavigationReplace(rootScreens.commandScreen(weatherCounter)))
+        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
     }
 
     suspend fun onMultiForwardButtonClicked() {
@@ -102,9 +90,6 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onContainerButtonClicked() {
-        // TODO
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        weatherNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
+        weatherNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 }

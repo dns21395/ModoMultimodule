@@ -4,5 +4,5 @@ import com.github.terrakok.modo.Screen
 
 interface WeatherApi {
 
-    fun getWeatherScreen(counter: Int): Screen
+    fun weatherScreen(): Screen
 }

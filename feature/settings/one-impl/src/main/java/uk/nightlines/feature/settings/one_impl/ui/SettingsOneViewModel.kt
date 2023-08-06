@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.RootScreensInteractor
-import uk.nightlines.core.common.RootScreensCounterInteractor
+import uk.nightlines.core.common.state.SimpleEditTextState
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
@@ -19,24 +19,21 @@ internal class SettingsOneViewModel @Inject constructor(
     @SetStackNavigationQualifier private val settingsNavigation: NavigationTypeSetStack,
     private val twoApi: TwoScreenApi,
     private val rootScreens: RootScreensInteractor,
-    private val weatherScreenCounterInteractor: RootScreensCounterInteractor
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(SettingsOneViewState())
-    val state: StateFlow<SettingsOneViewState> = mutableState
+    private val mutableState = MutableStateFlow(SimpleEditTextState())
+    val state: StateFlow<SimpleEditTextState> = mutableState
 
-    suspend fun onOpenSettingsTwoScreenClicked() {
+    suspend fun onReplaceButtonClicked() {
         settingsNavigation.navigate(NavigationReplace(twoApi.getScreen()))
     }
 
-    suspend fun onForwardTwoButtonClicked() {
+    suspend fun onForwardButtonClicked() {
         settingsNavigation.navigate(NavigationForward(twoApi.getScreen()))
     }
 
     suspend fun onOpenWeatherScreenClicked() {
-        val weatherCounter = weatherScreenCounterInteractor.getCommandScreenCount()
-
-        rootNavigation.navigate(NavigationForward(rootScreens.commandScreen(weatherCounter)))
+        rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 
     suspend fun onTextChangedAction(text: String) {

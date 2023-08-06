@@ -1,6 +1,5 @@
-package uk.nightlines.feature.settings.main_impl
+package uk.nightlines.feature.settings.main_impl.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -13,6 +12,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
+import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.SlideTransition
@@ -25,11 +25,10 @@ private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 
 @Parcelize
 class SettingsStack(
-    private val count: Int,
     private val stackNavModel: StackNavModel,
 ) : BaseContainerScreen(stackNavModel) {
 
-    constructor(count: Int) : this(count, StackNavModel(emptyList()))
+    constructor() : this(StackNavModel(emptyList()))
 
     @Composable
     override fun Content() {
@@ -56,18 +55,16 @@ class SettingsStack(
         CompositionLocalProvider(
             LocalDependenciesProvider provides componentHolder.component
         ) {
-
-            SetStackScreenContent(
+            ContainerScreenContent(
+                title = "SETTINGS",
                 state = state.value,
-                counter = count.toString(),
                 screenKey = screenKey.value,
                 screenHashCode = hashCode().toString(),
                 navigationStack = navigationState.stack,
                 onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
                 onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
                 onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
-                onRemoveByPositionsEditTextChanged = { viewModel.onRemoveEditTextPositionChanged(it) },
-                onRemoveByPositionsButtonClicked = { viewModel.onRemoveScreensButtonClicked() },
+                onRemoveByPositionsButtonClicked = { viewModel.onRemoveFirstAndThirdScreensButtonClicked() },
                 onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked() },
                 onBackToRootClicked = { viewModel.onBackToRootClicked() },
                 onNewStackButtonClicked = { viewModel.onNewStackButtonClicked() },

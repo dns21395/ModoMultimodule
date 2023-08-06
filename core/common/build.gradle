@@ -21,6 +21,10 @@ android {
 dependencies {
 
     implementation(
+            deps.compose.activity,
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.ui_tooling_preview,
             deps.lifecycle.viewmodel,
             deps.lifecycle.viewmodel_compose,
             deps.modo.modo,

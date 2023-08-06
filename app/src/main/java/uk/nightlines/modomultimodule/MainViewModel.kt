@@ -18,10 +18,9 @@ internal class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            navigation.navigate(NavigationReplace(rootScreensInteractor.commandScreen(0)))
+            navigation.navigate(NavigationReplace(rootScreensInteractor.weatherScreen()))
         }
     }
 
     val navigationCommands: Flow<NavigationCommand> = navigation.commandsFlow
-
 }
