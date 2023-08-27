@@ -59,7 +59,7 @@ class SettingsStack(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "SETTINGS SCREEN ${state.value.emoji}",
+                    "SETTINGS SCREEN (${screenKey.value}) ${state.value.emoji}",
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
                     style = MaterialTheme.typography.h6
