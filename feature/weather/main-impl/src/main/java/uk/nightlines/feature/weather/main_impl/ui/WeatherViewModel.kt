@@ -39,8 +39,20 @@ internal class WeatherViewModel @Inject constructor(
         _state.emit(state.value.copy(isOptionsVisible = !state.value.isOptionsVisible))
     }
 
-    suspend fun onOpenNewWeatherScreenButtonClicked() {
+    suspend fun onForwardWeatherButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
+    }
+
+    suspend fun onReplaceWeatherButtonClicked() {
+        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
+    }
+
+    suspend fun onForwardSettingsButtonClicked() {
+        rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
+    }
+
+    suspend fun onReplaceSettingsButtonClicked() {
+        rootNavigation.navigate(NavigationReplace(rootScreens.settingsScreen()))
     }
 
     suspend fun openNewStackButtonClicked() {
@@ -66,10 +78,6 @@ internal class WeatherViewModel @Inject constructor(
 
     suspend fun onBackToSecondScreenClicked(screen: Screen) {
         weatherNavigation.navigate(NavigationBackTo(screen))
-    }
-
-    suspend fun onReplaceButtonClicked() {
-        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
     }
 
     suspend fun onMultiForwardButtonClicked() {

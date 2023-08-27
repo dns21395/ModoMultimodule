@@ -9,7 +9,6 @@ import com.github.terrakok.modo.stack.StackScreen
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
-import uk.nightlines.core.common.ui.ContainerScreenContent
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.command.navigate
@@ -58,8 +57,10 @@ internal class WeatherStack(
                 screenHashCode = hashCode().toString(),
                 navigationStack = navigationState.stack,
                 onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
-                onForwardButtonClicked = { viewModel.onOpenNewWeatherScreenButtonClicked() },
-                onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
+                onForwardWeatherButtonClicked = { viewModel.onForwardWeatherButtonClicked() },
+                onReplaceWeatherButtonClicked = { viewModel.onReplaceWeatherButtonClicked() },
+                onForwardSettingsButtonClicked = { viewModel.onForwardSettingsButtonClicked() },
+                onReplaceSettingsButtonClicked = { viewModel.onReplaceSettingsButtonClicked() },
                 onRemoveByPositionsButtonClicked = { viewModel.onRemoveFirstAndThirdScreensButtonClicked() },
                 onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked(it) },
                 onBackToRootClicked = { viewModel.onBackToRootButtonClicked() },

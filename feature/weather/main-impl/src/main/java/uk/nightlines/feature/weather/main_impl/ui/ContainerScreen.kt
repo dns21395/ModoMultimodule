@@ -1,4 +1,4 @@
-package uk.nightlines.core.common.ui
+package uk.nightlines.feature.weather.main_impl.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,8 +23,10 @@ fun ContainerScreenContent(
     screenHashCode: String,
     navigationStack: List<Screen>,
     onShowOptionsButtonClicked: suspend () -> Unit,
-    onForwardButtonClicked: suspend () -> Unit,
-    onReplaceButtonClicked: suspend () -> Unit,
+    onForwardWeatherButtonClicked: suspend () -> Unit,
+    onReplaceWeatherButtonClicked: suspend () -> Unit,
+    onForwardSettingsButtonClicked: suspend () -> Unit,
+    onReplaceSettingsButtonClicked: suspend () -> Unit,
     onRemoveByPositionsButtonClicked: suspend () -> Unit,
     onBackToSecondScreenButtonClicked: suspend (Screen) -> Unit,
     onBackToRootClicked: suspend () -> Unit,
@@ -78,6 +80,7 @@ fun ContainerScreenContent(
                         style = MaterialTheme.typography.h6
                     )
                 }
+                Spacer(modifier = Modifier.height(8.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -87,20 +90,46 @@ fun ContainerScreenContent(
                             .weight(1f)
                             .padding(horizontal = 16.dp),
                         onClick = {
-                            coroutineScope.launch { onForwardButtonClicked() }
+                            coroutineScope.launch { onForwardWeatherButtonClicked() }
                         }) {
-                        Text(text = "FORWARD")
+                        Text(text = "FORWARD [WEATHER]")
                     }
                     Button(
                         modifier = Modifier
                             .weight(1f)
                             .padding(horizontal = 16.dp),
                         onClick = {
-                            coroutineScope.launch { onReplaceButtonClicked() }
+                            coroutineScope.launch { onReplaceWeatherButtonClicked() }
                         }) {
-                        Text(text = "REPLACE")
+                        Text(text = "REPLACE [WEATHER]")
                     }
                 }
+                Spacer(modifier = Modifier.height(8.dp))
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { onForwardSettingsButtonClicked() }
+                        }) {
+                        Text(text = "FORWARD [SETTINGS]")
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(horizontal = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { onReplaceSettingsButtonClicked() }
+                        }) {
+                        Text(text = "REPLACE [SETTINGS]")
+                    }
+                }
+                Spacer(modifier = Modifier.height(8.dp))
+
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
