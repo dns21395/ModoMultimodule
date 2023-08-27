@@ -54,11 +54,12 @@ class SettingsStack(
         ) {
             Column(
                 modifier = Modifier
-                    .background(state.value.backgroundColor),
+                    .background(state.value.backgroundColor)
+                    .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "Settings screen",
+                    "SETTINGS SCREEN ${state.value.emoji}",
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),
                     style = MaterialTheme.typography.h6
@@ -67,14 +68,50 @@ class SettingsStack(
                     horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
                         .fillMaxWidth()
+                        .padding(top = 16.dp)
                 ) {
                     Button(
                         modifier = Modifier
-                            .padding(horizontal = 16.dp),
+                            .weight(1f)
+                            .padding(start = 16.dp, end = 8.dp),
                         onClick = {
-                            coroutineScope.launch { viewModel.onForwardButtonClicked() }
+                            coroutineScope.launch { viewModel.onForwardSettingsButtonClicked() }
                         }) {
-                        Text(text = "FORWARD WEATHER SCREEN")
+                        Text(text = "FORWARD [SETTINGS]")
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 8.dp, end = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onReplaceSettingsButtonClicked() }
+                        }) {
+                        Text(text = "REPLACE [SETTINGS]")
+                    }
+                }
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 16.dp)
+                ) {
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 16.dp, end = 8.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onForwardWeatherButtonClicked() }
+                        }) {
+                        Text(text = "FORWARD [WEATHER]")
+                    }
+                    Button(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = 8.dp, end = 16.dp),
+                        onClick = {
+                            coroutineScope.launch { viewModel.onReplaceWeatherButtonClicked() }
+                        }) {
+                        Text(text = "REPLACE [WEATHER]")
                     }
                 }
             }
