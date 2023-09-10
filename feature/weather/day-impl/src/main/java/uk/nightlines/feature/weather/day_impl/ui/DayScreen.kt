@@ -8,7 +8,6 @@ import com.github.terrakok.modo.ScreenKey
 import com.github.terrakok.modo.generateScreenKey
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
-import uk.nightlines.core.common.ui.SimpleEditTextScreen
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
@@ -50,9 +49,8 @@ fun DayContent(
     val state = viewModel.state.collectAsStateWithLifecycle()
 
     SimpleEditTextScreen(
-        screenName = "Day",
+        screenName = "DAY",
         state = state.value,
-        screenHashCode = screenHashCode,
         containerScreenKey = screen.screenKey.value,
         screenKey = screenKey.value,
         onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
