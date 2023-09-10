@@ -1,12 +1,11 @@
-package uk.nightlines.feature.weather.main_impl.di
+package uk.nightlines.feature.weather.container_impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationProvider
 import uk.nightlines.feature.weather.day_api.DayApiProvider
-import uk.nightlines.feature.weather.main_impl.ui.WeatherViewModel
+import uk.nightlines.feature.weather.container_impl.ui.WeatherViewModel
 import uk.nightlines.feature.weather.week_api.WeekApiProvider
 
 @Component(

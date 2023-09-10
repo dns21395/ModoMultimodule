@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.main_impl.ui
+package uk.nightlines.feature.weather.container_impl.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

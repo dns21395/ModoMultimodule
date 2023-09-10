@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.main_impl.di
+package uk.nightlines.feature.weather.container_impl.di
 
 import dagger.Module
 import dagger.Provides

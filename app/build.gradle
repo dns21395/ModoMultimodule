@@ -55,8 +55,8 @@ dependencies {
             project(':core:common'),
             project(':core:di'),
             project(':core:navigation'),
-            project(':feature:weather:main-api'),
-            project(':feature:weather:main-impl'),
+            project(':feature:weather:container-api'),
+            project(':feature:weather:container-impl'),
             project(':feature:settings:main-api'),
             project(':feature:settings:main-impl'),
 
