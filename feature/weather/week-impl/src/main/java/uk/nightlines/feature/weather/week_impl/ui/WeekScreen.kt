@@ -8,7 +8,6 @@ import com.github.terrakok.modo.ScreenKey
 import com.github.terrakok.modo.generateScreenKey
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
-import uk.nightlines.core.common.ui.SimpleScreenContent
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
@@ -40,9 +39,10 @@ fun WeekContent(
     val containerScreen = LocalContainerScreen.current
     val weatherDependencies = LocalDependenciesProvider.current
 
-    val component = daggerViewModel(key = "${containerScreen.screenKey}$KEY_COMPONENT$screenHashCode") {
-        ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
-    }
+    val component =
+        daggerViewModel(key = "${containerScreen.screenKey}$KEY_COMPONENT$screenHashCode") {
+            ComponentHolder(DaggerWeekComponent.factory().create(coreProvider, weatherDependencies))
+        }
 
     val viewModel: WeekViewModel =
         daggerViewModel(key = "${containerScreen.screenKey}$KEY_VIEWMODEL$screenHashCode") {
@@ -53,12 +53,10 @@ fun WeekContent(
 
     SimpleScreenContent(
         screenName = "WEEK",
-        screenHashCode = screenHashCode,
-        dependenciesProviderHashCode = weatherDependencies.hashCode(),
         containerKeyScreen = containerScreen.screenKey.value,
         keyScreen = screenKey.value,
         state = state.value,
         onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
         onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
-        onSettingsButtonClicked = { viewModel.onOpenSettingScreenButtonClicked() })
+    )
 }

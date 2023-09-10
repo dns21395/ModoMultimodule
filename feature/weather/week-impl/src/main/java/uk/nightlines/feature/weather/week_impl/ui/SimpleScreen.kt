@@ -1,10 +1,7 @@
-package uk.nightlines.core.common.ui
+package uk.nightlines.feature.weather.week_impl.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -19,14 +16,11 @@ import uk.nightlines.core.common.state.SimpleState
 @Composable
 fun SimpleScreenContent(
     screenName: String,
-    screenHashCode: Int,
-    dependenciesProviderHashCode: Int,
     containerKeyScreen: String,
     keyScreen: String,
     state: SimpleState,
     onForwardButtonClicked: suspend () -> Unit,
     onReplaceButtonClicked: suspend () -> Unit,
-    onSettingsButtonClicked: suspend () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -41,12 +35,11 @@ fun SimpleScreenContent(
         )
         Text(
             "$screenName ($keyScreen)\n" +
-                    "SCREEN HASHCODE: $screenHashCode\n" +
-                    "DEPENDENCIES PROVIDER HASHCODE: $dependenciesProviderHashCode\n" +
                     "CONTAINER SCREEN KEY : $containerKeyScreen\n"
         )
-
-        Row {
+        Row(
+            horizontalArrangement = Arrangement.Center,
+        ) {
             Button(
                 modifier = Modifier
                     .weight(1f)
@@ -68,17 +61,6 @@ fun SimpleScreenContent(
                     }
                 }) {
                 Text("FORWARD")
-            }
-            Button(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 2.dp),
-                onClick = {
-                    coroutineScope.launch {
-                        onSettingsButtonClicked()
-                    }
-                }) {
-                Text("NEW CONTAINER")
             }
         }
     }
