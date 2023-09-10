@@ -22,8 +22,8 @@ android {
 dependencies {
 
     implementation(
-            project(':core:navigation'),
-            project(':feature:weather:day-api'),
+            project(':core:navigation'), project(':feature:weather:one-api',)
+            ,
             project(':feature:weather:week-api'),
 
             deps.compose.ui,

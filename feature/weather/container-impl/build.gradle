@@ -27,9 +27,8 @@ dependencies {
             project(':core:common'),
             project(':core:navigation'),
             project(':feature:weather:common'),
-            project(':feature:weather:container-api'),
-            project(':feature:weather:day-api'),
-            project(':feature:weather:day-impl'),
+            project(':feature:weather:container-api'), project(':feature:weather:one-api',), project(':feature:weather:one-impl',)
+            ,
             project(':feature:weather:week-api'),
             project(':feature:weather:week-impl'),
 
