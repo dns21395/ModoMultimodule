@@ -1,10 +1,10 @@
-package uk.nightlines.feature.weather.week_impl.di
+package uk.nightlines.feature.weather.two_impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.feature.weather.common.WeatherDependencies
-import uk.nightlines.feature.weather.week_impl.ui.WeekViewModel
+import uk.nightlines.feature.weather.two_impl.ui.WeekViewModel
 
 @FeatureScope
 @Component(

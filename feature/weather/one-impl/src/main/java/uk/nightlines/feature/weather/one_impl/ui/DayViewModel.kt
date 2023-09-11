@@ -9,7 +9,7 @@ import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
-import uk.nightlines.feature.weather.week_api.WeekScreenApi
+import uk.nightlines.feature.weather.two_api.WeekScreenApi
 import javax.inject.Inject
 
 internal class DayViewModel @Inject constructor(

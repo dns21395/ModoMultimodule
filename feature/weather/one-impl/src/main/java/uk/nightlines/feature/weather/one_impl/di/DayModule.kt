@@ -7,8 +7,8 @@ import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.WeatherDependencies
 import uk.nightlines.feature.weather.common.WeatherNavigationProvider
 import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
-import uk.nightlines.feature.weather.week_api.WeekApiProvider
-import uk.nightlines.feature.weather.week_api.WeekScreenApi
+import uk.nightlines.feature.weather.two_api.WeekApiProvider
+import uk.nightlines.feature.weather.two_api.WeekScreenApi
 
 @Module
 internal class DayModule {

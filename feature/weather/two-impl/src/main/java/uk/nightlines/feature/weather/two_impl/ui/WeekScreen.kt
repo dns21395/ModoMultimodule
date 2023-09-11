@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.week_impl.ui
+package uk.nightlines.feature.weather.two_impl.ui
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -11,7 +11,7 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.week_impl.di.DaggerWeekComponent
+import uk.nightlines.feature.weather.two_impl.di.DaggerWeekComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_WEEK_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_WEEK_VIEWMODEL"

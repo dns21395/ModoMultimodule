@@ -22,9 +22,9 @@ android {
 dependencies {
 
     implementation(
-            project(':core:navigation'), project(':feature:weather:one-api',)
-            ,
-            project(':feature:weather:week-api'),
+            project(':core:navigation'),
+            project(':feature:weather:one-api'),
+            project(':feature:weather:two-api'),
 
             deps.compose.ui,
             deps.compose.material,

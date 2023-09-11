@@ -6,7 +6,7 @@ import uk.nightlines.core.di.PerFeature
 import uk.nightlines.feature.weather.common.WeatherNavigationProvider
 import uk.nightlines.feature.weather.one_api.DayApiProvider
 import uk.nightlines.feature.weather.container_impl.ui.WeatherViewModel
-import uk.nightlines.feature.weather.week_api.WeekApiProvider
+import uk.nightlines.feature.weather.two_api.WeekApiProvider
 
 @Component(
     dependencies = [CoreProvider::class],

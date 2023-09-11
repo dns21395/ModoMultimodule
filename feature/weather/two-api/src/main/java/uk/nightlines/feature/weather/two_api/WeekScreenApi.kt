@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.week_api
+package uk.nightlines.feature.weather.two_api
 
 import com.github.terrakok.modo.Screen
 
