@@ -6,8 +6,7 @@ plugins {
 apply from: "$rootDir/common.gradle"
 
 android {
-
-    namespace 'uk.nightlines.feature.weather.container_api'
+    namespace 'uk.nightlines.feature.complex.common'
 
     buildFeatures {
         compose true
@@ -23,22 +22,13 @@ dependencies {
 
     implementation(
             project(':core:navigation'),
-            project(':feature:weather:one-api'),
-            project(':feature:weather:two-api'),
 
-            deps.compose.ui,
             deps.compose.material,
-            deps.compose.material3,
-            deps.compose.ui_tooling_preview,
             deps.dagger.dagger,
             deps.modo.modo,
     )
 
     kapt(
             deps.dagger.compiler
-    )
-
-    debugImplementation(
-            deps.compose.ui_tooling
     )
 }

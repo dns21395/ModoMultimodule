@@ -7,7 +7,7 @@ apply from: "$rootDir/common.gradle"
 
 android {
 
-    namespace 'uk.nightlines.feature.weather.two_api'
+    namespace 'uk.nightlines.feature.complex.container_api'
 
     buildFeatures {
         compose true
@@ -22,7 +22,9 @@ android {
 dependencies {
 
     implementation(
-            project(':feature:weather:common'),
+            project(':core:navigation'),
+            project(':feature:complex:one-api'),
+            project(':feature:complex:two-api'),
 
             deps.compose.ui,
             deps.compose.material,
