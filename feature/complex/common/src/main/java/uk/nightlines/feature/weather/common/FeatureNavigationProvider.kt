@@ -2,8 +2,8 @@ package uk.nightlines.feature.weather.common
 
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 
-interface WeatherNavigationProvider {
+interface FeatureNavigationProvider {
 
-    @WeatherNavigationQualifier
+    @FeatureNavigationQualifier
     fun provideNavigation(): NavigationTypeCommand
 }

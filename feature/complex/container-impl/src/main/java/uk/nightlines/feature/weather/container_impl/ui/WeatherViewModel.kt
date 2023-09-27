@@ -11,14 +11,14 @@ import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
+import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import uk.nightlines.feature.weather.one_api.DayScreenApi
 import uk.nightlines.feature.weather.two_api.WeekScreenApi
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
-    @WeatherNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
+    @FeatureNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
     private val weekScreenApi: WeekScreenApi,
     private val dayScreenApi: DayScreenApi

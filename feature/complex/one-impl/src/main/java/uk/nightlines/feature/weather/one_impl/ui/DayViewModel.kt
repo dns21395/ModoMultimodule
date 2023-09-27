@@ -8,13 +8,13 @@ import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
+import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import uk.nightlines.feature.weather.two_api.WeekScreenApi
 import javax.inject.Inject
 
 internal class DayViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
-    @WeatherNavigationQualifier private val navigation: NavigationTypeCommand,
+    @FeatureNavigationQualifier private val navigation: NavigationTypeCommand,
     private val weekScreenApi: WeekScreenApi
 ) : ViewModel() {
 

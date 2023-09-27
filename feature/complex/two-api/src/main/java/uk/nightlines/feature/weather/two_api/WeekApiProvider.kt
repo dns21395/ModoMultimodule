@@ -1,8 +1,8 @@
 package uk.nightlines.feature.weather.two_api
 
-import uk.nightlines.feature.weather.common.WeatherDependencies
+import uk.nightlines.feature.weather.common.FeatureDependencies
 
-interface WeekApiProvider : WeatherDependencies {
+interface WeekApiProvider : FeatureDependencies {
 
     fun weekScreenApi(): WeekScreenApi
 }

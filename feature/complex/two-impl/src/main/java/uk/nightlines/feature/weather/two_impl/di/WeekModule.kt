@@ -4,9 +4,9 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.common.WeatherDependencies
-import uk.nightlines.feature.weather.common.WeatherNavigationProvider
-import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
+import uk.nightlines.feature.weather.common.FeatureDependencies
+import uk.nightlines.feature.weather.common.FeatureNavigationProvider
+import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import uk.nightlines.feature.weather.one_api.DayScreenApi
 import uk.nightlines.feature.weather.one_api.DayApiProvider
 
@@ -15,13 +15,13 @@ internal class WeekModule {
 
     @FeatureScope
     @Provides
-    @WeatherNavigationQualifier
-    fun provideNavigationTypeCommand(weatherDependencies: WeatherDependencies): NavigationTypeCommand {
-        return (weatherDependencies as WeatherNavigationProvider).provideNavigation()
+    @FeatureNavigationQualifier
+    fun provideNavigationTypeCommand(featureDependencies: FeatureDependencies): NavigationTypeCommand {
+        return (featureDependencies as FeatureNavigationProvider).provideNavigation()
     }
 
     @FeatureScope
     @Provides
-    fun provideDayApi(weatherDependencies: WeatherDependencies): DayScreenApi =
-        (weatherDependencies as DayApiProvider).dayApi()
+    fun provideDayApi(featureDependencies: FeatureDependencies): DayScreenApi =
+        (featureDependencies as DayApiProvider).dayApi()
 }

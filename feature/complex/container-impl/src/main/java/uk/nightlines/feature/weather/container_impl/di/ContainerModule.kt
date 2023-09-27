@@ -6,16 +6,16 @@ import uk.nightlines.core.di.PerFeature
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.one_api.DayScreenApi
 import uk.nightlines.feature.weather.one_impl.DayImpl
-import uk.nightlines.feature.weather.common.WeatherNavigationQualifier
+import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import uk.nightlines.feature.weather.two_api.WeekScreenApi
 import uk.nightlines.feature.weather.two_impl.WeekImpl
 
 @Module
-internal class WeatherMainModule {
+internal class ContainerModule {
 
     @PerFeature
     @Provides
-    @WeatherNavigationQualifier
+    @FeatureNavigationQualifier
     fun provideNavigation() = NavigationTypeCommand()
 
     @PerFeature
