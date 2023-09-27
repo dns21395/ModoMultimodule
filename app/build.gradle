@@ -57,8 +57,8 @@ dependencies {
             project(':core:navigation'),
             project(':feature:complex:container-api'),
             project(':feature:complex:container-impl'),
-            project(':feature:settings:main-api'),
-            project(':feature:settings:main-impl'),
+            project(':feature:simple:api'),
+            project(':feature:simple:impl'),
 
             deps.compose.activity,
             deps.compose.ui,

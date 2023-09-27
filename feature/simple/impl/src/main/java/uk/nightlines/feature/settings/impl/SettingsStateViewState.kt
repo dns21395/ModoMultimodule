@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.main_impl
+package uk.nightlines.feature.settings.impl
 
 import androidx.compose.ui.graphics.Color
 import uk.nightlines.core.common.emojis
