@@ -3,20 +3,20 @@ package uk.nightlines.feature.settings.impl.di
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.feature.settings.impl.ui.SettingsViewModel
+import uk.nightlines.feature.settings.impl.ui.SimpleViewModel
 
 @Component(
     dependencies = [CoreProvider::class]
 )
 @PerFeature
-internal interface SettingsComponent {
+internal interface SimpleComponent {
 
     @Component.Factory
     interface Builder {
         fun create(
             coreProvider: CoreProvider
-        ): SettingsComponent
+        ): SimpleComponent
     }
 
-    fun viewModel(): SettingsViewModel
+    fun viewModel(): SimpleViewModel
 }

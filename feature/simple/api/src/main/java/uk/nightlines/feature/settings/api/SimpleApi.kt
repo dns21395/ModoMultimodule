@@ -2,7 +2,7 @@ package uk.nightlines.feature.settings.api
 
 import com.github.terrakok.modo.Screen
 
-interface SettingsApi {
+interface SimpleApi {
 
-    fun settingsScreen(): Screen
+    fun screen(): Screen
 }

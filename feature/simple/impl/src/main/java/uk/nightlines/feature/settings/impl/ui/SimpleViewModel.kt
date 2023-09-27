@@ -10,27 +10,27 @@ import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import javax.inject.Inject
 
-internal class SettingsViewModel @Inject constructor(
+internal class SimpleViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow(SettingsViewState())
-    val state: StateFlow<SettingsViewState> = _state
+    private val _state = MutableStateFlow(SimpleViewState())
+    val state: StateFlow<SimpleViewState> = _state
 
-    suspend fun onForwardWeatherButtonClicked() {
+    suspend fun onForwardComplexButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
     }
 
-    suspend fun onReplaceWeatherButtonClicked() {
+    suspend fun onReplaceComplexButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
     }
 
-    suspend fun onForwardSettingsButtonClicked() {
+    suspend fun onForwardSimpleButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
     }
 
-    suspend fun onReplaceSettingsButtonClicked() {
+    suspend fun onReplaceSimpleButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.settingsScreen()))
     }
 }
