@@ -13,7 +13,7 @@ import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.command.navigate
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.container_impl.di.DaggerWeatherMainComponent
+import uk.nightlines.feature.weather.container_impl.di.DaggerContainerComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_VIEWMODEL"
@@ -31,7 +31,7 @@ internal class WeatherStack(
         val coreProvider = LocalCoreProvider.current
 
         val componentHolder = daggerViewModel(key = "${stackNavModel.screenKey}$KEY_COMPONENT") {
-            ComponentHolder(DaggerWeatherMainComponent.factory().create(coreProvider))
+            ComponentHolder(DaggerContainerComponent.factory().create(coreProvider))
         }
 
         val viewModel: WeatherViewModel =

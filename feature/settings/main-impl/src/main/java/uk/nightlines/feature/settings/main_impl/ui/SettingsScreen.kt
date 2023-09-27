@@ -6,7 +6,6 @@ import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,7 +19,6 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.setstack.BaseContainerScreen
-import uk.nightlines.feature.settings.common.LocalDependenciesProvider
 import uk.nightlines.feature.settings.main_impl.di.DaggerSettingsComponent
 
 private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
@@ -49,72 +47,70 @@ class SettingsStack(
 
         val state = viewModel.state.collectAsStateWithLifecycle()
 
-        CompositionLocalProvider(
-            LocalDependenciesProvider provides componentHolder.component
+
+        Column(
+            modifier = Modifier
+                .background(state.value.backgroundColor)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Column(
+            Text(
+                "SETTINGS SCREEN (${screenKey.value}) ${state.value.emoji}",
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                style = MaterialTheme.typography.h6
+            )
+            Row(
+                horizontalArrangement = Arrangement.Center,
                 modifier = Modifier
-                    .background(state.value.backgroundColor)
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
             ) {
-                Text(
-                    "SETTINGS SCREEN (${screenKey.value}) ${state.value.emoji}",
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth(),
-                    style = MaterialTheme.typography.h6
-                )
-                Row(
-                    horizontalArrangement = Arrangement.Center,
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 16.dp, end = 8.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onForwardSettingsButtonClicked() }
-                        }) {
-                        Text(text = "FORWARD [SETTINGS]")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 8.dp, end = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onReplaceSettingsButtonClicked() }
-                        }) {
-                        Text(text = "REPLACE [SETTINGS]")
-                    }
+                        .weight(1f)
+                        .padding(start = 16.dp, end = 8.dp),
+                    onClick = {
+                        coroutineScope.launch { viewModel.onForwardSettingsButtonClicked() }
+                    }) {
+                    Text(text = "FORWARD [SETTINGS]")
                 }
-                Row(
-                    horizontalArrangement = Arrangement.Center,
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 16.dp)
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 16.dp, end = 8.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onForwardWeatherButtonClicked() }
-                        }) {
-                        Text(text = "FORWARD [WEATHER]")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(start = 8.dp, end = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { viewModel.onReplaceWeatherButtonClicked() }
-                        }) {
-                        Text(text = "REPLACE [WEATHER]")
-                    }
+                        .weight(1f)
+                        .padding(start = 8.dp, end = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { viewModel.onReplaceSettingsButtonClicked() }
+                    }) {
+                    Text(text = "REPLACE [SETTINGS]")
+                }
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp)
+            ) {
+                Button(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 16.dp, end = 8.dp),
+                    onClick = {
+                        coroutineScope.launch { viewModel.onForwardWeatherButtonClicked() }
+                    }) {
+                    Text(text = "FORWARD [WEATHER]")
+                }
+                Button(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp, end = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { viewModel.onReplaceWeatherButtonClicked() }
+                    }) {
+                    Text(text = "REPLACE [WEATHER]")
                 }
             }
         }
+
     }
 }
