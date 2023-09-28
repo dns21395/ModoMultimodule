@@ -8,7 +8,7 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.setstack.BaseContainerScreen
-import uk.nightlines.feature.settings.impl.di.DaggerSimpleComponent
+import uk.nightlines.feature.simple.impl.di.DaggerSimpleComponent
 
 private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
