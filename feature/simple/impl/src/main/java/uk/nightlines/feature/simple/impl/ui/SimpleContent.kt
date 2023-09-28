@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.impl.ui
+package uk.nightlines.feature.simple.impl.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

@@ -7,7 +7,7 @@ plugins {
 apply from: "$rootDir/common.gradle"
 
 android {
-    namespace 'uk.nightlines.feature.settings.main_api'
+    namespace 'uk.nightlines.feature.simple.api'
 }
 
 dependencies {

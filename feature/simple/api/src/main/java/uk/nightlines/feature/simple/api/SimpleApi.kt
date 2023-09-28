@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.api
+package uk.nightlines.feature.simple.api
 
 import com.github.terrakok.modo.Screen
 

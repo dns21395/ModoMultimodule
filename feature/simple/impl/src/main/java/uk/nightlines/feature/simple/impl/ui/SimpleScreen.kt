@@ -1,4 +1,4 @@
-package uk.nightlines.feature.settings.impl.ui
+package uk.nightlines.feature.simple.impl.ui
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -14,7 +14,7 @@ private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
 
 @Parcelize
-class SettingsStack(
+class SimpleStack(
     private val stackNavModel: StackNavModel,
 ) : BaseContainerScreen(stackNavModel) {
 

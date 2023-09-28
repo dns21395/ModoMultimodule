@@ -2,8 +2,8 @@ package uk.nightlines.modomultimodule.di
 
 import dagger.Module
 import dagger.Provides
-import uk.nightlines.feature.settings.api.SimpleApi
-import uk.nightlines.feature.settings.impl.SimpleImpl
+import uk.nightlines.feature.simple.api.SimpleApi
+import uk.nightlines.feature.simple.impl.SimpleImpl
 import uk.nightlines.feature.weather.container_api.ComplexApi
 import uk.nightlines.feature.weather.container_impl.WeatherImpl
 import javax.inject.Singleton

@@ -8,7 +8,7 @@ apply from: "$rootDir/common.gradle"
 
 android {
 
-    namespace 'uk.nightlines.feature.settings.main_impl'
+    namespace 'uk.nightlines.feature.simple.impl'
 
     buildFeatures {
         compose true

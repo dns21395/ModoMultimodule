@@ -1,9 +1,9 @@
-package uk.nightlines.feature.settings.impl.di
+package uk.nightlines.feature.simple.impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.PerFeature
-import uk.nightlines.feature.settings.impl.ui.SimpleViewModel
+import uk.nightlines.feature.simple.impl.ui.SimpleViewModel
 
 @Component(
     dependencies = [CoreProvider::class]
