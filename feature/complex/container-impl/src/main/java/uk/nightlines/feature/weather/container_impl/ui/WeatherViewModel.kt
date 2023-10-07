@@ -20,14 +20,14 @@ import uk.nightlines.core.navigation.NavigationSetStack
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
-import uk.nightlines.feature.weather.one_api.ScreenApi
+import uk.nightlines.feature.weather.one_api.ComplexFeatureApi
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @FeatureNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
-    private val screenApi: ScreenApi
+    private val screenApi: ComplexFeatureApi
 ) : ViewModel() {
 
     val navigationCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow

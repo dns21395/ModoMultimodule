@@ -9,7 +9,7 @@ import uk.nightlines.feature.weather.common.FeatureNavigationProvider
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 
 @Module
-internal class DayModule {
+internal class ComplexFeatureModule {
 
     @FeatureScope
     @Provides

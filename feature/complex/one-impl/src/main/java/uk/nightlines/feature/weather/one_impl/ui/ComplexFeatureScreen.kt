@@ -11,27 +11,27 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.one_impl.di.DaggerDayComponent
+import uk.nightlines.feature.weather.one_impl.di.DaggerComplexFeatureComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_DAY_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_DAY_VIEWMODEL"
 
 @Parcelize
-class DayScreen(
+class ComplexScreen(
     override val screenKey: ScreenKey = generateScreenKey(),
 ) : Screen {
 
     @Composable
     override fun Content() {
-        DayContent(
-            this.hashCode(),
+        Complex(
+            hashCode(),
             screenKey
         )
     }
 }
 
 @Composable
-fun DayContent(
+fun Complex(
     screenHashCode: Int,
     screenKey: ScreenKey,
 ) {
@@ -40,7 +40,7 @@ fun DayContent(
     val weatherDependencies = LocalDependenciesProvider.current
 
     val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
-        ComponentHolder(DaggerDayComponent.factory().create(coreProvider, weatherDependencies))
+        ComponentHolder(DaggerComplexFeatureComponent.factory().create(coreProvider, weatherDependencies))
     }
 
     val viewModel =
@@ -49,13 +49,12 @@ fun DayContent(
     val state = viewModel.state.collectAsStateWithLifecycle()
 
     SimpleEditTextScreen(
-        screenName = "DAY",
+        screenName = "SCREEN",
         state = state.value,
         containerScreenKey = screen.screenKey.value,
         screenKey = screenKey.value,
         onForwardButtonClicked = { viewModel.onForwardButtonClicked() },
         onReplaceButtonClicked = { viewModel.onReplaceButtonClicked() },
-        onOpenDialogButtonClicked = { viewModel.onOpenDialogButtonClicked() },
         onEditTextChanged = { viewModel.onTextChangedAction(it) }
     )
 }

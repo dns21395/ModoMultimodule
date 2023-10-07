@@ -5,29 +5,25 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.common.state.SimpleEditTextState
 import uk.nightlines.core.navigation.NavigationForward
-import uk.nightlines.core.navigation.RootNavigationQualifier
+import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
-internal class DayViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+internal class ComplexFeatureViewModel @Inject constructor(
     @FeatureNavigationQualifier private val navigation: NavigationTypeCommand,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     private val mutableState = MutableStateFlow(SimpleEditTextState())
     val state: StateFlow<SimpleEditTextState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
-
+        navigation.navigate(NavigationReplace(ComplexScreen()))
     }
 
     suspend fun onForwardButtonClicked() {
-    }
-
-    suspend fun onOpenDialogButtonClicked() {
-        rootNavigation.navigate(NavigationForward(DayDialog()))
+        navigation.navigate(NavigationForward(ComplexScreen()))
     }
 
     suspend fun onTextChangedAction(text: String) {

@@ -4,7 +4,7 @@ import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.feature.weather.common.FeatureDependencies
-import uk.nightlines.feature.weather.one_impl.ui.DayViewModel
+import uk.nightlines.feature.weather.one_impl.ui.ComplexFeatureViewModel
 
 @FeatureScope
 @Component(
@@ -12,17 +12,17 @@ import uk.nightlines.feature.weather.one_impl.ui.DayViewModel
         CoreProvider::class,
         FeatureDependencies::class
     ],
-    modules = [DayModule::class]
+    modules = [ComplexFeatureModule::class]
 )
-internal interface DayComponent {
+internal interface ComplexFeatureComponent {
 
     @Component.Factory
     interface Builder {
         fun create(
             coreProvider: CoreProvider,
             featureDependencies: FeatureDependencies
-        ): DayComponent
+        ): ComplexFeatureComponent
     }
 
-    fun viewModel(): DayViewModel
+    fun viewModel(): ComplexFeatureViewModel
 }

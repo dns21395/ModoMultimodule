@@ -26,7 +26,6 @@ fun SimpleEditTextScreen(
     screenKey: String,
     onForwardButtonClicked: suspend () -> Unit,
     onReplaceButtonClicked: suspend () -> Unit,
-    onOpenDialogButtonClicked: suspend () -> Unit,
     onEditTextChanged: suspend (String) -> Unit,
 ) {
 
@@ -99,17 +98,6 @@ fun SimpleEditTextScreen(
                     }
                 }) {
                 Text("FORWARD")
-            }
-            Button(
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(horizontal = 2.dp),
-                onClick = {
-                    coroutineScope.launch {
-                        onOpenDialogButtonClicked()
-                    }
-                }) {
-                Text("DIALOG")
             }
         }
     }
