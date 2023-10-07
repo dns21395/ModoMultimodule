@@ -7,21 +7,27 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.common.RootScreensInteractor
-import uk.nightlines.core.navigation.*
+import uk.nightlines.core.common.state.ContainerState
+import uk.nightlines.core.navigation.NavigationBackTo
+import uk.nightlines.core.navigation.NavigationBackToRoot
+import uk.nightlines.core.navigation.NavigationCommand
+import uk.nightlines.core.navigation.NavigationForward
+import uk.nightlines.core.navigation.NavigationNewStack
+import uk.nightlines.core.navigation.NavigationRemoveScreen
+import uk.nightlines.core.navigation.NavigationReplace
+import uk.nightlines.core.navigation.NavigationSetStack
+import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
-import uk.nightlines.feature.weather.one_api.DayScreenApi
-import uk.nightlines.feature.weather.two_api.WeekScreenApi
+import uk.nightlines.feature.weather.one_api.ScreenApi
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @FeatureNavigationQualifier private val weatherNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
-    private val weekScreenApi: WeekScreenApi,
-    private val dayScreenApi: DayScreenApi
+    private val screenApi: ScreenApi
 ) : ViewModel() {
 
     val navigationCommands: Flow<NavigationCommand> = weatherNavigation.commandsFlow
@@ -31,7 +37,7 @@ internal class WeatherViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            weatherNavigation.navigate(NavigationForward(weekScreenApi.getWeekScreen()))
+            weatherNavigation.navigate(NavigationForward(screenApi.screen()))
         }
     }
 
@@ -40,29 +46,27 @@ internal class WeatherViewModel @Inject constructor(
     }
 
     suspend fun onForwardWeatherButtonClicked() {
-        rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
+        rootNavigation.navigate(NavigationForward(rootScreens.complexScreen()))
     }
 
     suspend fun onReplaceWeatherButtonClicked() {
-        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
+        rootNavigation.navigate(NavigationReplace(rootScreens.complexScreen()))
     }
 
     suspend fun onForwardSettingsButtonClicked() {
-        rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
+        rootNavigation.navigate(NavigationForward(rootScreens.simpleScreen()))
     }
 
     suspend fun onReplaceSettingsButtonClicked() {
-        rootNavigation.navigate(NavigationReplace(rootScreens.settingsScreen()))
+        rootNavigation.navigate(NavigationReplace(rootScreens.simpleScreen()))
     }
 
     suspend fun openNewStackButtonClicked() {
         weatherNavigation.navigate(
             NavigationSetStack(
                 listOf(
-                    dayScreenApi.getDayScreen(),
-                    weekScreenApi.getWeekScreen(),
-                    dayScreenApi.getDayScreen(),
-                    weekScreenApi.getWeekScreen()
+                    screenApi.screen(),
+                    screenApi.screen(),
                 )
             )
         )
@@ -83,21 +87,19 @@ internal class WeatherViewModel @Inject constructor(
     suspend fun onMultiForwardButtonClicked() {
         weatherNavigation.navigate(
             NavigationForward(
-                dayScreenApi.getDayScreen(),
+                screenApi.screen(),
                 listOf(
-                    weekScreenApi.getWeekScreen(),
-                    dayScreenApi.getDayScreen(),
-                    weekScreenApi.getWeekScreen()
+                    screenApi.screen(),
                 )
             )
         )
     }
 
     suspend fun onNewRootButtonClicked() {
-        weatherNavigation.navigate(NavigationNewStack(weekScreenApi.getWeekScreen()))
+        weatherNavigation.navigate(NavigationNewStack(screenApi.screen()))
     }
 
     suspend fun onContainerButtonClicked() {
-        weatherNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
+        weatherNavigation.navigate(NavigationForward(rootScreens.complexScreen()))
     }
 }

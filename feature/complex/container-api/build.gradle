@@ -24,7 +24,6 @@ dependencies {
     implementation(
             project(':core:navigation'),
             project(':feature:complex:one-api'),
-            project(':feature:complex:two-api'),
 
             deps.compose.ui,
             deps.compose.material,

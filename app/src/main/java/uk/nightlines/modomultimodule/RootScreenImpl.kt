@@ -8,10 +8,10 @@ import javax.inject.Inject
 
 class RootScreenImpl @Inject constructor(
     private val simpleApi: SimpleApi,
-    private val weatherApi: ComplexApi
+    private val complexApi: ComplexApi
 ) : RootScreensInteractor {
 
-    override fun weatherScreen(): Screen = weatherApi.screen()
+    override fun complexScreen(): Screen = complexApi.screen()
 
-    override fun settingsScreen(): Screen = simpleApi.screen()
+    override fun simpleScreen(): Screen = simpleApi.screen()
 }

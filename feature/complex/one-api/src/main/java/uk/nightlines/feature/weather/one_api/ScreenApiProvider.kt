@@ -2,7 +2,7 @@ package uk.nightlines.feature.weather.one_api
 
 import uk.nightlines.feature.weather.common.FeatureDependencies
 
-interface DayApiProvider : FeatureDependencies {
+interface ScreenApiProvider : FeatureDependencies {
 
-    fun dayApi(): DayScreenApi
+    fun dayApi(): ScreenApi
 }

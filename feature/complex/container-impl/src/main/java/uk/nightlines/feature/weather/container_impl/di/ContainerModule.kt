@@ -4,11 +4,9 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.PerFeature
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.one_api.DayScreenApi
-import uk.nightlines.feature.weather.one_impl.DayImpl
+import uk.nightlines.feature.weather.one_api.ScreenApi
+import uk.nightlines.feature.weather.one_impl.ScreenImpl
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
-import uk.nightlines.feature.weather.two_api.WeekScreenApi
-import uk.nightlines.feature.weather.two_impl.WeekImpl
 
 @Module
 internal class ContainerModule {
@@ -20,9 +18,5 @@ internal class ContainerModule {
 
     @PerFeature
     @Provides
-    fun provideDayScreenApi(): DayScreenApi = DayImpl()
-
-    @PerFeature
-    @Provides
-    fun provideWeekScreenApi(): WeekScreenApi = WeekImpl()
+    fun provideDayScreenApi(): ScreenApi = ScreenImpl()
 }

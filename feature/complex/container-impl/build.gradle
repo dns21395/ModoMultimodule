@@ -30,8 +30,6 @@ dependencies {
             project(':feature:complex:container-api'),
             project(':feature:complex:one-api'),
             project(':feature:complex:one-impl'),
-            project(':feature:complex:two-api'),
-            project(':feature:complex:two-impl'),
 
             deps.compose.activity,
             deps.compose.ui,

@@ -4,7 +4,7 @@ import com.github.terrakok.modo.Screen
 
 interface RootScreensInteractor {
 
-    fun settingsScreen(): Screen
+    fun simpleScreen(): Screen
 
-    fun weatherScreen(): Screen
+    fun complexScreen(): Screen
 }

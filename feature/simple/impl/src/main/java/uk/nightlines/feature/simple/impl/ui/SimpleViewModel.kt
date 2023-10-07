@@ -19,18 +19,18 @@ internal class SimpleViewModel @Inject constructor(
     val state: StateFlow<SimpleViewState> = _state
 
     suspend fun onForwardComplexButtonClicked() {
-        rootNavigation.navigate(NavigationForward(rootScreens.weatherScreen()))
+        rootNavigation.navigate(NavigationForward(rootScreens.complexScreen()))
     }
 
     suspend fun onReplaceComplexButtonClicked() {
-        rootNavigation.navigate(NavigationReplace(rootScreens.weatherScreen()))
+        rootNavigation.navigate(NavigationReplace(rootScreens.complexScreen()))
     }
 
     suspend fun onForwardSimpleButtonClicked() {
-        rootNavigation.navigate(NavigationForward(rootScreens.settingsScreen()))
+        rootNavigation.navigate(NavigationForward(rootScreens.simpleScreen()))
     }
 
     suspend fun onReplaceSimpleButtonClicked() {
-        rootNavigation.navigate(NavigationReplace(rootScreens.settingsScreen()))
+        rootNavigation.navigate(NavigationReplace(rootScreens.simpleScreen()))
     }
 }
