@@ -51,23 +51,14 @@ internal class WeatherStack(
             LocalDependenciesProvider provides componentHolder.component
         ) {
             ContainerScreenContent(
-                title = "WEATHER",
+                title = "CONTAINER",
                 state = state.value,
                 screenKey = screenKey.value,
-                screenHashCode = hashCode().toString(),
                 navigationStack = navigationState.stack,
-                onShowOptionsButtonClicked = { viewModel.onShowOptionsButtonClicked() },
                 onForwardWeatherButtonClicked = { viewModel.onForwardWeatherButtonClicked() },
                 onReplaceWeatherButtonClicked = { viewModel.onReplaceWeatherButtonClicked() },
                 onForwardSettingsButtonClicked = { viewModel.onForwardSettingsButtonClicked() },
                 onReplaceSettingsButtonClicked = { viewModel.onReplaceSettingsButtonClicked() },
-                onRemoveByPositionsButtonClicked = { viewModel.onRemoveFirstAndThirdScreensButtonClicked() },
-                onBackToSecondScreenButtonClicked = { viewModel.onBackToSecondScreenClicked(it) },
-                onBackToRootClicked = { viewModel.onBackToRootButtonClicked() },
-                onNewStackButtonClicked = { viewModel.openNewStackButtonClicked() },
-                onMultiForwardButtonClicked = { viewModel.onMultiForwardButtonClicked() },
-                onNewRootButtonClicked = { viewModel.onNewRootButtonClicked() },
-                onContainerButtonClicked = { viewModel.onContainerButtonClicked() },
                 topScreenContent = { TopScreenContent() }
             )
         }

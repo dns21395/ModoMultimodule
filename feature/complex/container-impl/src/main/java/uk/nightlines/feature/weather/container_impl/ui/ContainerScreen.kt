@@ -1,7 +1,13 @@
 package uk.nightlines.feature.weather.container_impl.ui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -9,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.launch
@@ -20,20 +25,11 @@ fun ContainerScreenContent(
     title: String,
     state: ContainerState,
     screenKey: String,
-    screenHashCode: String,
     navigationStack: List<Screen>,
-    onShowOptionsButtonClicked: suspend () -> Unit,
     onForwardWeatherButtonClicked: suspend () -> Unit,
     onReplaceWeatherButtonClicked: suspend () -> Unit,
     onForwardSettingsButtonClicked: suspend () -> Unit,
     onReplaceSettingsButtonClicked: suspend () -> Unit,
-    onRemoveByPositionsButtonClicked: suspend () -> Unit,
-    onBackToSecondScreenButtonClicked: suspend (Screen) -> Unit,
-    onBackToRootClicked: suspend () -> Unit,
-    onNewStackButtonClicked: suspend () -> Unit,
-    onMultiForwardButtonClicked: suspend () -> Unit,
-    onNewRootButtonClicked: suspend () -> Unit,
-    onContainerButtonClicked: suspend () -> Unit,
     topScreenContent: @Composable () -> Unit
 ) {
 
@@ -54,175 +50,63 @@ fun ContainerScreenContent(
             Text(text = state.emoji, style = MaterialTheme.typography.h4)
             Text(
                 text = "$title ($screenKey)\n" +
-                        "CONTAINER HASCODE : $screenHashCode\n" +
                         "STACK : ${navigationStack.map { it.screenKey.value }}"
             )
             Row(
-                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+            }
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
                 Button(
-                    onClick = { coroutineScope.launch { onShowOptionsButtonClicked() } }
-                ) {
-                    Text(if (state.isOptionsVisible) "HIDE OPTIONS" else "SHOW OPTIONS")
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { onForwardWeatherButtonClicked() }
+                    }) {
+                    Text(text = "FORWARD [COMPLEX]")
+                }
+                Button(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { onReplaceWeatherButtonClicked() }
+                    }) {
+                    Text(text = "REPLACE [COMPLEX]")
                 }
             }
-            if (state.isOptionsVisible) {
-                Row(
+            Spacer(modifier = Modifier.height(8.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        "Root navigation actions",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
-                        style = MaterialTheme.typography.h6
-                    )
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { onForwardSettingsButtonClicked() }
+                    }) {
+                    Text(text = "FORWARD [SIMPLE]")
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
+                Button(
                     modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onForwardWeatherButtonClicked() }
-                        }) {
-                        Text(text = "FORWARD [WEATHER]")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onReplaceWeatherButtonClicked() }
-                        }) {
-                        Text(text = "REPLACE [WEATHER]")
-                    }
+                        .weight(1f)
+                        .padding(horizontal = 16.dp),
+                    onClick = {
+                        coroutineScope.launch { onReplaceSettingsButtonClicked() }
+                    }) {
+                    Text(text = "REPLACE [SIMPLE]")
                 }
-                Spacer(modifier = Modifier.height(8.dp))
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onForwardSettingsButtonClicked() }
-                        }) {
-                        Text(text = "FORWARD [SETTINGS]")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onReplaceSettingsButtonClicked() }
-                        }) {
-                        Text(text = "REPLACE [SETTINGS]")
-                    }
-                }
-                Spacer(modifier = Modifier.height(8.dp))
+            }
+            Spacer(modifier = Modifier.height(8.dp))
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        "Container navigation actions",
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.fillMaxWidth(),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onRemoveByPositionsButtonClicked() }
-                        }) {
-                        Text("REMOVE SCREENS 1 AND 3")
-                    }
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                ) {
-                    Button(
-                        onClick = {
-                            coroutineScope.launch {
-                                onBackToSecondScreenButtonClicked(
-                                    navigationStack[1]
-                                )
-                            }
-                        },
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        Text("BACK TO 2ND SCREEN", style = MaterialTheme.typography.overline)
-                    }
-                    Button(
-                        onClick = { coroutineScope.launch { onBackToRootClicked() } },
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp)
-                    ) {
-                        Text("BACK TO ROOT")
-                    }
-                }
-                Row {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onNewStackButtonClicked() }
-                        }) {
-                        Text(text = "SET STACK")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onMultiForwardButtonClicked() }
-                        }) {
-                        Text(text = "MULTI FORWARD")
-                    }
-                }
-                Row {
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onNewRootButtonClicked() }
-                        }) {
-                        Text(text = "NEW ROOT")
-                    }
-                    Button(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(horizontal = 16.dp),
-                        onClick = {
-                            coroutineScope.launch { onContainerButtonClicked() }
-                        }) {
-                        Text(text = "CONTAINER")
-                    }
-                }
-            }
             topScreenContent()
         }
     }
