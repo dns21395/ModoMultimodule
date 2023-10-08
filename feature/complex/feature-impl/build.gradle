@@ -27,7 +27,7 @@ dependencies {
             project(':core:common'),
             project(':core:navigation'),
             project(':feature:complex:common'),
-            project(':feature:complex:one-api'),
+            project(':feature:complex:feature-api'),
 
             deps.compose.ui,
             deps.compose.material,

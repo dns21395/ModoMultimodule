@@ -20,7 +20,7 @@ import uk.nightlines.core.navigation.NavigationSetStack
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
-import uk.nightlines.feature.weather.one_api.ComplexFeatureApi
+import uk.nightlines.feature.complex.feature_api.ComplexFeatureApi
 import javax.inject.Inject
 
 internal class WeatherViewModel @Inject constructor(

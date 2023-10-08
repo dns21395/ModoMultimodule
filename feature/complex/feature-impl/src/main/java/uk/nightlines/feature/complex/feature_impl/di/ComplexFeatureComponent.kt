@@ -1,10 +1,10 @@
-package uk.nightlines.feature.weather.one_impl.di
+package uk.nightlines.feature.complex.feature_impl.di
 
 import dagger.Component
 import uk.nightlines.core.di.CoreProvider
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.feature.weather.common.FeatureDependencies
-import uk.nightlines.feature.weather.one_impl.ui.ComplexFeatureViewModel
+import uk.nightlines.feature.complex.feature_impl.ui.ComplexFeatureViewModel
 
 @FeatureScope
 @Component(

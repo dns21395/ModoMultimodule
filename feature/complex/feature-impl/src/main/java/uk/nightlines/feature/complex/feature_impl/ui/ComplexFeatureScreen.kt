@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.one_impl.ui
+package uk.nightlines.feature.complex.feature_impl.ui
 
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -10,8 +10,8 @@ import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
+import uk.nightlines.feature.complex.feature_impl.di.DaggerComplexFeatureComponent
 import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.one_impl.di.DaggerComplexFeatureComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_DAY_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_DAY_VIEWMODEL"

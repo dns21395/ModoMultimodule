@@ -1,8 +1,8 @@
-package uk.nightlines.feature.weather.one_api
+package uk.nightlines.feature.complex.feature_api
 
 import uk.nightlines.feature.weather.common.FeatureDependencies
 
 interface ComplextFeatureApiProvider : FeatureDependencies {
 
-    fun dayApi(): ComplexFeatureApi
+    fun complexFeatureApi(): ComplexFeatureApi
 }

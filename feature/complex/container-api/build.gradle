@@ -22,8 +22,8 @@ android {
 dependencies {
 
     implementation(
-            project(':core:navigation'),
-            project(':feature:complex:one-api'),
+            project(':core:navigation'), project(':feature:complex:feature-api',)
+            ,
 
             deps.compose.ui,
             deps.compose.material,
