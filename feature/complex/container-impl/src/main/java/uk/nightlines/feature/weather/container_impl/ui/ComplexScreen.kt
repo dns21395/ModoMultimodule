@@ -34,7 +34,7 @@ internal class WeatherStack(
             ComponentHolder(DaggerContainerComponent.factory().create(coreProvider))
         }
 
-        val viewModel: WeatherViewModel =
+        val viewModel: ComplexViewModel =
             daggerViewModel(key = "${stackNavModel.screenKey}$KEY_VIEWMODEL") {
                 componentHolder.component.viewModel()
             }

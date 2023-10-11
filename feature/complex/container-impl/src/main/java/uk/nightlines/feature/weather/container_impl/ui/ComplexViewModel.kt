@@ -17,7 +17,7 @@ import uk.nightlines.feature.complex.feature_api.ComplexFeatureApi
 import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
-internal class WeatherViewModel @Inject constructor(
+internal class ComplexViewModel @Inject constructor(
     @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
     @FeatureNavigationQualifier private val complexNavigation: NavigationTypeCommand,
     private val rootScreens: RootScreensInteractor,
