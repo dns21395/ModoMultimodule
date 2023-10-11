@@ -8,7 +8,6 @@ import javax.inject.Singleton
 @Component(
     modules = [
         AppModuule::class,
-        ScreensModule::class
     ]
 )
 @Singleton

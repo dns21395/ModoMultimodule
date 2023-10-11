@@ -1,4 +1,4 @@
-package uk.nightlines.modomultimodule
+package uk.nightlines.modomultimodule.navigation
 
 import com.github.terrakok.modo.Screen
 import uk.nightlines.core.common.RootScreensInteractor
