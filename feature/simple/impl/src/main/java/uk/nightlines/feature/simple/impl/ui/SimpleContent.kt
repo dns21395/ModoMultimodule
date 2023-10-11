@@ -47,18 +47,18 @@ internal fun SimpleContent(
                     .weight(1f)
                     .padding(start = 16.dp, end = 8.dp),
                 onClick = {
-                    coroutineScope.launch { onForwardSimpleButtonClicked() }
+                    coroutineScope.launch { onForwardComplexButtonClicked() }
                 }) {
-                Text(text = "FORWARD [SIMPLE]")
+                Text(text = "FORWARD [COMPLEX]")
             }
             Button(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp, end = 16.dp),
                 onClick = {
-                    coroutineScope.launch { onReplaceSimpleButtonClicked() }
+                    coroutineScope.launch { onReplaceComplexButtonClicked() }
                 }) {
-                Text(text = "REPLACE [SIMPLE]")
+                Text(text = "REPLACE [COMPLEX]")
             }
         }
         Row(
@@ -72,18 +72,18 @@ internal fun SimpleContent(
                     .weight(1f)
                     .padding(start = 16.dp, end = 8.dp),
                 onClick = {
-                    coroutineScope.launch { onForwardComplexButtonClicked() }
+                    coroutineScope.launch { onForwardSimpleButtonClicked() }
                 }) {
-                Text(text = "FORWARD [COMPLEX]")
+                Text(text = "FORWARD [SIMPLE]")
             }
             Button(
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp, end = 16.dp),
                 onClick = {
-                    coroutineScope.launch { onReplaceComplexButtonClicked() }
+                    coroutineScope.launch { onReplaceSimpleButtonClicked() }
                 }) {
-                Text(text = "REPLACE [COMPLEX]")
+                Text(text = "REPLACE [SIMPLE]")
             }
         }
     }

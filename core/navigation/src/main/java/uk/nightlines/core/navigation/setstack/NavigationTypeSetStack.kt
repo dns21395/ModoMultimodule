@@ -1,6 +1,5 @@
 package uk.nightlines.core.navigation.setstack
 
-import android.util.Log
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
