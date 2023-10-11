@@ -3,7 +3,7 @@ package uk.nightlines.modomultimodule.navigation
 import com.github.terrakok.modo.Screen
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.feature.simple.api.SimpleApi
-import uk.nightlines.feature.weather.container_api.ComplexApi
+import uk.nightlines.feature.complex.container_api.ComplexApi
 import javax.inject.Inject
 
 class RootScreenImpl @Inject constructor(

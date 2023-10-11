@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.container_impl.ui
+package uk.nightlines.feature.complex.container_impl.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -12,8 +12,8 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.command.navigate
-import uk.nightlines.feature.weather.common.LocalDependenciesProvider
-import uk.nightlines.feature.weather.container_impl.di.DaggerContainerComponent
+import uk.nightlines.feature.complex.common.LocalDependenciesProvider
+import uk.nightlines.feature.complex.container_impl.di.DaggerContainerComponent
 
 private const val KEY_COMPONENT = "KEY_WEATHER_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_VIEWMODEL"

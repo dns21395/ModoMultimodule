@@ -4,9 +4,9 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.di.FeatureScope
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.common.FeatureDependencies
-import uk.nightlines.feature.weather.common.FeatureNavigationProvider
-import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
+import uk.nightlines.feature.complex.common.FeatureDependencies
+import uk.nightlines.feature.complex.common.FeatureNavigationProvider
+import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 
 @Module
 internal class ComplexFeatureModule {

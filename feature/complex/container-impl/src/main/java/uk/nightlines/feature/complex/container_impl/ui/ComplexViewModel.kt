@@ -1,4 +1,4 @@
-package uk.nightlines.feature.weather.container_impl.ui
+package uk.nightlines.feature.complex.container_impl.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,7 @@ import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
 import uk.nightlines.feature.complex.feature_api.ComplexFeatureApi
-import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
+import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
 internal class ComplexViewModel @Inject constructor(

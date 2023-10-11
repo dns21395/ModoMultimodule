@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
-import uk.nightlines.feature.weather.common.FeatureNavigationQualifier
+import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
 internal class ComplexFeatureViewModel @Inject constructor(
