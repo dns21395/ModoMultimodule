@@ -3,7 +3,6 @@ package uk.nightlines.feature.complex.feature_impl.ui
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import uk.nightlines.core.common.state.SimpleEditTextState
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.command.NavigationTypeCommand
@@ -15,8 +14,8 @@ internal class ComplexFeatureViewModel @Inject constructor(
 
     ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow(SimpleEditTextState())
-    val state: StateFlow<SimpleEditTextState> = mutableState
+    private val mutableState = MutableStateFlow(ComplexFeatureState())
+    val state: StateFlow<ComplexFeatureState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
         navigation.navigate(NavigationReplace(ComplexScreen()))

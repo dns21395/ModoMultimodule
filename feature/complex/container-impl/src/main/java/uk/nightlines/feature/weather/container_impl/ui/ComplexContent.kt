@@ -18,12 +18,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.github.terrakok.modo.Screen
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.state.ContainerState
 
 @Composable
 fun ContainerScreenContent(
     title: String,
-    state: ContainerState,
+    state: ComplexState,
     screenKey: String,
     navigationStack: List<Screen>,
     onForwardWeatherButtonClicked: suspend () -> Unit,

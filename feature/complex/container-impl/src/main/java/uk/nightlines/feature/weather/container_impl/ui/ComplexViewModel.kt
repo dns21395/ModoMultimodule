@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import uk.nightlines.core.common.RootScreensInteractor
-import uk.nightlines.core.common.state.ContainerState
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
@@ -26,8 +25,8 @@ internal class ComplexViewModel @Inject constructor(
 
     val navigationCommands: Flow<NavigationCommand> = complexNavigation.commandsFlow
 
-    private val _state = MutableStateFlow(ContainerState())
-    val state: StateFlow<ContainerState> = _state
+    private val _state = MutableStateFlow(ComplexState())
+    val state: StateFlow<ComplexState> = _state
 
     init {
         viewModelScope.launch {

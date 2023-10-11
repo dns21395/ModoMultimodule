@@ -19,7 +19,7 @@ private const val KEY_COMPONENT = "KEY_WEATHER_COMPONENT"
 private const val KEY_VIEWMODEL = "KEY_WEATHER_VIEWMODEL"
 
 @Parcelize
-internal class WeatherStack(
+internal class ComplexStack(
     private val stackNavModel: StackNavModel,
 ) : StackScreen(stackNavModel) {
 

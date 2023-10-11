@@ -16,12 +16,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import uk.nightlines.core.common.state.SimpleEditTextState
 
 @Composable
 fun SimpleEditTextScreen(
     screenName: String,
-    state: SimpleEditTextState,
+    state: ComplexFeatureState,
     containerScreenKey: String,
     screenKey: String,
     onForwardButtonClicked: suspend () -> Unit,
