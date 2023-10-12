@@ -13,8 +13,8 @@ import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.complex.feature_impl.di.DaggerComplexFeatureComponent
 import uk.nightlines.feature.complex.common.LocalDependenciesProvider
 
-private const val KEY_COMPONENT = "KEY_WEATHER_DAY_COMPONENT"
-private const val KEY_VIEWMODEL = "KEY_WEATHER_DAY_VIEWMODEL"
+private const val KEY_COMPONENT = "KEY_COMPLEX_FEATURE_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_COMPLEX_FEATURE_VIEWMODEL"
 
 @Parcelize
 class ComplexScreen(

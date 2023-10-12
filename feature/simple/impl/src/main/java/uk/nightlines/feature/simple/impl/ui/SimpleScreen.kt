@@ -11,8 +11,8 @@ import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.feature.simple.impl.di.DaggerSimpleComponent
 
-private const val KEY_COMPONENT = "KEY_SETTINGS_COMPONENT"
-private const val KEY_VIEWMODEL = "KEY_SETTINGS_VIEWMODEL"
+private const val KEY_COMPONENT = "KEY_SIMPLE_COMPONENT"
+private const val KEY_VIEWMODEL = "KEY_SIMPLE_VIEWMODEL"
 
 @Parcelize
 class SimpleStack(

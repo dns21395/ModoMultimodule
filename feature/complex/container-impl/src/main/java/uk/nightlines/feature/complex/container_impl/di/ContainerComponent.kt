@@ -5,7 +5,7 @@ import uk.nightlines.core.di.di.CoreProvider
 import uk.nightlines.core.di.di.FeatureScope
 import uk.nightlines.feature.complex.common.FeatureNavigationProvider
 import uk.nightlines.feature.complex.container_impl.ui.ComplexViewModel
-import uk.nightlines.feature.complex.feature_api.ComplextFeatureApiProvider
+import uk.nightlines.feature.complex.feature_api.ComplexFeatureApiProvider
 
 @Component(
     dependencies = [CoreProvider::class],
@@ -13,7 +13,7 @@ import uk.nightlines.feature.complex.feature_api.ComplextFeatureApiProvider
 )
 @FeatureScope
 internal interface ContainerComponent :
-    ComplextFeatureApiProvider,
+    ComplexFeatureApiProvider,
     FeatureNavigationProvider {
 
     @Component.Factory
