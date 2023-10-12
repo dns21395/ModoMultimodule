@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.feature.simple.api.SimpleApi
 import uk.nightlines.feature.simple.impl.SimpleImpl
 import uk.nightlines.feature.complex.container_api.ComplexApi
@@ -18,7 +18,7 @@ internal class AppModuule {
     @Provides
     @Singleton
     @RootNavigationQualifier
-    fun provideNavigationTypeCommand(): NavigationTypeCommand = NavigationTypeCommand()
+    fun provideRootNavigation(): Navigation = Navigation()
 
     @Provides
     @Singleton

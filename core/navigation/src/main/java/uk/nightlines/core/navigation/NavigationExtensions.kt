@@ -1,8 +1,7 @@
-package uk.nightlines.core.navigation.command
+package uk.nightlines.core.navigation
 
 import com.github.terrakok.modo.NavigationContainer
 import com.github.terrakok.modo.stack.*
-import uk.nightlines.core.navigation.*
 
 fun NavigationContainer<StackState>.navigate(command: NavigationCommand) {
     val action = when (command) {

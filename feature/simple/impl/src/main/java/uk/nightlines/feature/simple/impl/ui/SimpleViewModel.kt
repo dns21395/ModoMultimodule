@@ -7,11 +7,11 @@ import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 import javax.inject.Inject
 
 internal class SimpleViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
+    @RootNavigationQualifier private val rootNavigation: Navigation,
     private val rootScreens: RootScreensInteractor,
 ) : ViewModel() {
 
