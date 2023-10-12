@@ -10,19 +10,18 @@ import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
 internal class ComplexFeatureViewModel @Inject constructor(
-    @FeatureNavigationQualifier private val copmlexNavigation: Navigation,
-
-    ) : ViewModel() {
+    @FeatureNavigationQualifier private val complexNavigation: Navigation,
+) : ViewModel() {
 
     private val mutableState = MutableStateFlow(ComplexFeatureState())
     val state: StateFlow<ComplexFeatureState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
-        copmlexNavigation.navigate(NavigationReplace(ComplexScreen()))
+        complexNavigation.navigate(NavigationReplace(ComplexScreen()))
     }
 
     suspend fun onForwardButtonClicked() {
-        copmlexNavigation.navigate(NavigationForward(ComplexScreen()))
+        complexNavigation.navigate(NavigationForward(ComplexScreen()))
     }
 
     suspend fun onTextChangedAction(text: String) {

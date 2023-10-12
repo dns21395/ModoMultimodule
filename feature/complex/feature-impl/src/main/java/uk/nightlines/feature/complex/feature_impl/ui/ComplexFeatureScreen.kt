@@ -37,10 +37,10 @@ fun Complex(
 ) {
     val coreProvider = LocalCoreProvider.current
     val screen = LocalContainerScreen.current
-    val weatherDependencies = LocalDependenciesProvider.current
+    val featureDependencies = LocalDependenciesProvider.current
 
     val component = daggerViewModel(key = "${screen.screenKey}$KEY_COMPONENT$screenHashCode") {
-        ComponentHolder(DaggerComplexFeatureComponent.factory().create(coreProvider, weatherDependencies))
+        ComponentHolder(DaggerComplexFeatureComponent.factory().create(coreProvider, featureDependencies))
     }
 
     val viewModel =

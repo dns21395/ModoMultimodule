@@ -34,19 +34,19 @@ internal class ComplexViewModel @Inject constructor(
         }
     }
 
-    suspend fun onForwardWeatherButtonClicked() {
+    suspend fun onForwardComplexButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.complexScreen()))
     }
 
-    suspend fun onReplaceWeatherButtonClicked() {
+    suspend fun onReplaceComplexButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.complexScreen()))
     }
 
-    suspend fun onForwardSettingsButtonClicked() {
+    suspend fun onForwardSimpleButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.simpleScreen()))
     }
 
-    suspend fun onReplaceSettingsButtonClicked() {
+    suspend fun onReplaceSimpleButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.simpleScreen()))
     }
 }
