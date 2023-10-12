@@ -1,4 +1,4 @@
-package uk.nightlines.core.di
+package uk.nightlines.core.di.di
 
 import javax.inject.Scope
 

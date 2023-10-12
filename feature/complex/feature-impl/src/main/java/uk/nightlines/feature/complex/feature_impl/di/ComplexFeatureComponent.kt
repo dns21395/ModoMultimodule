@@ -1,8 +1,8 @@
 package uk.nightlines.feature.complex.feature_impl.di
 
 import dagger.Component
-import uk.nightlines.core.di.CoreProvider
-import uk.nightlines.core.di.FeatureScope
+import uk.nightlines.core.di.di.CoreProvider
+import uk.nightlines.core.di.di.FeatureScope
 import uk.nightlines.feature.complex.common.FeatureDependencies
 import uk.nightlines.feature.complex.feature_impl.ui.ComplexFeatureViewModel
 

@@ -26,9 +26,9 @@ internal class AppModuule {
 
     @Provides
     @Singleton
-    fun provideWeatherApi(): ComplexApi = ComplexImpl()
+    fun provideComplexApi(): ComplexApi = ComplexImpl()
 
     @Provides
     @Singleton
-    fun provideSettingsApi(): SimpleApi = SimpleImpl()
+    fun provideSimpleApi(): SimpleApi = SimpleImpl()
 }

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.parcelize.Parcelize
 import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
-import uk.nightlines.core.di.CoreProvider
+import uk.nightlines.core.di.di.CoreProvider
 import uk.nightlines.core.di.LocalCoreProvider
 import uk.nightlines.core.navigation.command.navigate
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
