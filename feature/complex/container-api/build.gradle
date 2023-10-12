@@ -1,0 +1,43 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+
+    namespace 'uk.nightlines.feature.complex.container_api'
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion rootProject.ext.kotlinCompiler
+        kotlinCompilerVersion rootProject.ext.kotlinCompiler
+    }
+}
+
+dependencies {
+
+    implementation(
+            project(':core:navigation'), project(':feature:complex:feature-api',)
+            ,
+
+            deps.compose.ui,
+            deps.compose.material,
+            deps.compose.material3,
+            deps.compose.ui_tooling_preview,
+            deps.dagger.dagger,
+            deps.modo.modo,
+    )
+
+    kapt(
+            deps.dagger.compiler
+    )
+
+    debugImplementation(
+            deps.compose.ui_tooling
+    )
+}

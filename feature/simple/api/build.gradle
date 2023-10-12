@@ -1,0 +1,18 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
+}
+apply from: "$rootDir/common.gradle"
+
+android {
+    namespace 'uk.nightlines.feature.simple.api'
+}
+
+dependencies {
+
+    implementation(
+            deps.modo.modo
+    )
+}
