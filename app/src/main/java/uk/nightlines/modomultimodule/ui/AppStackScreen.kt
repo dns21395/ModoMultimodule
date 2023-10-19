@@ -11,7 +11,7 @@ import uk.nightlines.core.common.daggerViewModel
 import uk.nightlines.core.di.ComponentHolder
 import uk.nightlines.core.di.di.CoreProvider
 import uk.nightlines.core.di.LocalCoreProvider
-import uk.nightlines.core.navigation.command.navigate
+import uk.nightlines.core.navigation.navigate
 import uk.nightlines.modomultimodule.di.DaggerAppComponent
 
 private const val KEY_COMPONENT = "KEY_APP_COMPONENT"

@@ -5,24 +5,23 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
 internal class ComplexFeatureViewModel @Inject constructor(
-    @FeatureNavigationQualifier private val navigation: NavigationTypeCommand,
-
-    ) : ViewModel() {
+    @FeatureNavigationQualifier private val complexNavigation: Navigation,
+) : ViewModel() {
 
     private val mutableState = MutableStateFlow(ComplexFeatureState())
     val state: StateFlow<ComplexFeatureState> = mutableState
 
     suspend fun onReplaceButtonClicked() {
-        navigation.navigate(NavigationReplace(ComplexScreen()))
+        complexNavigation.navigate(NavigationReplace(ComplexScreen()))
     }
 
     suspend fun onForwardButtonClicked() {
-        navigation.navigate(NavigationForward(ComplexScreen()))
+        complexNavigation.navigate(NavigationForward(ComplexScreen()))
     }
 
     suspend fun onTextChangedAction(text: String) {

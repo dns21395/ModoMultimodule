@@ -8,19 +8,19 @@ import uk.nightlines.core.common.RootScreensInteractor
 import uk.nightlines.core.navigation.*
 import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.core.navigation.NavigationReplace
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 import javax.inject.Inject
 
 internal class MainViewModel @Inject constructor(
-    @RootNavigationQualifier private val navigation: NavigationTypeCommand,
+    @RootNavigationQualifier private val rootNavigation: Navigation,
     private val rootScreensInteractor: RootScreensInteractor
 ) : ViewModel() {
 
     init {
         viewModelScope.launch {
-            navigation.navigate(NavigationReplace(rootScreensInteractor.complexScreen()))
+            rootNavigation.navigate(NavigationReplace(rootScreensInteractor.complexScreen()))
         }
     }
 
-    val navigationCommands: Flow<NavigationCommand> = navigation.commandsFlow
+    val navigationCommands: Flow<NavigationCommand> = rootNavigation.commandsFlow
 }

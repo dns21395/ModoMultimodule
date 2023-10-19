@@ -1,9 +1,9 @@
 package uk.nightlines.feature.complex.common
 
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 
 interface FeatureNavigationProvider {
 
     @FeatureNavigationQualifier
-    fun provideNavigation(): NavigationTypeCommand
+    fun complexNavigation(): Navigation
 }

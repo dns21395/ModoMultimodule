@@ -11,14 +11,14 @@ import uk.nightlines.core.navigation.NavigationCommand
 import uk.nightlines.core.navigation.NavigationForward
 import uk.nightlines.core.navigation.NavigationReplace
 import uk.nightlines.core.navigation.RootNavigationQualifier
-import uk.nightlines.core.navigation.command.NavigationTypeCommand
+import uk.nightlines.core.navigation.Navigation
 import uk.nightlines.feature.complex.feature_api.ComplexFeatureApi
 import uk.nightlines.feature.complex.common.FeatureNavigationQualifier
 import javax.inject.Inject
 
 internal class ComplexViewModel @Inject constructor(
-    @RootNavigationQualifier private val rootNavigation: NavigationTypeCommand,
-    @FeatureNavigationQualifier private val complexNavigation: NavigationTypeCommand,
+    @RootNavigationQualifier private val rootNavigation: Navigation,
+    @FeatureNavigationQualifier private val complexNavigation: Navigation,
     private val rootScreens: RootScreensInteractor,
     private val complexFeatureApi: ComplexFeatureApi
 ) : ViewModel() {
@@ -34,19 +34,19 @@ internal class ComplexViewModel @Inject constructor(
         }
     }
 
-    suspend fun onForwardWeatherButtonClicked() {
+    suspend fun onForwardComplexButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.complexScreen()))
     }
 
-    suspend fun onReplaceWeatherButtonClicked() {
+    suspend fun onReplaceComplexButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.complexScreen()))
     }
 
-    suspend fun onForwardSettingsButtonClicked() {
+    suspend fun onForwardSimpleButtonClicked() {
         rootNavigation.navigate(NavigationForward(rootScreens.simpleScreen()))
     }
 
-    suspend fun onReplaceSettingsButtonClicked() {
+    suspend fun onReplaceSimpleButtonClicked() {
         rootNavigation.navigate(NavigationReplace(rootScreens.simpleScreen()))
     }
 }

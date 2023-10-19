@@ -25,10 +25,10 @@ fun ContainerScreenContent(
     state: ComplexState,
     screenKey: String,
     navigationStack: List<Screen>,
-    onForwardWeatherButtonClicked: suspend () -> Unit,
-    onReplaceWeatherButtonClicked: suspend () -> Unit,
-    onForwardSettingsButtonClicked: suspend () -> Unit,
-    onReplaceSettingsButtonClicked: suspend () -> Unit,
+    onForwardComplexButtonClicked: suspend () -> Unit,
+    onReplaceComplexButtonClicked: suspend () -> Unit,
+    onForwardSimpleButtonClicked: suspend () -> Unit,
+    onReplaceSimpleButtonClicked: suspend () -> Unit,
     topScreenContent: @Composable () -> Unit
 ) {
 
@@ -66,7 +66,7 @@ fun ContainerScreenContent(
                         .weight(1f)
                         .padding(horizontal = 16.dp),
                     onClick = {
-                        coroutineScope.launch { onForwardWeatherButtonClicked() }
+                        coroutineScope.launch { onForwardComplexButtonClicked() }
                     }) {
                     Text(text = "FORWARD [COMPLEX]")
                 }
@@ -75,7 +75,7 @@ fun ContainerScreenContent(
                         .weight(1f)
                         .padding(horizontal = 16.dp),
                     onClick = {
-                        coroutineScope.launch { onReplaceWeatherButtonClicked() }
+                        coroutineScope.launch { onReplaceComplexButtonClicked() }
                     }) {
                     Text(text = "REPLACE [COMPLEX]")
                 }
@@ -90,7 +90,7 @@ fun ContainerScreenContent(
                         .weight(1f)
                         .padding(horizontal = 16.dp),
                     onClick = {
-                        coroutineScope.launch { onForwardSettingsButtonClicked() }
+                        coroutineScope.launch { onForwardSimpleButtonClicked() }
                     }) {
                     Text(text = "FORWARD [SIMPLE]")
                 }
@@ -99,7 +99,7 @@ fun ContainerScreenContent(
                         .weight(1f)
                         .padding(horizontal = 16.dp),
                     onClick = {
-                        coroutineScope.launch { onReplaceSettingsButtonClicked() }
+                        coroutineScope.launch { onReplaceSimpleButtonClicked() }
                     }) {
                     Text(text = "REPLACE [SIMPLE]")
                 }
